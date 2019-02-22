@@ -9,6 +9,10 @@ import org.cactoos.map.MapOf;
 
 public class JoinedMap<K, V> extends MapEnvelope<K, V>
 {
+    public JoinedMap(Map.Entry<K, V> entry, Map<K, V> map) {
+        this(new MapOf<>(entry), map);
+    }
+
     @SafeVarargs
     public JoinedMap(Map<K, V>... maps)
     {

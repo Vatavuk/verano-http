@@ -2,12 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="abc7876a-4970-4ce8-a5bf-1cc800915cad" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/hr/com/vgv/verano/http/FirstCallTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Headers.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/RequestDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/RequestDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Response.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hr/com/vgv/verano/http/Tmp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hr/com/vgv/verano/http/Tmp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Body.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/JoinedMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/JoinedMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Request.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/RequestDetails.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Response.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Status.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Wire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Wire.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/headers/Header.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/request/Header.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/headers/Headers.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/wire/ApacheWire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/wire/ApacheWire.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hr/com/vgv/verano/http/JoinedMapTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hr/com/vgv/verano/http/JoinedMapTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hr/com/vgv/verano/http/Tmp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hr/com/vgv/verano/http/Body.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hr/com/vgv/verano/http/JoinedMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hr/com/vgv/verano/http/JoinedMap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hr/com/vgv/verano/http/Request.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hr/com/vgv/verano/http/RequestDetails.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hr/com/vgv/verano/http/Response.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hr/com/vgv/verano/http/Status.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hr/com/vgv/verano/http/Wire.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hr/com/vgv/verano/http/Wire.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hr/com/vgv/verano/http/headers/Header.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hr/com/vgv/verano/http/headers/Headers.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hr/com/vgv/verano/http/wire/ApacheWire.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hr/com/vgv/verano/http/wire/ApacheWire.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/hr/com/vgv/verano/http/Tmp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/hr/com/vgv/verano/http/Tmp.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -20,11 +40,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Tmp.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/hr/com/vgv/verano/http/Tmp.java">
+      <file leaf-file-name="FirstCallTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/hr/com/vgv/verano/http/FirstCallTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+            <state relative-caret-position="357">
+              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -57,18 +77,35 @@
       <list>
         <option value="$PROJECT_DIR$/src/README.md" />
         <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Headers.java" />
-        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Request.java" />
         <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Status.java" />
-        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Wire.java" />
         <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Body.java" />
-        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/wire/ApacheWire.java" />
-        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/headers/Header.java" />
         <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/headers/Headers.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/RequestDetails.java" />
         <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Response.java" />
+        <option value="$PROJECT_DIR$/src/test/java/hr/com/vgv/verano/http/JoinedMapTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Request.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Message.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/MapEntryEnvelop.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/headers/Header.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Header.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/request/Header.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/wire/ApacheContext.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/wire/BasicAuth.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/wire/SslTrusted.java" />
         <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/JoinedMap.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/MapEntryEnvelope.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/request/Method.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/request/RequestUri.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/request/Status.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Wire.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/response/JsonResponse.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/request/Path.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/request/GetReq.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/request/Body.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/wire/ApacheWire.java" />
         <option value="$PROJECT_DIR$/src/test/java/hr/com/vgv/verano/http/Tmp.java" />
+        <option value="$PROJECT_DIR$/src/test/java/hr/com/vgv/verano/http/FirstCallTest.java" />
       </list>
     </option>
   </component>
@@ -135,7 +172,25 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="http" type="462c0819:PsiDirectoryNode" />
-              <item name="headers" type="462c0819:PsiDirectoryNode" />
+              <item name="request" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="verano-http" type="b2602c69:ProjectViewProjectNode" />
+              <item name="verano-http" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="http" type="462c0819:PsiDirectoryNode" />
+              <item name="response" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="verano-http" type="b2602c69:ProjectViewProjectNode" />
+              <item name="verano-http" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="http" type="462c0819:PsiDirectoryNode" />
+              <item name="wire" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="verano-http" type="b2602c69:ProjectViewProjectNode" />
@@ -162,32 +217,6 @@
               <item name="verano-http" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
-            <path>
-              <item name="verano-http" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: org.cactoos:cactoos:0.39" type="70bed36:NamedLibraryElementNode" />
-            </path>
-            <path>
-              <item name="verano-http" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: org.cactoos:cactoos:0.39" type="70bed36:NamedLibraryElementNode" />
-              <item name="cactoos-0.39.jar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="verano-http" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: org.cactoos:cactoos:0.39" type="70bed36:NamedLibraryElementNode" />
-              <item name="cactoos-0.39.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="cactoos" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="verano-http" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: org.cactoos:cactoos:0.39" type="70bed36:NamedLibraryElementNode" />
-              <item name="cactoos-0.39.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="cactoos" type="462c0819:PsiDirectoryNode" />
-              <item name="map" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -196,12 +225,15 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="hr.com.vgv.verano.http" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\workspace\verano-http" />
     </key>
@@ -218,11 +250,11 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.FirstCallTest.getReq">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     </configuration>
-    <configuration name="Tmp.tmp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FirstCallTest.getReq" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="verano-http" />
       <extension name="coverage">
         <pattern>
@@ -233,8 +265,77 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="hr.com.vgv.verano.http" />
-      <option name="MAIN_CLASS_NAME" value="hr.com.vgv.verano.http.Tmp" />
+      <option name="MAIN_CLASS_NAME" value="hr.com.vgv.verano.http.FirstCallTest" />
+      <option name="METHOD_NAME" value="getReq" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="FirstCallTest.tmp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="verano-http" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="hr.com.vgv.verano.http.request.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="hr.com.vgv.verano.http" />
+      <option name="MAIN_CLASS_NAME" value="hr.com.vgv.verano.http.FirstCallTest" />
       <option name="METHOD_NAME" value="tmp" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="JoinedMapTest.joinsMaps" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="verano-http" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="hr.com.vgv.verano.http.request.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="hr.com.vgv.verano.http" />
+      <option name="MAIN_CLASS_NAME" value="hr.com.vgv.verano.http.JoinedMapTest" />
+      <option name="METHOD_NAME" value="joinsMaps" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="JoinedMapTest.overridesKeyOnJoin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="verano-http" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="hr.com.vgv.verano.http.request.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="hr.com.vgv.verano.http" />
+      <option name="MAIN_CLASS_NAME" value="hr.com.vgv.verano.http.JoinedMapTest" />
+      <option name="METHOD_NAME" value="overridesKeyOnJoin" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -283,9 +384,18 @@
       <properties />
       <listeners />
     </configuration>
+    <list>
+      <item itemvalue="JUnit.FirstCallTest.tmp" />
+      <item itemvalue="JUnit.JoinedMapTest.joinsMaps" />
+      <item itemvalue="JUnit.JoinedMapTest.overridesKeyOnJoin" />
+      <item itemvalue="JUnit.FirstCallTest.getReq" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.Tmp.tmp" />
+        <item itemvalue="JUnit.FirstCallTest.getReq" />
+        <item itemvalue="JUnit.JoinedMapTest.overridesKeyOnJoin" />
+        <item itemvalue="JUnit.JoinedMapTest.joinsMaps" />
+        <item itemvalue="JUnit.FirstCallTest.tmp" />
       </list>
     </recent_temporary>
   </component>
@@ -303,25 +413,51 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Tmp_tmp - 2019.02.22 at 10h 45m 53s.xml">
+    <history-entry file="Tmp_tmp - 2019.02.22 at 10h 54m 58s.xml">
       <configuration name="Tmp.tmp" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="JoinedMapTest_joinsMaps - 2019.02.22 at 11h 03m 26s.xml">
+      <configuration name="JoinedMapTest.joinsMaps" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="JoinedMapTest_overridesKeyOnJoin - 2019.02.22 at 11h 05m 08s.xml">
+      <configuration name="JoinedMapTest.overridesKeyOnJoin" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Tmp_getReq - 2019.02.22 at 15h 42m 57s.xml">
+      <configuration name="Tmp.getReq" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Tmp_getReq - 2019.02.22 at 15h 43m 48s.xml">
+      <configuration name="Tmp.getReq" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Tmp_getReq - 2019.02.22 at 15h 44m 27s.xml">
+      <configuration name="Tmp.getReq" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Tmp_getReq - 2019.02.22 at 15h 44m 45s.xml">
+      <configuration name="Tmp.getReq" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Tmp_getReq - 2019.02.22 at 15h 44m 55s.xml">
+      <configuration name="Tmp.getReq" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Tmp_getReq - 2019.02.22 at 15h 45m 18s.xml">
+      <configuration name="Tmp.getReq" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Tmp_getReq - 2019.02.22 at 15h 48m 54s.xml">
+      <configuration name="Tmp.getReq" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Messages" weight="0.3295099" />
       <window_info anchor="right" id="Palette&#9;" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3295099" />
       <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Terminal" weight="0.3295099" />
       <window_info id="Designer" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24972437" />
-      <window_info anchor="bottom" id="Statistic" />
+      <window_info anchor="bottom" id="Statistic" weight="0.3295099" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39937434" />
@@ -339,15 +475,23 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/hr/com/vgv/verano/http/Tmp.java</url>
-          <line>25</line>
-          <properties />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="1" />
+      <option name="time" value="4" />
     </breakpoint-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>new Status(this).getValue()</expression-string>
+        <language-id>JAVA</language-id>
+        <custom-info>hr.com.vgv.verano.http.request.Status</custom-info>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>new Body(this).getValue()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/README.md">
@@ -362,46 +506,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Status.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Wire.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="35" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Body.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/wire/ApacheWire.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#244#245#0" expanded="true" />
-            <element signature="e#308#309#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Request.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="16" lean-forward="true" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Headers.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -412,35 +516,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/headers/Header.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#266#267#0" expanded="true" />
-            <element signature="e#314#315#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/headers/Headers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="10" lean-forward="true" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/cactoos/cactoos/0.39/cactoos-0.39.jar!/org/cactoos/map/MapEntry.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -448,24 +523,184 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Response.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/RequestDetails.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/cactoos/cactoos/0.39/cactoos-0.39.jar!/org/cactoos/map/MapOf.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="20" column="11" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
+          <folding>
+            <element signature="e#538#539#0" expanded="true" />
+            <element signature="e#592#593#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Response.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/headers/Headers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Request.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Message.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/request/Header.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#270#271#0" expanded="true" />
+            <element signature="e#318#319#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/wire/SslTrusted.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="47" lean-forward="true" selection-start-line="32" selection-start-column="47" selection-end-line="32" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1490#1491#0" expanded="true" />
+            <element signature="e#1533#1534#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/wire/ApacheContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="55" selection-start-line="6" selection-start-column="55" selection-end-line="6" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/cactoos/cactoos/0.39/cactoos-0.39.jar!/org/cactoos/Scalar.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/cactoos/cactoos/0.39/cactoos-0.39.jar!/org/cactoos/scalar/StickyScalar.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="14" column="11" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/request/Method.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="18" column="31" lean-forward="true" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#392#393#0" expanded="true" />
+            <element signature="e#430#431#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Body.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.7/httpclient-4.5.7.jar!/org/apache/http/client/methods/HttpEntityEnclosingRequestBase.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="22" column="16" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
+          <folding>
+            <element signature="e#631#632#0" expanded="true" />
+            <element signature="e#667#668#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/MapEntryEnvelope.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/cactoos/cactoos/0.39/cactoos-0.39.jar!/org/cactoos/scalar/Ternary.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="543">
+          <caret line="39" column="11" selection-start-line="39" selection-start-column="11" selection-end-line="39" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.4.11/httpcore-4.4.11.jar!/org/apache/http/entity/BufferedHttpEntity.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="18" column="11" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.4.11/httpcore-4.4.11.jar!/org/apache/http/entity/InputStreamEntity.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+          <folding>
+            <element signature="e#441#442#0" expanded="true" />
+            <element signature="e#476#477#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Status.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/request/Status.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#293#294#0" expanded="true" />
+            <element signature="e#332#333#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/hr/com/vgv/verano/http/JoinedMapTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="10" lean-forward="true" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -473,20 +708,159 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+          <folding>
+            <element signature="e#688#689#0" expanded="true" />
+            <element signature="e#742#743#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.7/httpclient-4.5.7.jar!/org/apache/http/client/CredentialsProvider.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.7/httpclient-4.5.7.jar!/org/apache/http/auth/AuthScope.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-663">
+          <caret line="54" column="11" selection-start-line="54" selection-start-column="11" selection-end-line="54" selection-end-column="11" />
+          <folding>
+            <element signature="e#1897#1898#0" expanded="true" />
+            <element signature="e#1952#1953#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/wire/BasicAuth.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="11" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/JoinedMap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        <state relative-caret-position="170">
+          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#311#312#0" expanded="true" />
+            <element signature="e#356#357#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/hr/com/vgv/verano/http/Tmp.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/request/RequestUri.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+        <state relative-caret-position="170">
+          <caret line="10" selection-start-line="10" selection-end-line="19" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#298#299#0" expanded="true" />
+            <element signature="e#356#357#0" expanded="true" />
+            <element signature="e#406#407#0" expanded="true" />
+            <element signature="e#448#449#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/request/Path.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#258#259#0" expanded="true" />
+            <element signature="e#316#317#0" expanded="true" />
+            <element signature="e#366#367#0" expanded="true" />
+            <element signature="e#408#409#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/request/GetReq.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/Wire.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/RequestDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="30" column="21" lean-forward="true" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/response/JsonResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="20" lean-forward="true" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#460#461#0" expanded="true" />
+            <element signature="e#521#522#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/request/Body.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="37" lean-forward="true" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#427#428#0" expanded="true" />
+            <element signature="e#503#504#0" expanded="true" />
+            <element signature="e#431#432#0" expanded="true" />
+            <element signature="e#479#480#0" expanded="true" />
+            <element signature="e#527#528#0" expanded="true" />
+            <element signature="e#563#564#0" expanded="true" />
+            <element signature="e#604#605#0" expanded="true" />
+            <element signature="e#679#680#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hr/com/vgv/verano/http/wire/ApacheWire.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="79" column="52" selection-start-line="79" selection-start-column="52" selection-end-line="79" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/hr/com/vgv/verano/http/FirstCallTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

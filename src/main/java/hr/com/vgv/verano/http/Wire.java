@@ -1,6 +1,9 @@
 package hr.com.vgv.verano.http;
 
-public interface Wire
+import java.io.IOException;
+import java.util.Map;
+
+public interface Wire extends Map<String, String>
 {
-    Response send(Request request);
+    Map<String, String> send(Map<String, String> message) throws IOException;
 }
