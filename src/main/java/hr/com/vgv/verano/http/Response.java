@@ -4,7 +4,5 @@ public interface Response
 {
     Status status();
 
-    Headers headers();
-
     Body body();
 }

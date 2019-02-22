@@ -1,12 +1,26 @@
 package hr.com.vgv.verano.http;
 
+import java.lang.annotation.Target;
+import java.util.Map;
+
+import org.cactoos.map.MapEntry;
+import org.cactoos.map.MapOf;
+import org.junit.Test;
+
 import com.oracle.webservices.internal.api.message.ContentType;
 
 import hr.com.vgv.verano.http.wire.ApacheWire;
 
 public class Tmp
 {
-    public void getReq()
+    @Test
+    public void tmp() {
+
+        System.out.print(map);
+    }
+
+
+    /*public void getReq()
     {
         new JsonResponse(
             new GetReq(
@@ -26,6 +40,7 @@ public class Tmp
 
     public void postReq()
     {
+        //TODO: What about expectedStatus??
         new PostReq(
             wire,
             "/operators/id",
@@ -48,5 +63,5 @@ public class Tmp
                 3
             )
         );
-    }
+    }*/
 }

@@ -8,7 +8,5 @@ public interface RequestDetails
 
     URI uri();
 
-    Headers headers();
-
     Body body();
 }
