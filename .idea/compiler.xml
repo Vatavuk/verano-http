@@ -9,5 +9,8 @@
         <module name="verano-http" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="verano-http" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
