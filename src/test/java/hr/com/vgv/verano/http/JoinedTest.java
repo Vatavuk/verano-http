@@ -9,14 +9,14 @@ import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
-public final class JoinedMapTest
+public final class JoinedTest
 {
     @Test
     public void joinsMaps() {
         final Map.Entry<String, String> first = new MapEntry<>("first", "value1");
         final Map.Entry<String, String> second = new MapEntry<>("second", "value2");
         MatcherAssert.assertThat(
-            new JoinedMap<>(
+            new Joined<>(
                 new MapOf<>(first),
                 new MapOf<>(second)
             ).entrySet(),
@@ -33,7 +33,7 @@ public final class JoinedMapTest
         String key = "first";
         String value = "value3";
         MatcherAssert.assertThat(
-            new JoinedMap<>(
+            new Joined<>(
                 new MapOf<>(new MapEntry<>(key, "value1")),
                 new MapOf<>(new MapEntry<>(key, "value2")),
                 new MapOf<>(new MapEntry<>(key, value))

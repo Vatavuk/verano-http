@@ -17,7 +17,7 @@ import org.cactoos.iterable.IterableOf;
 import org.cactoos.map.MapEnvelope;
 import org.cactoos.map.MapOf;
 
-import hr.com.vgv.verano.http.JoinedMap;
+import hr.com.vgv.verano.http.Joined;
 import hr.com.vgv.verano.http.Wire;
 import hr.com.vgv.verano.http.request.Body;
 import hr.com.vgv.verano.http.request.Method;
@@ -46,7 +46,7 @@ public class ApacheWire extends MapEnvelope<String, String> implements Wire
 
     public ApacheWire(String uri, Iterable<ApacheContext> contexts, Map<String, String> request)
     {
-        this(contexts, new JoinedMap<>(new RequestUri(uri), request));
+        this(contexts, new Joined<>(new RequestUri(uri), request));
     }
 
     public ApacheWire(Iterable<ApacheContext> contexts, Map<String, String> request)
@@ -58,7 +58,7 @@ public class ApacheWire extends MapEnvelope<String, String> implements Wire
     @Override
     public Map<String, String> send(Map<String, String> message) throws IOException
     {
-        final Map<String, String> request = new JoinedMap<>(
+        final Map<String, String> request = new Joined<>(
             this, message
         );
         HttpClientBuilder builder = HttpClients.custom();
