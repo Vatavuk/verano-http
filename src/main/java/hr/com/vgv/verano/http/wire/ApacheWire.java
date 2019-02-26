@@ -1,9 +1,15 @@
 package hr.com.vgv.verano.http.wire;
 
+import hr.com.vgv.verano.http.Joined;
+import hr.com.vgv.verano.http.Wire;
+import hr.com.vgv.verano.http.request.Body;
+import hr.com.vgv.verano.http.request.Method;
+import hr.com.vgv.verano.http.request.Path;
+import hr.com.vgv.verano.http.request.RequestUri;
+import hr.com.vgv.verano.http.request.Status;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Map;
-
 import org.apache.http.StatusLine;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -14,20 +20,13 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.cactoos.iterable.IterableOf;
-import org.cactoos.map.MapEnvelope;
 import org.cactoos.map.MapOf;
 
-import hr.com.vgv.verano.http.Joined;
-import hr.com.vgv.verano.http.Wire;
-import hr.com.vgv.verano.http.request.Body;
-import hr.com.vgv.verano.http.request.Method;
-import hr.com.vgv.verano.http.request.Path;
-import hr.com.vgv.verano.http.request.RequestUri;
-import hr.com.vgv.verano.http.request.Status;
-
-public class ApacheWire extends MapEnvelope<String, String> implements Wire
+public class ApacheWire implements Wire
 {
     private final Iterable<ApacheContext> contexts;
+
+    private final Map<String, String> message;
 
     public ApacheWire(String uri)
     {
@@ -51,15 +50,15 @@ public class ApacheWire extends MapEnvelope<String, String> implements Wire
 
     public ApacheWire(Iterable<ApacheContext> contexts, Map<String, String> request)
     {
-        super(() -> request);
         this.contexts = contexts;
+        this.message = request;
     }
 
     @Override
     public Map<String, String> send(Map<String, String> message) throws IOException
     {
         final Map<String, String> request = new Joined<>(
-            this, message
+            this.message, message
         );
         HttpClientBuilder builder = HttpClients.custom();
         for (ApacheContext context : this.contexts)
