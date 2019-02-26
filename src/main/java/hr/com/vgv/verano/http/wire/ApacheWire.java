@@ -6,7 +6,8 @@ import hr.com.vgv.verano.http.request.Body;
 import hr.com.vgv.verano.http.request.Method;
 import hr.com.vgv.verano.http.request.Path;
 import hr.com.vgv.verano.http.request.RequestUri;
-import hr.com.vgv.verano.http.request.Status;
+import hr.com.vgv.verano.http.response.ReasonPhrase;
+import hr.com.vgv.verano.http.response.Status;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Map;
@@ -72,6 +73,7 @@ public class ApacheWire implements Wire
             StatusLine status = response.getStatusLine();
             return new MapOf<>(
                 new Status(status.getStatusCode()),
+                new ReasonPhrase(status.getReasonPhrase()),
                 new Body(EntityUtils.toString(response.getEntity()))
             );
             /*return new DefaultResponse(

@@ -1,4 +1,4 @@
-package hr.com.vgv.verano.http.request;
+package hr.com.vgv.verano.http.response;
 
 import java.util.Map;
 
