@@ -27,7 +27,7 @@ public class ApacheRequest implements Scalar<HttpEntityEnclosingRequestBase>
     @Override
     public final HttpEntityEnclosingRequestBase value() throws IOException
     {
-        final HttpEntityEnclosingRequestBase req =
+        final HttpEntityEnclosingRequestBase result =
             new HttpEntityEnclosingRequestBase()
             {
                 @Override
@@ -43,7 +43,7 @@ public class ApacheRequest implements Scalar<HttpEntityEnclosingRequestBase>
                 new Path.Of(request).value()
             )
         );
-        req.setConfig(
+        result.setConfig(
             RequestConfig.custom()
                 .setCircularRedirectsAllowed(false)
                 .setRedirectsEnabled(false)
@@ -51,8 +51,8 @@ public class ApacheRequest implements Scalar<HttpEntityEnclosingRequestBase>
                 //.setSocketTimeout(read)
                 .build()
         );
-        req.setURI(uri);
-        req.setEntity(
+        result.setURI(uri);
+        result.setEntity(
             new BufferedHttpEntity(
                 new InputStreamEntity(new Body.Of(request).stream()
                 )
@@ -60,8 +60,8 @@ public class ApacheRequest implements Scalar<HttpEntityEnclosingRequestBase>
         );
         /*for (final Map.Entry<String, String> header : headers)
         {
-            req.addHeader(header.getKey(), header.getValue());
+            result.addHeader(header.getKey(), header.getValue());
         }*/
-        return req;
+        return result;
     }
 }
