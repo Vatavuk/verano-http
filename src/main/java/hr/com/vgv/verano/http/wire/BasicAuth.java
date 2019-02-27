@@ -10,23 +10,19 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 public class BasicAuth implements ApacheContext
 {
-    private final String uri;
-
     private final String username;
 
     private final String password;
 
-    public BasicAuth(String uri, String username, String password)
+    public BasicAuth(String username, String password)
     {
-        this.uri = uri;
         this.username = username;
         this.password = password;
     }
 
     @Override
-    public final HttpClientBuilder apply(HttpClientBuilder builder) {
+    public final HttpClientBuilder apply(URI uri, HttpClientBuilder builder) {
         final CredentialsProvider provider = new BasicCredentialsProvider();
-        URI uri = URI.create(this.uri);
         provider.setCredentials(
             new AuthScope(uri.getHost(), uri.getPort()),
             new UsernamePasswordCredentials(this.username, this.password)

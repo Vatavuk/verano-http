@@ -1,6 +1,7 @@
 package hr.com.vgv.verano.http.wire;
 
 import java.io.IOException;
+import java.net.URI;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -20,7 +21,7 @@ import org.apache.http.ssl.SSLContexts;
 public class SslTrusted implements ApacheContext
 {
     @Override
-    public final HttpClientBuilder apply(HttpClientBuilder builder) {
+    public final HttpClientBuilder apply(URI uri, HttpClientBuilder builder) {
         final SSLContextBuilder ssl = SSLContexts.custom();
         final SSLContext sslContext;
         try

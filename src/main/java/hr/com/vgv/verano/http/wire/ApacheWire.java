@@ -52,16 +52,17 @@ public class ApacheWire implements Wire
     @Override
     public final Dict send(Dict message) throws IOException
     {
+        final JoinedDict request = new JoinedDict(message, this.parameters);
         HttpClientBuilder builder = HttpClients.custom();
         for (ApacheContext context : this.contexts)
         {
-            builder = context.apply(builder);
+            builder = context.apply(new RequestUri.Of(request).uri(), builder);
         }
         final CloseableHttpResponse response =
             builder.build()
                 .execute(
                     new ApacheRequest(
-                        new JoinedDict(message, this.parameters)
+                        request
                     ).value()
                 );
         try
