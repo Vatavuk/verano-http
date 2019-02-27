@@ -15,7 +15,7 @@ public class FirstCallTest
         new JsonResponse(
             new ApacheWire(
                 uri,
-                new BasicAuth(uri, "admin", "admin")
+                new BasicAuth("admin", "admin")
             ),
             new GetReq(
                 "/items"
