@@ -1,21 +1,28 @@
 package hr.com.vgv.verano.http.request;
 
-import java.util.Map;
+import hr.com.vgv.verano.http.Dict;
+import hr.com.vgv.verano.http.Kvp;
+import hr.com.vgv.verano.http.KvpOf;
 
-import org.cactoos.map.MapEntry;
-
-import hr.com.vgv.verano.http.MapEntryEnvelope;
-
-public class RequestUri extends MapEntryEnvelope<String, String>
+public class RequestUri extends Kvp.Template
 {
     private static final String KEY = "uri";
 
-    public RequestUri(String uri)
+    public RequestUri(final String uri)
     {
-        super(new MapEntry<>(RequestUri.KEY, uri));
+        super(new KvpOf(KEY, uri));
     }
 
-    public RequestUri(Map<String, String> map) {
-        super(RequestUri.KEY, map);
+    public static class Of extends Kvp.Template {
+
+        public Of(final Dict dict)
+        {
+            super(
+                new KvpOf(
+                    KEY,
+                    dict.get(KEY, "") + new Path.Of(dict).value()
+                )
+            );
+        }
     }
 }

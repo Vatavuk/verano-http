@@ -1,21 +1,20 @@
 package hr.com.vgv.verano.http.request;
 
-import hr.com.vgv.verano.http.Joined;
-import java.util.Map;
-import org.cactoos.map.MapEnvelope;
-import org.cactoos.map.MapOf;
+import hr.com.vgv.verano.http.Dict;
+import hr.com.vgv.verano.http.HashDict;
+import hr.com.vgv.verano.http.Kvp;
 
-public class GetReq extends MapEnvelope<String, String>
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.iterable.Joined;
+
+public class GetReq extends Dict.Template
 {
-    @SafeVarargs
-    public GetReq(String path, Map.Entry<String, String>... properties)
+    public GetReq(String path, Kvp... kvps)
     {
-        super(() -> new Joined<>(
-            new MapOf<>(
-                new Method("GET"),
-                new Path(path)
-            ),
-            new MapOf<>(properties)
-        ));
+        this(path, new IterableOf<>(kvps));
+    }
+
+    public GetReq(String path, Iterable<Kvp> kvps) {
+        super(() -> new HashDict(new Joined<>(new Path(path), kvps)));
     }
 }

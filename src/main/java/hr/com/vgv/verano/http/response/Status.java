@@ -1,12 +1,9 @@
 package hr.com.vgv.verano.http.response;
 
-import java.util.Map;
+import hr.com.vgv.verano.http.Kvp;
+import hr.com.vgv.verano.http.KvpOf;
 
-import org.cactoos.map.MapEntry;
-
-import hr.com.vgv.verano.http.MapEntryEnvelope;
-
-public class Status extends MapEntryEnvelope<String, String>
+public class Status extends Kvp.Template
 {
     private static final String KEY = "status";
 
@@ -16,14 +13,10 @@ public class Status extends MapEntryEnvelope<String, String>
 
     public Status(String status)
     {
-        super(new MapEntry<>(Status.KEY, status));
-    }
-
-    public Status(Map<String, String> map) {
-        super(Status.KEY, map);
+        super(new KvpOf(Status.KEY, status));
     }
 
     public final int intValue() {
-        return Integer.parseInt(this.getValue());
+        return Integer.parseInt(this.value());
     }
 }

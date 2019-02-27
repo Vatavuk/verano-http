@@ -20,12 +20,12 @@ public interface Kvp {
         }
 
         @Override
-        public String key() {
+        public final String key() {
             return this.kvp.key();
         }
 
         @Override
-        public String value() {
+        public final String value() {
             return this.kvp.value();
         }
     }

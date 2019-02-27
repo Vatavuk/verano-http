@@ -3,15 +3,12 @@ package hr.com.vgv.verano.http.request;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Map;
 
-import org.cactoos.map.MapEntry;
-import org.cactoos.scalar.Ternary;
-import org.cactoos.scalar.UncheckedScalar;
+import hr.com.vgv.verano.http.Dict;
+import hr.com.vgv.verano.http.Kvp;
+import hr.com.vgv.verano.http.KvpOf;
 
-import hr.com.vgv.verano.http.MapEntryEnvelope;
-
-public class Body extends MapEntryEnvelope<String, String>
+public class Body extends Kvp.Template
 {
     private static final String KEY = "body";
 
@@ -21,26 +18,18 @@ public class Body extends MapEntryEnvelope<String, String>
 
     public Body(String body)
     {
-        super(new MapEntry<>(KEY, body));
+        super(new KvpOf(KEY, body));
     }
 
-    public Body(Map<String, String> map)
-    {
-        this(Body.body(map));
-    }
+    public static class Of extends Kvp.Template {
 
-    public final InputStream stream() {
-        return new ByteArrayInputStream(this.getValue().getBytes());
-    }
+        public Of(final Dict dict)
+        {
+            super(new KvpOf(KEY, dict.get(KEY, "")));
+        }
 
-    private static String body(Map<String, String> map)
-    {
-        return new UncheckedScalar<>(
-            new Ternary<>(
-                () -> map.containsKey(Body.KEY),
-                () -> map.get(Body.KEY),
-                () -> ""
-            )
-        ).value();
+        public final InputStream stream() {
+            return new ByteArrayInputStream(this.value().getBytes());
+        }
     }
 }
