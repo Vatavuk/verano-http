@@ -57,7 +57,7 @@ public class HashDict extends IterableEnvelope<Kvp> implements Dict
         return new UncheckedScalar<>(
             new Ternary<>(
                 () -> this.contains(key),
-                () -> key,
+                () -> this.map.get(key),
                 () -> def
             )
         ).value();

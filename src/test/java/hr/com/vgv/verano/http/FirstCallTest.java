@@ -2,24 +2,18 @@ package hr.com.vgv.verano.http;
 
 import org.junit.Test;
 
-import hr.com.vgv.verano.http.request.GetRequest;
+import hr.com.vgv.verano.http.request.Body;
+import hr.com.vgv.verano.http.request.Post;
 import hr.com.vgv.verano.http.response.JsonResponse;
 import hr.com.vgv.verano.http.wire.ApacheWire;
-import hr.com.vgv.verano.http.wire.BasicAuth;
 
 public class FirstCallTest
 {
     @Test
-    public void getReq() {
-        String uri = "http://localhost:8080";
+    public void postReq() {
         new JsonResponse(
-            new ApacheWire(
-                uri,
-                new BasicAuth("admin", "admin")
-            ),
-            new GetRequest(
-                "/items"
-            )
+            new ApacheWire("http://example.com"),
+            new Post(new Body("Hello World"))
         ).json();
     }
 }

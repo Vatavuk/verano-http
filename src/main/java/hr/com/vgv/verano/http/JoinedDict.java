@@ -6,6 +6,6 @@ public class JoinedDict extends Dict.Template
 {
     public JoinedDict(Dict... dicts)
     {
-        super(new HashDict(new Joined<>(dicts)));
+        super(() -> new HashDict(new Joined<>(dicts)));
     }
 }

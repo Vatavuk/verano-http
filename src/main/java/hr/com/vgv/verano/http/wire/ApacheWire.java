@@ -9,6 +9,8 @@ import hr.com.vgv.verano.http.request.RequestUri;
 import hr.com.vgv.verano.http.response.ReasonPhrase;
 import hr.com.vgv.verano.http.response.Status;
 import java.io.IOException;
+import java.net.URI;
+
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -52,11 +54,12 @@ public class ApacheWire implements Wire
     @Override
     public final Dict send(Dict message) throws IOException
     {
-        final JoinedDict request = new JoinedDict(message, this.parameters);
+        final Dict request = new JoinedDict(message, this.parameters);
         HttpClientBuilder builder = HttpClients.custom();
+        final URI uri = new RequestUri.Of(request).uri();
         for (ApacheContext context : this.contexts)
         {
-            builder = context.apply(new RequestUri.Of(request).uri(), builder);
+            builder = context.apply(uri, builder);
         }
         final CloseableHttpResponse response =
             builder.build()
