@@ -1,4 +1,4 @@
-package hr.com.vgv.verano.http.wire;
+package hr.com.vgv.verano.http.wire.apache;
 
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.HashDict;

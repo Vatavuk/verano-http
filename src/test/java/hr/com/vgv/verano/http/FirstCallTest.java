@@ -5,7 +5,7 @@ import org.junit.Test;
 import hr.com.vgv.verano.http.request.Body;
 import hr.com.vgv.verano.http.request.Post;
 import hr.com.vgv.verano.http.response.JsonResponse;
-import hr.com.vgv.verano.http.wire.ApacheWire;
+import hr.com.vgv.verano.http.wire.apache.ApacheWire;
 
 public class FirstCallTest
 {
