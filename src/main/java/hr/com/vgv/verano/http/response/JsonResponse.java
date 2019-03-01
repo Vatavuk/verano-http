@@ -8,19 +8,23 @@ import javax.json.JsonReader;
 
 import hr.com.vgv.verano.http.Assertion;
 import hr.com.vgv.verano.http.Dict;
+import hr.com.vgv.verano.http.HashDict;
 import hr.com.vgv.verano.http.Wire;
 import hr.com.vgv.verano.http.request.Body;
-import hr.com.vgv.verano.http.wire.AssertionWire;
 
-public class JsonResponse extends Dict.Template
+public class JsonResponse extends Response
 {
+    public JsonResponse(Wire wire, Assertion assertion) {
+        this(wire, new HashDict(), assertion);
+    }
+
     public JsonResponse(Wire wire, Dict request) {
         this(wire, request, in -> {});
     }
 
     public JsonResponse(Wire wire, Dict request, Assertion assertion)
     {
-        super(() -> new AssertionWire(wire, assertion).send(request));
+        super(wire, request, assertion);
     }
 
     public final JsonObject json() {

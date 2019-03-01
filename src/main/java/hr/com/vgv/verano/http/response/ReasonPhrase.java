@@ -1,5 +1,6 @@
 package hr.com.vgv.verano.http.response;
 
+import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.Kvp;
 import hr.com.vgv.verano.http.KvpOf;
 
@@ -15,5 +16,13 @@ public class ReasonPhrase extends Kvp.Template {
     public ReasonPhrase(String reason)
     {
         super(new KvpOf(KEY, reason));
+    }
+
+    public static class Of extends Kvp.Template {
+
+        public Of(Dict dict)
+        {
+            super(new KvpOf(KEY, dict.get(KEY, "")));
+        }
     }
 }
