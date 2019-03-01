@@ -12,7 +12,6 @@ import org.cactoos.Scalar;
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.request.Body;
 import hr.com.vgv.verano.http.request.Method;
-import hr.com.vgv.verano.http.request.Path;
 import hr.com.vgv.verano.http.request.RequestUri;
 
 public class ApacheRequest implements Scalar<HttpEntityEnclosingRequestBase>
@@ -36,13 +35,7 @@ public class ApacheRequest implements Scalar<HttpEntityEnclosingRequestBase>
                     return new Method.Of(request).value();
                 }
             };
-        final URI uri = URI.create(
-            String.format(
-                "%s%s",
-                new RequestUri.Of(request).value(),
-                new Path.Of(request).value()
-            )
-        );
+        final URI uri = new RequestUri.Of(request).uri();
         result.setConfig(
             RequestConfig.custom()
                 .setCircularRedirectsAllowed(false)

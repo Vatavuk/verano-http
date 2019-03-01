@@ -1,4 +1,4 @@
-package hr.com.vgv.verano.http;
+package hr.com.vgv.verano.http.wire;
 
 import org.junit.Ignore;
 import org.junit.Test;

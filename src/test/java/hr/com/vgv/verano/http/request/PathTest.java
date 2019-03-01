@@ -1,4 +1,4 @@
-package hr.com.vgv.verano.http;
+package hr.com.vgv.verano.http.request;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;

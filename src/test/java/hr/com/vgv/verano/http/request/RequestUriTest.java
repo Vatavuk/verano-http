@@ -1,10 +1,8 @@
-package hr.com.vgv.verano.http;
+package hr.com.vgv.verano.http.request;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
-
-import hr.com.vgv.verano.http.request.RequestUri;
 
 public class RequestUriTest
 {
