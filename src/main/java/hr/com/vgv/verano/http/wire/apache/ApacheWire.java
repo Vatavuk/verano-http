@@ -8,6 +8,7 @@ import hr.com.vgv.verano.http.request.Body;
 import hr.com.vgv.verano.http.request.RequestUri;
 import hr.com.vgv.verano.http.response.ReasonPhrase;
 import hr.com.vgv.verano.http.response.Status;
+
 import java.io.IOException;
 import java.net.URI;
 
@@ -61,25 +62,23 @@ public class ApacheWire implements Wire
         {
             builder = context.apply(uri, builder);
         }
-        final CloseableHttpResponse response =
-            builder.build()
-                .execute(
-                    new ApacheRequest(
-                        request
-                    ).value()
-                );
+        final CloseableHttpResponse response = builder.build()
+            .execute(
+                new ApacheRequest(request).value()
+            );
         try
         {
             StatusLine status = response.getStatusLine();
-            return new HashDict(
-                new Status(status.getStatusCode()),
-                new ReasonPhrase(status.getReasonPhrase()),
-                new Body(EntityUtils.toString(response.getEntity()))
+            return new JoinedDict(
+                new HashDict(
+                    new Status(status.getStatusCode()),
+                    new ReasonPhrase(status.getReasonPhrase()),
+                    new Body(EntityUtils.toString(response.getEntity()))
+                ),
+                new HashDict(
+                    new ApacheHeaders(response.getAllHeaders())
+                )
             );
-            /*return new DefaultResponse(
-                req,
-                this.headers(response.getAllHeaders()),
-            );*/
         }
         finally
         {

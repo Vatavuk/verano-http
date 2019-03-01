@@ -26,7 +26,7 @@ public class FormParamsOf extends IterableEnvelope<Kvp>
     }
 
     @Override
-    public String toString()
+    public final String toString()
     {
         return new UncheckedText(
             new JoinedText(
