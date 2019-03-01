@@ -10,7 +10,9 @@ import org.apache.http.entity.InputStreamEntity;
 import org.cactoos.Scalar;
 
 import hr.com.vgv.verano.http.Dict;
+import hr.com.vgv.verano.http.Kvp;
 import hr.com.vgv.verano.http.request.Body;
+import hr.com.vgv.verano.http.request.HeadersOf;
 import hr.com.vgv.verano.http.request.Method;
 import hr.com.vgv.verano.http.request.RequestUri;
 
@@ -35,25 +37,23 @@ public class ApacheRequest implements Scalar<HttpEntityEnclosingRequestBase>
                     return new Method.Of(request).value();
                 }
             };
-        final URI uri = new RequestUri.Of(request).uri();
+        final URI uri = new RequestUri.Of(this.request).uri();
         result.setConfig(
             RequestConfig.custom()
                 .setCircularRedirectsAllowed(false)
                 .setRedirectsEnabled(false)
-                //.setConnectTimeout(connect)
-                //.setSocketTimeout(read)
                 .build()
         );
         result.setURI(uri);
         result.setEntity(
             new BufferedHttpEntity(
-                new InputStreamEntity(new Body.Of(request).stream())
+                new InputStreamEntity(new Body.Of(this.request).stream())
             )
         );
-        /*for (final Map.Entry<String, String> header : headers)
+        for (final Kvp header : new HeadersOf(this.request))
         {
-            result.addHeader(header.getKey(), header.getValue());
-        }*/
+            result.addHeader(header.key(), header.value());
+        }
         return result;
     }
 }

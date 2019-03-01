@@ -4,7 +4,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import hr.com.vgv.verano.http.request.Body;
-import hr.com.vgv.verano.http.request.Post;
+import hr.com.vgv.verano.http.request.methods.Post;
 import hr.com.vgv.verano.http.response.ExpectedStatus;
 import hr.com.vgv.verano.http.response.JsonResponse;
 import hr.com.vgv.verano.http.response.Response;
