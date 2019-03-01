@@ -4,6 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
+import org.cactoos.collection.CollectionOf;
+
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.Kvp;
 import hr.com.vgv.verano.http.KvpOf;
@@ -25,11 +27,22 @@ public class Body extends Kvp.Template
 
         public Of(final Dict dict)
         {
-            super(new KvpOf(KEY, dict.get(KEY, "")));
+            super(new KvpOf(KEY, buildBody(dict)));
         }
 
         public final InputStream stream() {
             return new ByteArrayInputStream(this.value().getBytes());
+        }
+
+        private static String buildBody(Dict dict) {
+            final FormParamsOf params = new FormParamsOf(dict);
+            final String body;
+            if (new CollectionOf<>(params).isEmpty()) {
+                body = dict.get(KEY, "");
+            } else {
+                body = params.toString();
+            }
+            return body;
         }
     }
 }

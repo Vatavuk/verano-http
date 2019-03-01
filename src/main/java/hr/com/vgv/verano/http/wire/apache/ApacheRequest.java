@@ -47,8 +47,7 @@ public class ApacheRequest implements Scalar<HttpEntityEnclosingRequestBase>
         result.setURI(uri);
         result.setEntity(
             new BufferedHttpEntity(
-                new InputStreamEntity(new Body.Of(request).stream()
-                )
+                new InputStreamEntity(new Body.Of(request).stream())
             )
         );
         /*for (final Map.Entry<String, String> header : headers)
