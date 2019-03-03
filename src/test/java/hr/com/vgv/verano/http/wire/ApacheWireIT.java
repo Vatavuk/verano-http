@@ -1,14 +1,13 @@
 package hr.com.vgv.verano.http.wire;
 
-import org.junit.Ignore;
-import org.junit.Test;
-
 import hr.com.vgv.verano.http.request.Body;
 import hr.com.vgv.verano.http.request.methods.Post;
 import hr.com.vgv.verano.http.response.ExpectedStatus;
 import hr.com.vgv.verano.http.response.JsonResponse;
 import hr.com.vgv.verano.http.response.Response;
 import hr.com.vgv.verano.http.wire.apache.ApacheWire;
+import org.junit.Ignore;
+import org.junit.Test;
 
 public class ApacheWireIT
 {

@@ -1,16 +1,14 @@
 package hr.com.vgv.verano.http.request;
 
+import hr.com.vgv.verano.http.Dict;
+import hr.com.vgv.verano.http.KvpOf;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-
+import org.cactoos.Text;
 import org.cactoos.collection.CollectionOf;
 
-import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.Kvp;
-import hr.com.vgv.verano.http.KvpOf;
-
-public class Body extends Kvp.Template
+public class Body extends RequestInput
 {
     private static final String KEY = "body";
 
@@ -23,26 +21,28 @@ public class Body extends Kvp.Template
         super(new KvpOf(KEY, body));
     }
 
-    public static class Of extends Kvp.Template {
+    public static class Of implements Text {
 
-        public Of(final Dict dict)
-        {
-            super(new KvpOf(KEY, buildBody(dict)));
+        private final Dict dict;
+
+        public Of(final Dict dict) {
+            this.dict = dict;
         }
 
-        public final InputStream stream() {
-            return new ByteArrayInputStream(this.value().getBytes());
-        }
-
-        private static String buildBody(Dict dict) {
-            final FormParamsOf params = new FormParamsOf(dict);
+        @Override
+        public String asString() {
+            final FormParamsOf params = new FormParamsOf(this.dict);
             final String body;
             if (new CollectionOf<>(params).isEmpty()) {
-                body = dict.get(KEY, "");
+                body = this.dict.get(KEY, "");
             } else {
                 body = params.toString();
             }
             return body;
+        }
+
+        public final InputStream stream() {
+            return new ByteArrayInputStream(this.asString().getBytes());
         }
     }
 }

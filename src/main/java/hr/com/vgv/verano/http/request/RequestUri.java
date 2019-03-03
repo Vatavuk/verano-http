@@ -7,7 +7,7 @@ import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.Kvp;
 import hr.com.vgv.verano.http.KvpOf;
 
-public class RequestUri extends Kvp.Template
+public class RequestUri extends RequestInput
 {
     private static final String KEY = "uri";
 
@@ -31,7 +31,7 @@ public class RequestUri extends Kvp.Template
 
         private static String buildUri(Dict dict)
         {
-            final String base = dict.get(KEY, "") + new Path.Of(dict).value();
+            final String base = dict.get(KEY, "") + new Path.Of(dict).asString();
             UriBuilder builder = UriBuilder.fromUri(base);
             for (final Kvp kvp: new QueryParamsOf(dict)) {
                 builder = builder.queryParam(kvp.key(), kvp.value());
