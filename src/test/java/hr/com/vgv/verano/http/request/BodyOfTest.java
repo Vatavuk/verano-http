@@ -16,7 +16,7 @@ public final class BodyOfTest
                 new HashDict(
                     new KvpOf("body", "test"), new KvpOf("unknown", "")
                 )
-            ).value(),
+            ).asString(),
             new IsEqual<>("test")
         );
     }
@@ -29,7 +29,7 @@ public final class BodyOfTest
                     new KvpOf("f.param1", "test1"),
                     new KvpOf("f.param2", "test2")
                 )
-            ).value(),
+            ).asString(),
             new IsEqual<>("param1=test1&param2=test2")
         );
     }
