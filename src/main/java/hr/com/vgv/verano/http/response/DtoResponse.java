@@ -32,6 +32,6 @@ public class DtoResponse extends Response
     }
 
     public final <T> T as(Class<T> cls) throws Exception {
-        return MAPPER.readValue(new Body.Of(this).value(), cls);
+        return MAPPER.readValue(new Body.Of(this).asString(), cls);
     }
 }
