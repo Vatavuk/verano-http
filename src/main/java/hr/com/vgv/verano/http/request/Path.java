@@ -23,7 +23,6 @@ public class Path extends RequestInput
 
     public static class Of implements Text
     {
-
         private final Dict dict;
 
         public Of(final Dict dict)

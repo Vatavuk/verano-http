@@ -34,7 +34,7 @@ public class ApacheRequest implements Scalar<HttpEntityEnclosingRequestBase>
                 @Override
                 public String getMethod()
                 {
-                    return new Method.Of(request).value();
+                    return new Method.Of(request).asString();
                 }
             };
         final URI uri = new RequestUri.Of(this.request).uri();
