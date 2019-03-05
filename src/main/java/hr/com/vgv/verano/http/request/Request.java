@@ -22,7 +22,7 @@ public class Request extends Dict.Template
     {
         super(
             () -> new DictOf(
-                new Joined<>(
+                new Joined<DictInput>(
                     new IterableOf<>(
                         new Path(path), new Method(method)
                     ),
