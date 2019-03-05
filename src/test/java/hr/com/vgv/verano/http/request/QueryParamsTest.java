@@ -12,7 +12,7 @@ import hr.com.vgv.verano.http.KvpOf;
 public final class QueryParamsTest
 {
     @Test
-    public void buildQueryParamasInput(){
+    public void buildQueryParamsInput(){
         final Dict dict = new QueryParams(
             new KvpOf("name", "John"),
             new KvpOf("surname", "Smith")

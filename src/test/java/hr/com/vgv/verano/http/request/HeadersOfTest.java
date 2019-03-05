@@ -16,7 +16,7 @@ public final class HeadersOfTest
     @Test
     public void extractHeadersFromDict() {
         final List<Kvp> kvps = new ListOf<>(
-            new HeadersOf(
+            new Headers.Of(
                 new HashDict(
                     new KvpOf("test", "test"),
                     new KvpOf("h.kfirst", "first"),

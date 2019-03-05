@@ -31,7 +31,7 @@ public class QueryParams extends DictInput.Simple
         return builder.build().toString();
     }
 
-    static class Of implements Text {
+    public static class Of implements Text {
 
         private final Dict dict;
 

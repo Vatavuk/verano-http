@@ -12,7 +12,7 @@ import org.cactoos.Scalar;
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.Kvp;
 import hr.com.vgv.verano.http.request.Body;
-import hr.com.vgv.verano.http.request.HeadersOf;
+import hr.com.vgv.verano.http.request.Headers;
 import hr.com.vgv.verano.http.request.Method;
 import hr.com.vgv.verano.http.request.RequestUri;
 
@@ -50,7 +50,7 @@ public class ApacheRequest implements Scalar<HttpEntityEnclosingRequestBase>
                 new InputStreamEntity(new Body.Of(this.request).stream())
             )
         );
-        for (final Kvp header : new HeadersOf(this.request))
+        for (final Kvp header : new Headers.Of(this.request))
         {
             result.addHeader(header.key(), header.value());
         }

@@ -45,7 +45,7 @@ public class FormParams extends DictInput.Simple
         );
     }
 
-    static class Of implements Text {
+    public static class Of implements Text {
 
         private final Dict dict;
 

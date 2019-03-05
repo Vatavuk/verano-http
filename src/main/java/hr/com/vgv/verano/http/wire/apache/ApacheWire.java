@@ -62,25 +62,15 @@ public class ApacheWire implements Wire
         {
             builder = context.apply(uri, builder);
         }
-        final CloseableHttpResponse response = builder.build()
-            .execute(new ApacheRequest(request).value());
-        try
-        {
+        try(final CloseableHttpResponse response = builder.build()
+            .execute(new ApacheRequest(request).value())) {
             StatusLine status = response.getStatusLine();
-            return new JoinedDict(
-                new DictOf(
-                    new Status(status.getStatusCode()),
-                    new ReasonPhrase(status.getReasonPhrase()),
-                    new Body(EntityUtils.toString(response.getEntity()))
-                ),
-                new HashDict(
-                    new ApacheHeaders(response.getAllHeaders())
-                )
+            return new DictOf(
+                new Status(status.getStatusCode()),
+                new ReasonPhrase(status.getReasonPhrase()),
+                new Body(EntityUtils.toString(response.getEntity())),
+                new ApacheHeaders(response.getAllHeaders())
             );
-        }
-        finally
-        {
-            response.close();
         }
     }
 }
