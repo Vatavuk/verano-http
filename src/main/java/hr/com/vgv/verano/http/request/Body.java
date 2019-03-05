@@ -8,7 +8,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import org.cactoos.Text;
-import org.cactoos.collection.CollectionOf;
 
 public class Body extends DictInput.Simple
 {
@@ -33,12 +32,9 @@ public class Body extends DictInput.Simple
 
         @Override
         public String asString() {
-            final FormParamsOf params = new FormParamsOf(this.dict);
-            final String body;
-            if (new CollectionOf<>(params).isEmpty()) {
+            String body = new FormParams.Of(this.dict).asString();
+            if (body.isEmpty()) {
                 body = this.dict.get(KEY, "");
-            } else {
-                body = params.toString();
             }
             return body;
         }
