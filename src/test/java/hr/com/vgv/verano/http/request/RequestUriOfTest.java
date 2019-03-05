@@ -20,8 +20,7 @@ public final class RequestUriOfTest
                 new HashDict(
                     new KvpOf("uri", base),
                     new KvpOf("path", path),
-                    new KvpOf("q.first", "10"),
-                    new KvpOf("q.second", "someStr")
+                    new KvpOf("qparams", "?first=10&second=someStr")
                 )
             ).uri().toString(),
             new IsEqual<>(

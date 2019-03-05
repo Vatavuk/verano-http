@@ -1,12 +1,10 @@
 package hr.com.vgv.verano.http.request;
 
 import java.net.URI;
-import javax.ws.rs.core.UriBuilder;
 
 import org.cactoos.Text;
 
 import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.Kvp;
 import hr.com.vgv.verano.http.KvpOf;
 import hr.com.vgv.verano.http.DictInput;
 
@@ -31,12 +29,12 @@ public class RequestUri extends DictInput.Simple
         @Override
         public final String asString()
         {
-            final String base = dict.get(KEY, "") + new Path.Of(dict).asString();
-            UriBuilder builder = UriBuilder.fromUri(base);
-            for (final Kvp kvp: new QueryParamsOf(dict)) {
-                builder = builder.queryParam(kvp.key(), kvp.value());
-            }
-            return builder.build().toString();
+            return String.format(
+                "%s%s%s",
+                dict.get(KEY, ""),
+                new Path.Of(dict).asString(),
+                new QueryParams.Of(dict).asString()
+            );
         }
 
         public final URI uri() {

@@ -3,6 +3,7 @@ package hr.com.vgv.verano.http.request;
 import java.net.URLEncoder;
 
 import org.cactoos.Text;
+import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.text.JoinedText;
 import org.cactoos.text.UncheckedText;
@@ -18,6 +19,10 @@ public class FormParams extends DictInput.Simple
 
     public FormParams(final Kvp... kvps)
     {
+        this(new IterableOf<>(kvps));
+    }
+
+    public FormParams(Iterable<Kvp> kvps) {
         super(
             new KvpOf(
                 FormParams.KEY,
