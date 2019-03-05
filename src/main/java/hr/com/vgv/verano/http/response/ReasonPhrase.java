@@ -1,7 +1,9 @@
 package hr.com.vgv.verano.http.response;
 
+import org.cactoos.Text;
+
 import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.Kvp;
+import hr.com.vgv.verano.http.DictInput;
 import hr.com.vgv.verano.http.KvpOf;
 
 /**
@@ -9,7 +11,7 @@ import hr.com.vgv.verano.http.KvpOf;
  * @version $Id$
  * @since 1.0
  */
-public class ReasonPhrase extends Kvp.Template {
+public class ReasonPhrase extends DictInput.Simple {
 
     private static final String KEY = "reason";
 
@@ -18,11 +20,19 @@ public class ReasonPhrase extends Kvp.Template {
         super(new KvpOf(KEY, reason));
     }
 
-    public static class Of extends Kvp.Template {
+    public static class Of implements Text
+    {
+        private final Dict dict;
 
         public Of(Dict dict)
         {
-            super(new KvpOf(KEY, dict.get(KEY, "")));
+            this.dict = dict;
+        }
+
+        @Override
+        public final String asString()
+        {
+            return dict.get(KEY, "");
         }
     }
 }

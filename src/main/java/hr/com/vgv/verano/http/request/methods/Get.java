@@ -2,39 +2,29 @@ package hr.com.vgv.verano.http.request.methods;
 
 import org.cactoos.iterable.IterableOf;
 
-import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.HashDict;
-import hr.com.vgv.verano.http.Kvp;
+import hr.com.vgv.verano.http.DictInput;
 import hr.com.vgv.verano.http.request.Request;
 
 public class Get extends Request
 {
+    public Get(DictInput... inputs) {
+        this("", new IterableOf<>(inputs));
+    }
+
+    public Get(Iterable<DictInput> inputs) {
+        this("", inputs);
+    }
+
     public Get(String path) {
-        this(path, new HashDict());
+        this(path, new IterableOf<>());
     }
 
-    public Get(String path, Kvp... kvps) {
-        this(path, new IterableOf<>(kvps));
+    public Get(String path, DictInput... inputs) {
+        this(path, new IterableOf<>(inputs));
     }
 
-    public Get(String path, Iterable<Kvp> kvps) {
-        this(path, new HashDict(kvps));
-    }
-
-    public Get(Kvp... kvps) {
-        this(new IterableOf<>(kvps));
-    }
-
-    public Get(Iterable<Kvp> kvps) {
-        this(new HashDict(kvps));
-    }
-
-    public Get(Dict dict) {
-        this("", dict);
-    }
-
-    public Get(String path, Dict dict)
+    public Get(String path, Iterable<DictInput> inputs)
     {
-        super(path, "GET", dict);
+        super(path, "GET", inputs);
     }
 }

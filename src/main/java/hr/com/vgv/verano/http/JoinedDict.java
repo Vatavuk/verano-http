@@ -8,6 +8,10 @@ public class JoinedDict extends Dict.Template
         this(new HashDict(kvp), dict);
     }
 
+    public JoinedDict(DictInput input, Dict dict) {
+        this(new DictOf(input), dict);
+    }
+
     public JoinedDict(Dict... dicts)
     {
         super(() -> new HashDict(new Joined<>(dicts)));

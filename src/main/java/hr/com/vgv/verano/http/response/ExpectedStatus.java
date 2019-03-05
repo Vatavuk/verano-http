@@ -46,7 +46,7 @@ public class ExpectedStatus implements Assertion
                     "Received response with status %d, instead of %d.\nReason: %s",
                     status,
                     this.statuses.iterator().next(),
-                    new ReasonPhrase.Of(dict).value()
+                    new ReasonPhrase.Of(dict).asString()
                 )
             );
             throw new UncheckedIOException(new IOException(msg));

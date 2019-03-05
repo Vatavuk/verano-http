@@ -29,7 +29,7 @@ public class JsonResponse extends Response
 
     public final JsonObject json() {
         JsonReader jsonReader = Json.createReader(
-            new StringReader(new Body.Of(this).value())
+            new StringReader(new Body.Of(this).asString())
         );
         JsonObject json = jsonReader.readObject();
         jsonReader.close();

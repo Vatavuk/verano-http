@@ -2,13 +2,15 @@ package hr.com.vgv.verano.http.request;
 
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.KvpOf;
+import hr.com.vgv.verano.http.DictInput;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import org.cactoos.Text;
 import org.cactoos.collection.CollectionOf;
 
-public class Body extends RequestInput
+public class Body extends DictInput.Simple
 {
     private static final String KEY = "body";
 

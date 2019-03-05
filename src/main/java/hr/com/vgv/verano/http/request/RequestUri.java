@@ -3,11 +3,14 @@ package hr.com.vgv.verano.http.request;
 import java.net.URI;
 import javax.ws.rs.core.UriBuilder;
 
+import org.cactoos.Text;
+
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.Kvp;
 import hr.com.vgv.verano.http.KvpOf;
+import hr.com.vgv.verano.http.DictInput;
 
-public class RequestUri extends RequestInput
+public class RequestUri extends DictInput.Simple
 {
     private static final String KEY = "uri";
 
@@ -16,20 +19,17 @@ public class RequestUri extends RequestInput
         super(new KvpOf(KEY, uri));
     }
 
-    public static class Of extends Kvp.Template {
+    public static class Of implements Text
+    {
+        private final Dict dict;
 
-        public Of(final Dict dict)
+        public Of(Dict dict)
         {
-            super(
-                new KvpOf(KEY, buildUri(dict))
-            );
+            this.dict = dict;
         }
 
-        public URI uri() {
-            return URI.create(this.value());
-        }
-
-        private static String buildUri(Dict dict)
+        @Override
+        public final String asString()
         {
             final String base = dict.get(KEY, "") + new Path.Of(dict).asString();
             UriBuilder builder = UriBuilder.fromUri(base);
@@ -37,6 +37,10 @@ public class RequestUri extends RequestInput
                 builder = builder.queryParam(kvp.key(), kvp.value());
             }
             return builder.build().toString();
+        }
+
+        public final URI uri() {
+            return URI.create(this.asString());
         }
     }
 }

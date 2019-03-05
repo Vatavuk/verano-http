@@ -1,10 +1,12 @@
 package hr.com.vgv.verano.http.response;
 
+import org.cactoos.Text;
+
 import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.Kvp;
+import hr.com.vgv.verano.http.DictInput;
 import hr.com.vgv.verano.http.KvpOf;
 
-public class Status extends Kvp.Template
+public class Status extends DictInput.Simple
 {
     private static final String KEY = "status";
 
@@ -18,16 +20,24 @@ public class Status extends Kvp.Template
         super(new KvpOf(Status.KEY, status));
     }
 
-    public static class Of extends Kvp.Template
+    public static class Of implements Text
     {
+        private final Dict dict;
+
         public Of(Dict dict)
         {
-            super(new KvpOf(KEY, dict.get(KEY)));
+            this.dict = dict;
+        }
+
+        @Override
+        public final String asString()
+        {
+            return dict.get(KEY);
         }
 
         public final int intValue()
         {
-            return Integer.parseInt(this.value());
+            return Integer.parseInt(this.asString());
         }
     }
 }

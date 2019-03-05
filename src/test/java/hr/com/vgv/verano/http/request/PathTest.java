@@ -11,12 +11,12 @@ import org.junit.Test;
 public final class PathTest {
 
     @Test
-    public void overridesPath() {
-        final Dict dict = new Path("localhost")
+    public void concatenatesPath() {
+        final Dict dict = new Path("/items")
             .apply(
                 new HashDict(
                     new KvpOf("aaa", "test"),
-                    new KvpOf("path", "unknown")
+                    new KvpOf("path", "localhost")
                 )
             );
         MatcherAssert.assertThat(
@@ -25,7 +25,7 @@ public final class PathTest {
         );
         MatcherAssert.assertThat(
             dict.get("path"),
-            new IsEqual<>("localhost")
+            new IsEqual<>("localhost/items")
         );
     }
 }

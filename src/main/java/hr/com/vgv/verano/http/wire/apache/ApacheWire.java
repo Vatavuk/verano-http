@@ -1,6 +1,7 @@
 package hr.com.vgv.verano.http.wire.apache;
 
 import hr.com.vgv.verano.http.Dict;
+import hr.com.vgv.verano.http.DictOf;
 import hr.com.vgv.verano.http.HashDict;
 import hr.com.vgv.verano.http.JoinedDict;
 import hr.com.vgv.verano.http.Wire;
@@ -18,7 +19,6 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.cactoos.iterable.IterableOf;
-import org.cactoos.iterable.Joined;
 
 public class ApacheWire implements Wire
 {
@@ -38,12 +38,12 @@ public class ApacheWire implements Wire
 
     public ApacheWire(String uri, Iterable<ApacheContext> contexts)
     {
-        this(contexts, new HashDict(new RequestUri(uri)));
+        this(contexts, new DictOf(new RequestUri(uri)));
     }
 
     public ApacheWire(String uri, Iterable<ApacheContext> contexts, Dict parameters)
     {
-        this(contexts, new HashDict(new Joined<>(new RequestUri(uri), parameters)));
+        this(contexts, new HashDict(new JoinedDict(new RequestUri(uri), parameters)));
     }
 
     public ApacheWire(Iterable<ApacheContext> contexts, Dict parameters)
@@ -63,14 +63,12 @@ public class ApacheWire implements Wire
             builder = context.apply(uri, builder);
         }
         final CloseableHttpResponse response = builder.build()
-            .execute(
-                new ApacheRequest(request).value()
-            );
+            .execute(new ApacheRequest(request).value());
         try
         {
             StatusLine status = response.getStatusLine();
             return new JoinedDict(
-                new HashDict(
+                new DictOf(
                     new Status(status.getStatusCode()),
                     new ReasonPhrase(status.getReasonPhrase()),
                     new Body(EntityUtils.toString(response.getEntity()))
