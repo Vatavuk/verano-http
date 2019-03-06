@@ -3,6 +3,7 @@ package hr.com.vgv.verano.http.wire;
 import hr.com.vgv.verano.http.request.Body;
 import hr.com.vgv.verano.http.request.methods.Post;
 import hr.com.vgv.verano.http.response.ExpectedStatus;
+import hr.com.vgv.verano.http.response.FailWith;
 import hr.com.vgv.verano.http.response.JsonResponse;
 import hr.com.vgv.verano.http.response.Response;
 import hr.com.vgv.verano.http.wire.apache.ApacheWire;
@@ -26,7 +27,9 @@ public class ApacheWireIT
     {
         new Response(
             new ApacheWire("http://google.com"),
-            new ExpectedStatus("Cannot fetch from Google", 301)
+            new ExpectedStatus(
+                301, new FailWith("Cannot fetch from Google")
+            )
         ).touch();
     }
 }
