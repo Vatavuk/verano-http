@@ -11,11 +11,11 @@ public interface Kvp {
 
     String value();
 
-    class Template implements Kvp {
+    class Simple implements Kvp {
 
         private final Kvp kvp;
 
-        public Template(final Kvp kvp) {
+        public Simple(final Kvp kvp) {
             this.kvp = kvp;
         }
 
