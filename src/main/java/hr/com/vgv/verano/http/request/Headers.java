@@ -1,6 +1,10 @@
 package hr.com.vgv.verano.http.request;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import org.cactoos.iterable.Filtered;
 import org.cactoos.iterable.IterableEnvelope;
@@ -47,14 +51,14 @@ public class Headers extends DictInput.Simple
             ));
         }
 
-        public final Map<String, String> asMap() {
-            return new MapOf<>(
-                new Mapped<>(
-                    input -> new MapEntry<>(input.key(), input.value()),
-                    this
-                )
-            );
+        public final Map<String, List<String>> asMap() {
+            final ConcurrentMap<String, List<String>> result =
+                new ConcurrentHashMap<>(0);
+            for (final Kvp header : this) {
+                result.putIfAbsent(header.key(), new LinkedList<>());
+                result.get(header.key()).add(header.value());
+            }
+            return result;
         }
     }
-
 }
