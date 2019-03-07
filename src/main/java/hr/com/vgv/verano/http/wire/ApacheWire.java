@@ -1,6 +1,7 @@
-package hr.com.vgv.verano.http.wire.apache;
+package hr.com.vgv.verano.http.wire;
 
 import hr.com.vgv.verano.http.Dict;
+import hr.com.vgv.verano.http.DictInput;
 import hr.com.vgv.verano.http.DictOf;
 import hr.com.vgv.verano.http.HashDict;
 import hr.com.vgv.verano.http.JoinedDict;
@@ -10,6 +11,9 @@ import hr.com.vgv.verano.http.request.RequestUri;
 import hr.com.vgv.verano.http.response.ReasonPhrase;
 import hr.com.vgv.verano.http.response.Status;
 
+import hr.com.vgv.verano.http.wire.apache.ApacheContext;
+import hr.com.vgv.verano.http.wire.apache.ApacheHeaders;
+import hr.com.vgv.verano.http.wire.apache.ApacheRequest;
 import java.io.IOException;
 import java.net.URI;
 
@@ -31,6 +35,11 @@ public class ApacheWire implements Wire
         this(uri, new IterableOf<>());
     }
 
+    public ApacheWire(String uri, DictInput... inputs)
+    {
+        this(uri, new IterableOf<>(), new DictOf(inputs));
+    }
+
     public ApacheWire(String uri, ApacheContext... contexts)
     {
         this(uri, new IterableOf<>(contexts));
@@ -41,9 +50,13 @@ public class ApacheWire implements Wire
         this(contexts, new DictOf(new RequestUri(uri)));
     }
 
-    public ApacheWire(String uri, Iterable<ApacheContext> contexts, Dict parameters)
+    public ApacheWire(String uri, Iterable<ApacheContext> contexts,
+        Dict parameters)
     {
-        this(contexts, new HashDict(new JoinedDict(new RequestUri(uri), parameters)));
+        this(
+            contexts,
+            new HashDict(new JoinedDict(new RequestUri(uri), parameters))
+        );
     }
 
     public ApacheWire(Iterable<ApacheContext> contexts, Dict parameters)
@@ -64,7 +77,7 @@ public class ApacheWire implements Wire
         }
         try(final CloseableHttpResponse response = builder.build()
             .execute(new ApacheRequest(request).value())) {
-            StatusLine status = response.getStatusLine();
+            final StatusLine status = response.getStatusLine();
             return new DictOf(
                 new Status(status.getStatusCode()),
                 new ReasonPhrase(status.getReasonPhrase()),

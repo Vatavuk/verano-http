@@ -6,7 +6,6 @@ import hr.com.vgv.verano.http.response.ExpectedStatus;
 import hr.com.vgv.verano.http.response.FailWith;
 import hr.com.vgv.verano.http.response.JsonResponse;
 import hr.com.vgv.verano.http.response.Response;
-import hr.com.vgv.verano.http.wire.apache.ApacheWire;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -27,9 +26,7 @@ public class ApacheWireIT
     {
         new Response(
             new ApacheWire("http://google.com"),
-            new ExpectedStatus(
-                301, new FailWith("Cannot fetch from Google")
-            )
+            new ExpectedStatus(301, new FailWith("Cannot fetch from Google"))
         ).touch();
     }
 }
