@@ -46,6 +46,17 @@ new Response(
     )
 ).touch();
 ```
+Using form parameters:
+```java
+new Response(
+    new ApacheWire("http://example.com"),
+    new Post(
+        "/items",
+        new FromParam("{\"name\":\"John\"}"),
+        new FromParam("{\"surname\":\"Smith\"}"),
+    )
+).touch();
+```
 ### Response handling
 
 #### Lazy Loading
