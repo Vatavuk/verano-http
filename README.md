@@ -1,11 +1,11 @@
 # Verano-HTTP
-### Java HTTP Client in OOP Style
+### Object-Oriented Java HTTP Client
 [![EO principles respected here](http://www.elegantobjects.org/badge.svg)](http://www.elegantobjects.org)
 [![DevOps By Rultor.com](http://www.rultor.com/b/Vatavuk/verano-http)](http://www.rultor.com/p/Vatavuk/verano-http)
 
 Immutable Object-Oriented HTTP client.
 
-Core features:
+Features:
 - Declarative usage
 - Fully extendable
 - Lazy loading support
@@ -22,3 +22,40 @@ Latest version [here](https://github.com/Vatavuk/verano-http/releases)
     <version>0.2</version>
 </dependency>
 ```
+
+### GET A URL
+```java
+JsonObject json = new JsonResponse(
+    new ApacheWire("http://example.com"),
+    new Get(
+        "/items",
+        new QueryParam("name", "John"),
+        new Accept("application/json"),
+    )
+).json();
+```
+
+### POST TO A SERVER
+```java
+new Response(
+    new ApacheWire("http://example.com"),
+    new Post(
+        "/items",
+        new Body("{\"name\":\"John\"}"),
+        new ContentType("application/json"),
+    )
+).touch();
+```
+### RESPONSES
+
+#### LAZY LOADING
+
+### ASSERTIONS
+
+### ADVANCED CONFIGURATION
+
+#### AUTHENTICATION
+
+#### PROXY
+
+#### CUSTOM WIRES

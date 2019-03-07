@@ -10,8 +10,6 @@ import org.cactoos.iterable.Filtered;
 import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
-import org.cactoos.map.MapEntry;
-import org.cactoos.map.MapOf;
 
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.DictInput;
