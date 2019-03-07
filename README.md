@@ -3,15 +3,11 @@
 [![EO principles respected here](http://www.elegantobjects.org/badge.svg)](http://www.elegantobjects.org)
 [![DevOps By Rultor.com](http://www.rultor.com/b/Vatavuk/verano-http)](http://www.rultor.com/p/Vatavuk/verano-http)
 
-Immutable Object-Oriented HTTP client.
+HTTP client that provides declarative and user-friendly interface for building HTTP requests. 
 
-Features:
-- Declarative usage
-- Fully extendable
-- Lazy loading support
-
-
-
+- Declarative
+- Immutable
+- Open for extension
 
 ## How to use
 Latest version [here](https://github.com/Vatavuk/verano-http/releases)
