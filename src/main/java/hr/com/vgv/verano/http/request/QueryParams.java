@@ -1,34 +1,32 @@
 package hr.com.vgv.verano.http.request;
 
-import javax.ws.rs.core.UriBuilder;
-
-import org.cactoos.Text;
-import org.cactoos.iterable.IterableOf;
-
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.DictInput;
+import hr.com.vgv.verano.http.DictOf;
 import hr.com.vgv.verano.http.Kvp;
 import hr.com.vgv.verano.http.KvpOf;
+import javax.ws.rs.core.UriBuilder;
+import org.cactoos.Text;
+import org.cactoos.iterable.Filtered;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.iterable.Mapped;
 
 public class QueryParams extends DictInput.Simple
 {
-    private static final String KEY = "qparams";
-
-    public QueryParams(final Kvp... kvps)
+    public QueryParams(final QueryParam... params)
     {
-        this(new IterableOf<>(kvps));
+        this(new IterableOf<>(params));
     }
 
-    public QueryParams(Iterable<Kvp> kvps) {
-        super(new KvpOf(KEY, queryString(kvps)));
-    }
-
-    private static final String queryString(Iterable<Kvp> kvps) {
-        UriBuilder builder = UriBuilder.fromUri("");
-        for (final Kvp kvp: kvps) {
-            builder = builder.queryParam(kvp.key(), kvp.value());
-        }
-        return builder.build().toString();
+    public QueryParams(Iterable<QueryParam> params) {
+        super(
+            (Dict dict) -> new DictOf(
+                new Mapped<>(
+                    input -> (DictInput) input,
+                    params
+                )
+            )
+        );
     }
 
     public static class Of implements Text {
@@ -43,7 +41,21 @@ public class QueryParams extends DictInput.Simple
         @Override
         public String asString()
         {
-            return this.dict.get(KEY, "");
+            return queryString(new Mapped<>(
+                in -> new KvpOf(in.key().substring(2), in.value()),
+                new Filtered<>(
+                    input -> input.key().startsWith("q."),
+                    this.dict
+                )
+            ));
         }
+    }
+
+    private static String queryString(Iterable<Kvp> kvps) {
+        UriBuilder builder = UriBuilder.fromUri("");
+        for (final Kvp kvp: kvps) {
+            builder = builder.queryParam(kvp.key(), kvp.value());
+        }
+        return builder.build().toString();
     }
 }
