@@ -23,7 +23,7 @@ Latest version [here](https://github.com/Vatavuk/verano-http/releases)
 </dependency>
 ```
 
-### GET A URL
+### Get a Url
 ```java
 JsonObject json = new JsonResponse(
     new ApacheWire("http://example.com"),
@@ -35,7 +35,7 @@ JsonObject json = new JsonResponse(
 ).json();
 ```
 
-### POST TO A SERVER
+### Post to a Server
 ```java
 new Response(
     new ApacheWire("http://example.com"),
@@ -46,16 +46,16 @@ new Response(
     )
 ).touch();
 ```
-### RESPONSES
+### Response handling
 
-#### LAZY LOADING
+#### Lazy Loading
 
-### ASSERTIONS
+### Assertions
 
-### ADVANCED CONFIGURATION
+### Advanced Configuration
 
-#### AUTHENTICATION
+#### Authentication
 
-#### PROXY
+#### Proxy
 
-#### CUSTOM WIRES
+#### Custom Wires
