@@ -9,6 +9,9 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import org.cactoos.Text;
 
+/**
+ * Http Body.
+ */
 public class Body extends DictInput.Simple
 {
     private static final String KEY = "body";

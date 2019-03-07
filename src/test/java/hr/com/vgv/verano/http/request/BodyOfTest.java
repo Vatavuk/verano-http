@@ -26,7 +26,8 @@ public final class BodyOfTest
         MatcherAssert.assertThat(
             new Body.Of(
                 new HashDict(
-                    new KvpOf("fparams", "param1=test1&param2=test2")
+                    new KvpOf("f.param1", "test1"),
+                    new KvpOf("f.param2", "test2")
                 )
             ).asString(),
             new IsEqual<>("param1=test1&param2=test2")
