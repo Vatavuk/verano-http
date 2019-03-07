@@ -26,7 +26,7 @@ Latest version [here](https://github.com/Vatavuk/verano-http/releases)
 ### Get a Url
 ```java
 JsonObject json = new JsonResponse(
-    new ApacheWire("http://ex.com"),
+    new ApacheWire("http://exmpl.com"),
     new Get(
         "/items",
         new QueryParam("name", "John"),
@@ -38,22 +38,22 @@ JsonObject json = new JsonResponse(
 ### Post to a Server
 ```java
 new Response(
-    new ApacheWire("http://ex.com"),
+    new ApacheWire("http://exmpl.com"),
     new Post(
         "/items",
-        new Body("{\"name\":\"John\"}"),
-        new ContentType("application/json"),
+        new Body("Hello World!"),
+        new ContentType("text/html"),
     )
 ).touch();
 ```
 Using form parameters:
 ```java
 new Response(
-    new ApacheWire("http://ex.com"),
+    new ApacheWire("http://exmpl.com"),
     new Post(
         "/items",
         new FormParam("name","John"),
-        new FormParam("surname","Smith"),
+        new FormParam("foo","bar"),
     )
 ).touch();
 ```
