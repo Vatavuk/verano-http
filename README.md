@@ -62,6 +62,19 @@ JsonObject json = new JsonResponse(
 #### Lazy Loading
 
 ### Assertions
+We can make assertions on received response like this:
+```java
+new Response(
+    new ApacheWire("http://google.com"),
+    new ExpectedStatus(
+        301, 
+        new FailWith("Cannot fetch from Google")
+    )
+).touch();
+```
+If the status code is not 301, exception will be raised with message specified
+by `FailWith`. Exception message will also contain response details. Custom
+exception message is optional.
 
 ### Advanced Configuration
 
