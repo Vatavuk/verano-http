@@ -1,12 +1,11 @@
 package hr.com.vgv.verano.http.headers;
 
-import hr.com.vgv.verano.http.Kvp;
-import hr.com.vgv.verano.http.KvpOf;
+import hr.com.vgv.verano.http.request.Header;
 
-public class Authorization extends Kvp.Simple
+public class Authorization extends Header
 {
     public Authorization(final String value)
     {
-        super(new KvpOf("Authorization", value));
+        super("Authorization", value);
     }
 }

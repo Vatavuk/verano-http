@@ -1,15 +1,12 @@
 package hr.com.vgv.verano.http.request;
 
+import hr.com.vgv.verano.http.HashDict;
+import hr.com.vgv.verano.http.Kvp;
 import java.util.List;
-
 import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
-
-import hr.com.vgv.verano.http.HashDict;
-import hr.com.vgv.verano.http.Kvp;
-import hr.com.vgv.verano.http.KvpOf;
 
 public final class HeadersTest
 {
@@ -18,8 +15,8 @@ public final class HeadersTest
     {
         final List<Kvp> kvps = new ListOf<>(
             new Headers(
-                new KvpOf("Content-Type", "application/json"),
-                new KvpOf("Authorization", "Bearer 1234")
+                new Header("Content-Type", "application/json"),
+                new Header("Authorization", "Bearer 1234")
             ).apply(new HashDict())
         );
         final Kvp content = kvps.get(0);

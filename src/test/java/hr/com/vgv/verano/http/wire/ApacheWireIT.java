@@ -1,5 +1,6 @@
 package hr.com.vgv.verano.http.wire;
 
+import hr.com.vgv.verano.http.headers.ContentType;
 import hr.com.vgv.verano.http.request.Body;
 import hr.com.vgv.verano.http.request.methods.Post;
 import hr.com.vgv.verano.http.response.ExpectedStatus;
@@ -17,7 +18,10 @@ public class ApacheWireIT
     {
         new JsonResponse(
             new ApacheWire("http://example.com"),
-            new Post(new Body("Hello World"))
+            new Post(
+                new Body("Hello World"),
+                new ContentType("text/html")
+            )
         ).json();
     }
 

@@ -1,12 +1,11 @@
 package hr.com.vgv.verano.http.headers;
 
-import hr.com.vgv.verano.http.Kvp;
-import hr.com.vgv.verano.http.KvpOf;
+import hr.com.vgv.verano.http.request.Header;
 
-public class ContentType extends Kvp.Simple
+public class ContentType extends Header
 {
     public ContentType(final String value)
     {
-        super(new KvpOf("Content-Type", value));
+        super("Content-Type", value);
     }
 }

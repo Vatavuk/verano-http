@@ -1,12 +1,11 @@
 package hr.com.vgv.verano.http.headers;
 
-import hr.com.vgv.verano.http.Kvp;
-import hr.com.vgv.verano.http.KvpOf;
+import hr.com.vgv.verano.http.request.Header;
 
-public class Cookie extends Kvp.Simple
+public class Cookie extends Header
 {
     public Cookie(final String value)
     {
-        super(new KvpOf("Cookie", value));
+        super("Cookie", value);
     }
 }
