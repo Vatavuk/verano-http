@@ -58,13 +58,25 @@ The library provides three type of response deserialization:
 - XmlResponse - comming soon
 - DtoResponse - jackson object mapper
 
-#### Lazy Loading
+You can easily add your custom response handling by extending `Response`
+class.
 
-### Assertions
+Response parameters can be extracted using `*.Of` classes:
+```java
+Response response = new Response(
+    new ApacheWire("http://google.com"),
+    new Get("/items")
+);
+Map<String, List<String>> headers = new Headers.Of(response).asMap();
+String body = new Body.Of(response).asString();
+```
+
+#### Assertions
 We can make assertions on received response like this:
 ```java
 new Response(
     new ApacheWire("http://google.com"),
+    new Get("/items"),
     new ExpectedStatus(
         301, 
         new FailWith("Cannot fetch from Google")
