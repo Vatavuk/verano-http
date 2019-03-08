@@ -72,7 +72,7 @@ String body = new Body.Of(response).asString();
 ```
 
 #### Assertions
-We can make assertions on received response like this:
+We can make assertions on received responses like this:
 ```java
 new Response(
     new ApacheWire("http://google.com"),
@@ -94,3 +94,34 @@ exception message is optional.
 #### Proxy
 
 #### Custom Wires
+Verano-http runs on Apache http client using `ApacheWire`. If you need a different
+engine, make your custom implementation of `Wire` interface.
+
+You can also make custom `Wire` decorators to enrich http requests. Let's say
+you need a custom authentication for requests towards remote api.
+You can implement it in this way:
+
+```java
+public class CustomWire implements Wire {
+ 
+     private final Wire origin;
+ 
+     public CustomWire(final Wire origin) {
+         this.origin = origin;
+     }
+ 
+     @Override
+     public Dict send(final Dict request) throws IOException {
+         final String token = login();
+         return this.origin.send(
+             new JoinedDict(
+                 request,
+                 new DictOf(
+                     new Authorization(token),
+                     new Cookie("someCookie")
+                 )
+             )
+         );
+     }
+}
+```
