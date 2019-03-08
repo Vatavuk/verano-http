@@ -15,7 +15,7 @@ Latest version [here](https://github.com/Vatavuk/verano-http/releases)
 <dependency>
     <groupId>hr.com.vgv.verano.http</groupId>
     <artifactId>verano-http</artifactId>
-    <version>0.2</version>
+    <version>0.3</version>
 </dependency>
 ```
 ### Get a Url
