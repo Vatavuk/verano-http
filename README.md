@@ -55,8 +55,8 @@ new Response(
 ### Response handling
 The library provides three type of response deserialization:
 - JsonResponse - javax.json
-- XmlResponse - comming soon
 - DtoResponse - jackson object mapper
+- XmlResponse - comming soon
 
 You can easily add your custom response handling by extending `Response`
 class.
@@ -87,11 +87,29 @@ If the status code is not 301, exception will be raised with message specified
 by `FailWith`. Exception message will also contain response details. Custom
 exception message is optional.
 
-### Advanced Configuration
+### Wires
+`Wire` is a
 
-#### Authentication
+#### Configuration
+The library currently provides following options:
 
-#### Proxy
+- BasicAuth - Basic and Digest authentication
+- Proxy - make requests through proxy
+- SslTrusted - trust all certificates
+
+```java
+new Response(
+    new ApacheWire(
+        "http://google.com", 
+        new BasicAuth("userame", "password"),
+        new Proxy("127.0.0.1", 8000)
+        new SsslTruested()
+    ),
+    new Get("/items")
+).touch();
+```
+If you need additional functionality just implement `ApacheContext` and provide
+as an argument to `ApacheWire`.
 
 #### Custom Wires
 Verano-http runs on Apache http client using `ApacheWire`. If you need a different
@@ -102,18 +120,18 @@ you need a custom authentication for requests towards remote api.
 You can implement it in this way:
 
 ```java
-public class CustomWire implements Wire {
+public class CustomAuthWire implements Wire {
  
-     private final Wire origin;
+     private final Wire wire;
  
-     public CustomWire(final Wire origin) {
-         this.origin = origin;
+     public CustomAuth(final Wire wire) {
+         this.wire = wire;
      }
  
      @Override
      public Dict send(final Dict request) throws IOException {
          final String token = login();
-         return this.origin.send(
+         return this.wire.send(
              new JoinedDict(
                  request,
                  new DictOf(
