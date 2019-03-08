@@ -106,8 +106,6 @@ new Response(
 ```
 
 #### Configuration
-The library currently provides following options:
-
 - BasicAuth - Basic and Digest authentication
 - Proxy - make requests through proxy
 - SslTrusted - trust all certificates
