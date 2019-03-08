@@ -55,8 +55,8 @@ new Response(
 ### Response handling
 The library provides three type of response deserialization:
 - JsonResponse - javax.json
-- DtoResponse - jackson object mapper
-- XmlResponse - comming soon
+- DtoResponse  - jackson object mapper
+- XmlResponse  - comming soon
 
 You can easily add your custom response handling by extending `Response`
 class.
@@ -64,7 +64,7 @@ class.
 Response parameters can be extracted using `*.Of` classes:
 ```java
 Response response = new Response(
-    new ApacheWire("http://google.com"),
+    new ApacheWire("http://exmpl.com"),
     new Get("/items")
 );
 Map<String, List<String>> headers = new Headers.Of(response).asMap();
@@ -75,11 +75,11 @@ String body = new Body.Of(response).asString();
 We can make assertions on received responses like this:
 ```java
 new Response(
-    new ApacheWire("http://google.com"),
+    new ApacheWire("http://exmpl.com"),
     new Get("/items"),
     new ExpectedStatus(
         301, 
-        new FailWith("Cannot fetch from Google")
+        new FailWith("Cannot fetch from exmpl")
     )
 ).touch();
 ```
@@ -88,7 +88,22 @@ by `FailWith`. Exception message will also contain response details. Custom
 exception message is optional.
 
 ### Wires
-`Wire` is a
+`Wire` is an interface through which requests are executed. Verano-http runs 
+on `ApacheWire` which encapsulates [Apache http client](https://github.com/apache/httpcomponents-client).
+If you need a different engine, make your custom `Wire` implementation.
+
+Default http parameters can be specified directly on `ApacheWire` to be used
+in each request:
+```java
+Wire wire = new ApacheWire(
+    "http://exmpl.com",
+    new ContentType("applicaiton/json"),
+    new Header("foo", "bar"),
+);
+new Response(
+    wire, new Get("/items")
+).touch();
+```
 
 #### Configuration
 The library currently provides following options:
@@ -100,7 +115,7 @@ The library currently provides following options:
 ```java
 new Response(
     new ApacheWire(
-        "http://google.com", 
+        "http://exmpl.com", 
         new BasicAuth("userame", "password"),
         new Proxy("127.0.0.1", 8000)
         new SsslTruested()
@@ -109,11 +124,10 @@ new Response(
 ).touch();
 ```
 If you need additional functionality just implement `ApacheContext` and provide
-as an argument to `ApacheWire`.
+it as an argument to `ApacheWire`.
 
 #### Custom Wires
-Verano-http runs on Apache http client using `ApacheWire`. If you need a different
-engine, make your custom implementation of `Wire` interface.
+
 
 You can also make custom `Wire` decorators to enrich http requests. Let's say
 you need a custom authentication for requests towards remote api.
