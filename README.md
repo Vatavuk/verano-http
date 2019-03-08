@@ -18,6 +18,17 @@ Latest version [here](https://github.com/Vatavuk/verano-http/releases)
     <version>0.2</version>
 </dependency>
 ```
+### Get a Url
+```java
+JsonObject json = new JsonResponse(
+    new ApacheWire("http://exmpl.com"),
+    new Get(
+        "/items",
+        new QueryParam("name", "John"),
+        new Accept("application/json"),
+    )
+).json();
+```
 
 ### Post to a Server
 ```java
@@ -41,19 +52,11 @@ new Response(
     )
 ).touch();
 ```
-
-### Get a Url
-```java
-JsonObject json = new JsonResponse(
-    new ApacheWire("http://exmpl.com"),
-    new Get(
-        "/items",
-        new QueryParam("name", "John"),
-        new Accept("application/json"),
-    )
-).json();
-```
 ### Response handling
+The library provides three type of response deserialization:
+- JsonResponse - javax.json
+- XmlResponse - comming soon
+- DtoResponse - jackson object mapper
 
 #### Lazy Loading
 
