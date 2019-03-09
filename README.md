@@ -93,7 +93,7 @@ exception message is optional.
 ### Wires
 `Wire` is an interface through which requests are executed. Verano-http runs 
 on `ApacheWire` which encapsulates [Apache http client](https://github.com/apache/httpcomponents-client).
-If you need a different engine, make your custom `Wire` implementation.
+If you need a different engine, you can make your custom `Wire` implementation.
 
 Default http parameters can be specified directly on `ApacheWire` to be used
 in each request:
@@ -119,7 +119,7 @@ new Response(
         "http://exmpl.com", 
         new BasicAuth("userame", "password"),
         new Proxy("127.0.0.1", 8000)
-        new SsslTruested()
+        new SslTrusted()
     ),
     new Get("/items")
 ).touch();
