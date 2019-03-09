@@ -11,10 +11,10 @@ import org.cactoos.Scalar;
 
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.Kvp;
-import hr.com.vgv.verano.http.request.Body;
-import hr.com.vgv.verano.http.request.Headers;
-import hr.com.vgv.verano.http.request.Method;
-import hr.com.vgv.verano.http.request.RequestUri;
+import hr.com.vgv.verano.http.parts.Body;
+import hr.com.vgv.verano.http.parts.Headers;
+import hr.com.vgv.verano.http.parts.Method;
+import hr.com.vgv.verano.http.parts.RequestUri;
 
 public class ApacheRequest implements Scalar<HttpEntityEnclosingRequestBase>
 {

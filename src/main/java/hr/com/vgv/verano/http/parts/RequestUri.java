@@ -1,4 +1,4 @@
-package hr.com.vgv.verano.http.request;
+package hr.com.vgv.verano.http.parts;
 
 import java.net.URI;
 

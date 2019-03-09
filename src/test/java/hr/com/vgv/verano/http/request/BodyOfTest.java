@@ -1,5 +1,6 @@
 package hr.com.vgv.verano.http.request;
 
+import hr.com.vgv.verano.http.parts.Body;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;

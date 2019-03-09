@@ -6,8 +6,8 @@ import hr.com.vgv.verano.http.DictOf;
 import hr.com.vgv.verano.http.HashDict;
 import hr.com.vgv.verano.http.JoinedDict;
 import hr.com.vgv.verano.http.Wire;
-import hr.com.vgv.verano.http.request.Body;
-import hr.com.vgv.verano.http.request.RequestUri;
+import hr.com.vgv.verano.http.parts.Body;
+import hr.com.vgv.verano.http.parts.RequestUri;
 import hr.com.vgv.verano.http.response.ReasonPhrase;
 import hr.com.vgv.verano.http.response.Status;
 

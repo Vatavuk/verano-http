@@ -5,7 +5,7 @@ import org.cactoos.iterable.Mapped;
 
 import hr.com.vgv.verano.http.DictInput;
 import hr.com.vgv.verano.http.JoinedDict;
-import hr.com.vgv.verano.http.request.Headers;
+import hr.com.vgv.verano.http.parts.Headers;
 
 public class ApacheHeaders extends DictInput.Simple
 {
@@ -15,7 +15,7 @@ public class ApacheHeaders extends DictInput.Simple
             dict,
             new Headers(
                 new Mapped<>(
-                    header -> new hr.com.vgv.verano.http.request.Header(
+                    header -> new hr.com.vgv.verano.http.parts.Header(
                         header.getName(), header.getValue()
                     ),
                     headers

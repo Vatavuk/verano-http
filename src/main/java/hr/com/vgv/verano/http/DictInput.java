@@ -1,6 +1,7 @@
 package hr.com.vgv.verano.http;
 
 import org.cactoos.Func;
+import org.cactoos.Scalar;
 import org.cactoos.func.UncheckedFunc;
 
 /**
@@ -15,10 +16,15 @@ public interface DictInput
     {
         private final UncheckedFunc<Dict, Dict> origin;
 
+        public Simple(final Scalar<DictInput> input) {
+            this((Dict dict) -> new JoinedDict(
+                dict, new DictOf(input.value()))
+            );
+        }
+
         public Simple(final Kvp... kvps) {
             this((Dict dict) -> new JoinedDict(
-                dict,
-                new HashDict(kvps))
+                dict, new HashDict(kvps))
             );
         }
 

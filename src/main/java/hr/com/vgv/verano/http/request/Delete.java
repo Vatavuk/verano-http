@@ -1,9 +1,7 @@
-package hr.com.vgv.verano.http.request.methods;
-
-import org.cactoos.iterable.IterableOf;
+package hr.com.vgv.verano.http.request;
 
 import hr.com.vgv.verano.http.DictInput;
-import hr.com.vgv.verano.http.request.Request;
+import org.cactoos.iterable.IterableOf;
 
 public class Delete extends Request
 {

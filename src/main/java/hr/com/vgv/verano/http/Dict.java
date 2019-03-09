@@ -20,11 +20,11 @@ public interface Dict extends Iterable<Kvp> {
 
     boolean contains(String key);
 
-    class Template implements Dict {
+    class Simple implements Dict {
 
         private final UncheckedScalar<Dict> origin;
 
-        public Template(Scalar<Dict> origin)
+        public Simple(Scalar<Dict> origin)
         {
             this.origin = new UncheckedScalar<>(new StickyScalar<>(origin));
         }

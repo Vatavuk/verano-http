@@ -1,5 +1,6 @@
 package hr.com.vgv.verano.http.request;
 
+import hr.com.vgv.verano.http.parts.RequestUri;
 import java.net.URI;
 
 import org.hamcrest.MatcherAssert;

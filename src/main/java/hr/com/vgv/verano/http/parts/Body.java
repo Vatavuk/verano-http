@@ -1,4 +1,4 @@
-package hr.com.vgv.verano.http.request;
+package hr.com.vgv.verano.http.parts;
 
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.KvpOf;

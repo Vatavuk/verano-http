@@ -1,6 +1,6 @@
-package hr.com.vgv.verano.http.headers;
+package hr.com.vgv.verano.http.parts.headers;
 
-import hr.com.vgv.verano.http.request.Header;
+import hr.com.vgv.verano.http.parts.Header;
 
 public class ContentType extends Header
 {

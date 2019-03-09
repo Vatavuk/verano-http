@@ -2,7 +2,7 @@ package hr.com.vgv.verano.http;
 
 import org.cactoos.iterable.Joined;
 
-public class JoinedDict extends Dict.Template
+public class JoinedDict extends Dict.Simple
 {
     public JoinedDict(Kvp kvp, Dict dict) {
         this(new HashDict(kvp), dict);

@@ -2,7 +2,7 @@ package hr.com.vgv.verano.http;
 
 import org.cactoos.iterable.IterableOf;
 
-public class DictOf extends Dict.Template
+public class DictOf extends Dict.Simple
 {
     public DictOf(final DictInput... inputs) {
         this(new IterableOf<>(inputs));

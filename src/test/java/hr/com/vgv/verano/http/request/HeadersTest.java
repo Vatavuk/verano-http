@@ -2,6 +2,8 @@ package hr.com.vgv.verano.http.request;
 
 import hr.com.vgv.verano.http.HashDict;
 import hr.com.vgv.verano.http.Kvp;
+import hr.com.vgv.verano.http.parts.Header;
+import hr.com.vgv.verano.http.parts.Headers;
 import java.util.List;
 import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;

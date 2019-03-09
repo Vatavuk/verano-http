@@ -1,7 +1,7 @@
 package hr.com.vgv.verano.http.response;
 
-import hr.com.vgv.verano.http.request.Body;
-import hr.com.vgv.verano.http.request.RequestUri;
+import hr.com.vgv.verano.http.parts.Body;
+import hr.com.vgv.verano.http.parts.RequestUri;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 

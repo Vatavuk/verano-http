@@ -20,12 +20,14 @@ Latest version [here](https://github.com/Vatavuk/verano-http/releases)
 ```
 ### Get a Url
 ```java
-JsonObject json = new JsonResponse(
-    new ApacheWire("http://exmpl.com"),
-    new Get(
-        "/items",
-        new QueryParam("name", "John"),
-        new Accept("application/json"),
+JsonObject json = new JsonBody.Of(
+    new Response(
+        "http://example.com",
+        new Get(
+            "/items",
+            new QueryParam("name", "John"),
+            new Accept("application/json"),
+        )
     )
 ).json();
 ```
@@ -33,7 +35,7 @@ JsonObject json = new JsonResponse(
 ### Post to a Server
 ```java
 new Response(
-    new ApacheWire("http://exmpl.com"),
+    "http://example.com",
     new Post(
         "/items",
         new Body("Hello World!"),
@@ -44,7 +46,7 @@ new Response(
 Using form parameters:
 ```java
 new Response(
-    new ApacheWire("http://exmpl.com"),
+    "http://example.com",
     new Post(
         "/items",
         new FormParam("name","John"),
@@ -52,19 +54,20 @@ new Response(
     )
 ).touch();
 ```
+
+### Serialization and Deserialization
+The library provides three type of request serialization:
+- JsonBody - javax.json
+- DtoBody  - jackson object mapper
+- XmlBody  - coming soon
+
+Response deserialization can be achieved using their accompanied `*.Of` classes.
+
 ### Response handling
-The library provides three type of response deserialization:
-- JsonResponse - javax.json
-- DtoResponse  - jackson object mapper
-- XmlResponse  - comming soon
-
-You can easily add your custom response handling by extending `Response`
-class.
-
 Response parameters can be extracted using `*.Of` classes:
 ```java
 Response response = new Response(
-    new ApacheWire("http://exmpl.com"),
+    "http://example.com",
     new Get("/items")
 );
 Map<String, List<String>> headers = new Headers.Of(response).asMap();
@@ -75,7 +78,7 @@ String body = new Body.Of(response).asString();
 We can make assertions on received responses like this:
 ```java
 new Response(
-    new ApacheWire("http://exmpl.com"),
+    "http://exmpl.com",
     new Get("/items"),
     new ExpectedStatus(
         301, 
