@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -27,9 +27,9 @@ import java.io.IOException;
 
 /**
  * Wire for executing requests.
+ * @since 1.0
  */
-public interface Wire
-{
+public interface Wire {
     /**
      * Send request.
      * @param request Request

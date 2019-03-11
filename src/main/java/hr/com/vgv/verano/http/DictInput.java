@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -31,8 +31,7 @@ import org.cactoos.func.UncheckedFunc;
  * Input to be attached to a dictionary.
  * @since 1.0
  */
-public interface DictInput
-{
+public interface DictInput {
     /**
      * Apply input to a dictionary.
      * @param dict Dictionary
@@ -44,8 +43,7 @@ public interface DictInput
      * Simple implementation of {@link DictInput} used
      * to simplify DictInput decorators.
      */
-    class Simple implements DictInput
-    {
+    class Simple implements DictInput {
         /**
          * Original DictInput.
          */
@@ -56,8 +54,8 @@ public interface DictInput
          * @param input Dictionary input
          */
         public Simple(final Scalar<DictInput> input) {
-            this((Dict dict) -> new JoinedDict(
-                dict, new DictOf(input.value()))
+            this(
+                (Dict dict) -> new JoinedDict(dict, new DictOf(input.value()))
             );
         }
 
@@ -66,9 +64,7 @@ public interface DictInput
          * @param kvps Key-value pairs
          */
         public Simple(final Kvp... kvps) {
-            this((Dict dict) -> new JoinedDict(
-                dict, new HashDict(kvps))
-            );
+            this((Dict dict) -> new JoinedDict(dict, new HashDict(kvps)));
         }
 
         /**

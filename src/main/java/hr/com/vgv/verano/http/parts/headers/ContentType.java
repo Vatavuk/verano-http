@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -29,14 +29,12 @@ import hr.com.vgv.verano.http.parts.Header;
  * Content-Type header.
  * @since 1.0
  */
-public class ContentType extends Header
-{
+public class ContentType extends Header {
     /**
      * Ctor.
      * @param value Header
      */
-    public ContentType(final String value)
-    {
+    public ContentType(final String value) {
         super("Content-Type", value);
     }
 }

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -23,30 +23,27 @@
  */
 package hr.com.vgv.verano.http.wire.apache;
 
-import java.io.IOException;
-import java.net.URI;
-
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
-import org.apache.http.entity.BufferedHttpEntity;
-import org.apache.http.entity.InputStreamEntity;
-import org.cactoos.Scalar;
-
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.Kvp;
 import hr.com.vgv.verano.http.parts.Body;
 import hr.com.vgv.verano.http.parts.Headers;
 import hr.com.vgv.verano.http.parts.Method;
 import hr.com.vgv.verano.http.parts.RequestUri;
+import java.io.IOException;
+import java.net.URI;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
+import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.entity.InputStreamEntity;
+import org.cactoos.Scalar;
 
 /**
  * Apache http request.
  * @since 1.0
  */
-public class ApacheRequest implements Scalar<HttpEntityEnclosingRequestBase>
-{
+public class ApacheRequest implements Scalar<HttpEntityEnclosingRequestBase> {
     /**
-     * Request as dictionary,
+     * Request as dictionary.
      */
     private final Dict request;
 
@@ -54,20 +51,17 @@ public class ApacheRequest implements Scalar<HttpEntityEnclosingRequestBase>
      * Ctor.
      * @param request Request
      */
-    public ApacheRequest(final Dict request)
-    {
+    public ApacheRequest(final Dict request) {
         this.request = request;
     }
 
     @Override
-    public final HttpEntityEnclosingRequestBase value() throws IOException
-    {
+    public final HttpEntityEnclosingRequestBase value() throws IOException {
         final HttpEntityEnclosingRequestBase result =
-            new HttpEntityEnclosingRequestBase()
-            {
+            new HttpEntityEnclosingRequestBase() {
                 @Override
-                public String getMethod()
-                {
+                public String getMethod() {
+                    //@checkstyle RequireThisCheck (1 lines)
                     return new Method.Of(request).asString();
                 }
             };
@@ -84,8 +78,7 @@ public class ApacheRequest implements Scalar<HttpEntityEnclosingRequestBase>
                 new InputStreamEntity(new Body.Of(this.request).stream())
             )
         );
-        for (final Kvp header : new Headers.Of(this.request))
-        {
+        for (final Kvp header : new Headers.Of(this.request)) {
             result.addHeader(header.key(), header.value());
         }
         return result;

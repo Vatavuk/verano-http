@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -35,14 +35,13 @@ import org.junit.Test;
 
 /**
  * Test case for {@link Headers}.
+ * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class HeadersTest
-{
+public final class HeadersTest {
     @Test
-    public void buildHeaderInput()
-    {
+    public void buildHeaderInput() {
         final List<Kvp> kvps = new ListOf<>(
             new Headers(
                 new Header("Content-Type", "application/json"),

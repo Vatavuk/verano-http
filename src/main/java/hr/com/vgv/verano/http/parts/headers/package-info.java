@@ -21,46 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http;
-
-import java.util.Map;
-import org.cactoos.map.MapEntry;
 
 /**
- * Key-value pair made of a string pair.
- * @since 1.0
+ * Headers.
+ * @since 0.1
  */
-public class KvpOf implements Kvp {
-
-    /**
-     * Map entry.
-     */
-    private final Map.Entry<String, String> entry;
-
-    /**
-     * Ctor.
-     * @param key Key
-     * @param value Value
-     */
-    public KvpOf(final String key, final String value) {
-        this(new MapEntry<>(key, value));
-    }
-
-    /**
-     * Ctor.
-     * @param entry Map entry
-     */
-    public KvpOf(final Map.Entry<String, String> entry) {
-        this.entry = entry;
-    }
-
-    @Override
-    public final String key() {
-        return this.entry.getKey();
-    }
-
-    @Override
-    public final String value() {
-        return this.entry.getValue();
-    }
-}
+package hr.com.vgv.verano.http.parts.headers;

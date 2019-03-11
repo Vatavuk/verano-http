@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -23,21 +23,19 @@
  */
 package hr.com.vgv.verano.http.request;
 
+import hr.com.vgv.verano.http.Dict;
+import hr.com.vgv.verano.http.DictInput;
+import hr.com.vgv.verano.http.DictOf;
 import hr.com.vgv.verano.http.parts.Method;
 import hr.com.vgv.verano.http.parts.Path;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
 
-import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.DictInput;
-import hr.com.vgv.verano.http.DictOf;
-
 /**
  * Http request.
  * @since 1.0
  */
-public class Request extends Dict.Simple
-{
+public class Request extends Dict.Simple {
     /**
      * Ctor.
      * @param method Http method
@@ -53,8 +51,9 @@ public class Request extends Dict.Simple
      * @param method Http method
      * @param inputs Inputs
      */
-    public Request(final String uri, final String method, final DictInput... inputs)
-    {
+    public Request(
+        final String uri, final String method, final DictInput... inputs
+    ) {
         this(uri, method, new IterableOf<>(inputs));
     }
 

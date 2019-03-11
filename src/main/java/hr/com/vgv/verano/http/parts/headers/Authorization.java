@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -29,14 +29,12 @@ import hr.com.vgv.verano.http.parts.Header;
  * Authorization header.
  * @since 1.0
  */
-public class Authorization extends Header
-{
+public class Authorization extends Header {
     /**
      * Ctor.
      * @param value Header
      */
-    public Authorization(final String value)
-    {
+    public Authorization(final String value) {
         super("Authorization", value);
     }
 }

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -24,9 +24,8 @@
 package hr.com.vgv.verano.http.parts;
 
 import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.KvpOf;
 import hr.com.vgv.verano.http.DictInput;
-
+import hr.com.vgv.verano.http.KvpOf;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -36,8 +35,7 @@ import org.cactoos.Text;
  * Http Body.
  * @since 1.0
  */
-public class Body extends DictInput.Simple
-{
+public class Body extends DictInput.Simple {
     /**
      * Body key in dictionary.
      */
@@ -55,8 +53,7 @@ public class Body extends DictInput.Simple
      * Ctor.
      * @param body Body
      */
-    public Body(final String body)
-    {
+    public Body(final String body) {
         super(new KvpOf(Body.KEY, body));
     }
 
@@ -79,7 +76,7 @@ public class Body extends DictInput.Simple
         }
 
         @Override
-        public String asString() {
+        public final String asString() {
             String body = new FormParams.Of(this.dict).asString();
             if (body.isEmpty()) {
                 body = this.dict.get(Body.KEY, "");

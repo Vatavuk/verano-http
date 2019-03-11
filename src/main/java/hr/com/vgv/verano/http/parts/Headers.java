@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -23,22 +23,20 @@
  */
 package hr.com.vgv.verano.http.parts;
 
+import hr.com.vgv.verano.http.Dict;
+import hr.com.vgv.verano.http.DictInput;
 import hr.com.vgv.verano.http.DictOf;
+import hr.com.vgv.verano.http.Kvp;
+import hr.com.vgv.verano.http.KvpOf;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-
 import org.cactoos.iterable.Filtered;
 import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Mapped;
-
-import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.DictInput;
-import hr.com.vgv.verano.http.Kvp;
-import hr.com.vgv.verano.http.KvpOf;
 
 /**
  * Http headers.

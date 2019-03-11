@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -62,9 +62,8 @@ public class JsonBody extends DictInput.Simple {
          * Body as json.
          * @return Json Json
          */
-        public final JsonObject json()
-        {
-            try(JsonReader reader = this.reader()) {
+        public final JsonObject json() {
+            try (JsonReader reader = this.reader()) {
                 return reader.readObject();
             }
         }
@@ -73,9 +72,8 @@ public class JsonBody extends DictInput.Simple {
          * Body as json array.
          * @return JsonArray Json array
          */
-        public final JsonArray jsonArray()
-        {
-            try(JsonReader reader = this.reader()) {
+        public final JsonArray jsonArray() {
+            try (JsonReader reader = this.reader()) {
                 return reader.readArray();
             }
         }
@@ -84,8 +82,7 @@ public class JsonBody extends DictInput.Simple {
          * Read json from string.
          * @return JsonReader Json reader
          */
-        private JsonReader reader()
-        {
+        private JsonReader reader() {
             return Json.createReader(
                 new StringReader(this.asString())
             );

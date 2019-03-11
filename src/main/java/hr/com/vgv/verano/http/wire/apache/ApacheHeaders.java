@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -23,35 +23,34 @@
  */
 package hr.com.vgv.verano.http.wire.apache;
 
-import org.apache.http.Header;
-import org.cactoos.iterable.Mapped;
-
 import hr.com.vgv.verano.http.DictInput;
 import hr.com.vgv.verano.http.JoinedDict;
 import hr.com.vgv.verano.http.parts.Headers;
+import org.apache.http.Header;
+import org.cactoos.iterable.Mapped;
 
 /**
  * Apache headers.
  * @since 1.0
  */
-public class ApacheHeaders extends DictInput.Simple
-{
+public class ApacheHeaders extends DictInput.Simple {
     /**
      * Ctor.
      * @param headers Headers
      */
-    public ApacheHeaders(final Header... headers)
-    {
-        super(dict -> new JoinedDict(
-            dict,
-            new Headers(
-                new Mapped<>(
-                    header -> new hr.com.vgv.verano.http.parts.Header(
-                        header.getName(), header.getValue()
-                    ),
-                    headers
-                )
-            ).apply(dict))
+    public ApacheHeaders(final Header... headers) {
+        super(
+            dict -> new JoinedDict(
+                dict,
+                new Headers(
+                    new Mapped<>(
+                        header -> new hr.com.vgv.verano.http.parts.Header(
+                            header.getName(), header.getValue()
+                        ),
+                        headers
+                    )
+                ).apply(dict)
+            )
         );
     }
 }

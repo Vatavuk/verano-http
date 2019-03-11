@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -27,8 +27,7 @@ package hr.com.vgv.verano.http;
  * Assertion on dictionary.
  * @since 1.0
  */
-public interface Assertion
-{
+public interface Assertion {
     /**
      * Assert dictionary.
      * @param dict Dictionary

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -23,25 +23,23 @@
  */
 package hr.com.vgv.verano.http.request;
 
+import hr.com.vgv.verano.http.HashDict;
+import hr.com.vgv.verano.http.Kvp;
+import hr.com.vgv.verano.http.KvpOf;
 import hr.com.vgv.verano.http.parts.Headers;
 import java.util.List;
-
 import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
-import hr.com.vgv.verano.http.HashDict;
-import hr.com.vgv.verano.http.Kvp;
-import hr.com.vgv.verano.http.KvpOf;
-
 /**
  * Test case for {@link Headers.Of}.
+ * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class HeadersOfTest
-{
+public final class HeadersOfTest {
     @Test
     public void extractHeadersFromDict() {
         final List<Kvp> kvps = new ListOf<>(

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -32,12 +32,12 @@ import org.junit.Test;
 
 /**
  * Test case for {@link QueryParams.Of}.
+ * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
  */
-public final class QueryParamsOfTest
-{
+public final class QueryParamsOfTest {
     @Test
-    public void buildQueryParamsInput(){
+    public void buildQueryParamsInput() {
         MatcherAssert.assertThat(
             new QueryParams.Of(
                 new HashDict(

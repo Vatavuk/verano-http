@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -24,7 +24,6 @@
 package hr.com.vgv.verano.http.wire.apache;
 
 import java.net.URI;
-
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
@@ -35,8 +34,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
  * Basic and Digest authentication.
  * @since 1.0
  */
-public class BasicAuth implements ApacheContext
-{
+public class BasicAuth implements ApacheContext {
     /**
      * Username.
      */
@@ -52,8 +50,7 @@ public class BasicAuth implements ApacheContext
      * @param username Username
      * @param password Password
      */
-    public BasicAuth(final String username, final String password)
-    {
+    public BasicAuth(final String username, final String password) {
         this.username = username;
         this.password = password;
     }

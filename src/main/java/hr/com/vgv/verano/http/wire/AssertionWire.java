@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -23,18 +23,16 @@
  */
 package hr.com.vgv.verano.http.wire;
 
-import java.io.IOException;
-
 import hr.com.vgv.verano.http.Assertion;
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.Wire;
+import java.io.IOException;
 
 /**
  * Wire with additional assertion on response.
  * @since 1.0
  */
-public class AssertionWire implements Wire
-{
+public class AssertionWire implements Wire {
     /**
      * Original wire.
      */
@@ -50,15 +48,13 @@ public class AssertionWire implements Wire
      * @param origin Origin
      * @param assertion Assertion
      */
-    public AssertionWire(final Wire origin, final Assertion assertion)
-    {
+    public AssertionWire(final Wire origin, final Assertion assertion) {
         this.origin = origin;
         this.assertion = assertion;
     }
 
     @Override
-    public final Dict send(final Dict request) throws IOException
-    {
+    public final Dict send(final Dict request) throws IOException {
         final Dict response = this.origin.send(request);
         this.assertion.test(response);
         return response;

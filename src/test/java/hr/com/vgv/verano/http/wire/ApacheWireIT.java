@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -36,14 +36,15 @@ import org.junit.Test;
 
 /**
  * Integration test case for {@link ApacheWire}.
+ * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class ApacheWireIT
-{
+public final class ApacheWireIT {
     @Test
     @Ignore
-    public void postReq()
-    {
+    public void postReq() {
         new JsonBody.Of(
             new Response(
                 "http://example.com",
@@ -56,10 +57,12 @@ public final class ApacheWireIT
     }
 
     @Test
-    public void googlePage()
-    {
+    public void googlePage() {
         new Response(
-            new ApacheWire("http://google.com", new BasicAuth("userame", "password")),
+            new ApacheWire(
+                "http://google.com",
+                new BasicAuth("userame", "password")
+            ),
             new ExpectedStatus(301, new FailWith("Cannot fetch from Google"))
         ).touch();
     }

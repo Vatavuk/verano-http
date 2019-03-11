@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -24,19 +24,17 @@
 package hr.com.vgv.verano.http.parts;
 
 import hr.com.vgv.verano.http.Dict;
+import hr.com.vgv.verano.http.DictInput;
 import hr.com.vgv.verano.http.HashDict;
 import hr.com.vgv.verano.http.JoinedDict;
 import hr.com.vgv.verano.http.KvpOf;
-import hr.com.vgv.verano.http.DictInput;
-
 import org.cactoos.Text;
 
 /**
  * Path in url.
  * @since 1.0
  */
-public class Path extends DictInput.Simple
-{
+public class Path extends DictInput.Simple {
     /**
      * Path key in dictionary.
      */
@@ -46,12 +44,16 @@ public class Path extends DictInput.Simple
      * Ctor.
      * @param path Path
      */
-    public Path(final String path)
-    {
+    public Path(final String path) {
         super(
-            (dict) -> new JoinedDict(
+            dict -> new JoinedDict(
                 dict,
-                new HashDict(new KvpOf(Path.KEY, dict.get(Path.KEY, "") + path))
+                new HashDict(
+                    new KvpOf(
+                        Path.KEY,
+                        String.format("%s%s", dict.get(Path.KEY, ""), path)
+                    )
+                )
             )
         );
     }
@@ -59,8 +61,7 @@ public class Path extends DictInput.Simple
     /**
      * Path from dictionary.
      */
-    public static class Of implements Text
-    {
+    public static class Of implements Text {
         /**
          * Dictionary.
          */
@@ -70,14 +71,12 @@ public class Path extends DictInput.Simple
          * Ctor.
          * @param dict Dictionary
          */
-        public Of(final Dict dict)
-        {
+        public Of(final Dict dict) {
             this.dict = dict;
         }
 
         @Override
-        public String asString()
-        {
+        public final String asString() {
             return this.dict.get(Path.KEY, "");
         }
     }

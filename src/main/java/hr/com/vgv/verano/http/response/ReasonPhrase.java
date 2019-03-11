@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -23,11 +23,10 @@
  */
 package hr.com.vgv.verano.http.response;
 
-import org.cactoos.Text;
-
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.DictInput;
 import hr.com.vgv.verano.http.KvpOf;
+import org.cactoos.Text;
 
 /**
  * Http reason phrase.
@@ -44,16 +43,14 @@ public class ReasonPhrase extends DictInput.Simple {
      * Ctor.
      * @param reason Reason phrase
      */
-    public ReasonPhrase(final String reason)
-    {
+    public ReasonPhrase(final String reason) {
         super(new KvpOf(ReasonPhrase.KEY, reason));
     }
 
     /**
      * Reason phrase from response.
      */
-    public static class Of implements Text
-    {
+    public static class Of implements Text {
         /**
          * Response.
          */
@@ -63,14 +60,12 @@ public class ReasonPhrase extends DictInput.Simple {
          * Ctor.
          * @param response Response
          */
-        public Of(final Dict response)
-        {
+        public Of(final Dict response) {
             this.response = response;
         }
 
         @Override
-        public final String asString()
-        {
+        public final String asString() {
             return this.response.get(ReasonPhrase.KEY, "");
         }
     }

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -30,8 +30,7 @@ import org.cactoos.iterable.IterableOf;
  * Http DELETE request.
  * @since 1.0
  */
-public class Delete extends Request
-{
+public class Delete extends Request {
     /**
      * Ctor.
      * @param inputs Inputs
@@ -70,8 +69,7 @@ public class Delete extends Request
      * @param uri Uri
      * @param inputs Inputs
      */
-    public Delete(final String uri, final Iterable<DictInput> inputs)
-    {
+    public Delete(final String uri, final Iterable<DictInput> inputs) {
         super(uri, "DELETE", inputs);
     }
 }

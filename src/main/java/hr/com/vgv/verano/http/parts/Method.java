@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -24,17 +24,15 @@
 package hr.com.vgv.verano.http.parts;
 
 import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.KvpOf;
 import hr.com.vgv.verano.http.DictInput;
-
+import hr.com.vgv.verano.http.KvpOf;
 import org.cactoos.Text;
 
 /**
  * Http method.
  * @since 1.0
  */
-public class Method extends DictInput.Simple
-{
+public class Method extends DictInput.Simple {
     /**
      * Method key in dictionary.
      */
@@ -44,8 +42,7 @@ public class Method extends DictInput.Simple
      * Ctor.
      * @param method Http method
      */
-    public Method(final String method)
-    {
+    public Method(final String method) {
         super(new KvpOf(Method.KEY, method));
     }
 
@@ -61,14 +58,14 @@ public class Method extends DictInput.Simple
 
         /**
          * Ctor.
-         * @param response response
+         * @param response Response
          */
         public Of(final Dict response) {
             this.response = response;
         }
 
         @Override
-        public String asString() {
+        public final String asString() {
             return this.response.get(Method.KEY, "GET");
         }
     }

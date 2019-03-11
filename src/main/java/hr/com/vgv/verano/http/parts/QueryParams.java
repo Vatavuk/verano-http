@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -38,14 +38,12 @@ import org.cactoos.iterable.Mapped;
  * Http query parameters.
  * @since 1.0
  */
-public class QueryParams extends DictInput.Simple
-{
+public class QueryParams extends DictInput.Simple {
     /**
      * Ctor.
      * @param params Parameters
      */
-    public QueryParams(final QueryParam... params)
-    {
+    public QueryParams(final QueryParam... params) {
         this(new IterableOf<>(params));
     }
 
@@ -65,6 +63,19 @@ public class QueryParams extends DictInput.Simple
     }
 
     /**
+     * Query string.
+     * @param kvps Key-Value pairs
+     * @return String Query string
+     */
+    private static String queryString(final Iterable<Kvp> kvps) {
+        UriBuilder builder = UriBuilder.fromUri("");
+        for (final Kvp kvp : kvps) {
+            builder = builder.queryParam(kvp.key(), kvp.value());
+        }
+        return builder.build().toString();
+    }
+
+    /**
      * Query parameters from response.
      */
     public static class Of implements Text {
@@ -78,34 +89,21 @@ public class QueryParams extends DictInput.Simple
          * Ctor.
          * @param response Response
          */
-        public Of(final Dict response)
-        {
+        public Of(final Dict response) {
             this.response = response;
         }
 
         @Override
-        public String asString()
-        {
-            return queryString(new Mapped<>(
-                in -> new KvpOf(in.key().substring(2), in.value()),
-                new Filtered<>(
-                    input -> input.key().startsWith("q."),
-                    this.response
+        public final String asString() {
+            return QueryParams.queryString(
+                new Mapped<>(
+                    in -> new KvpOf(in.key().substring(2), in.value()),
+                    new Filtered<>(
+                        input -> input.key().startsWith("q."),
+                        this.response
+                    )
                 )
-            ));
+            );
         }
-    }
-
-    /**
-     * Query string.
-     * @param kvps Key-Value pairs
-     * @return String Query string
-     */
-    private static String queryString(final Iterable<Kvp> kvps) {
-        UriBuilder builder = UriBuilder.fromUri("");
-        for (final Kvp kvp: kvps) {
-            builder = builder.queryParam(kvp.key(), kvp.value());
-        }
-        return builder.build().toString();
     }
 }

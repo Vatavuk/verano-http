@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -29,8 +29,7 @@ import org.cactoos.iterable.Joined;
  * Joined dictionary.
  * @since 1.0
  */
-public class JoinedDict extends Dict.Simple
-{
+public class JoinedDict extends Dict.Simple {
     /**
      * Ctor.
      * @param kvp Key-value pair
@@ -53,8 +52,7 @@ public class JoinedDict extends Dict.Simple
      * Ctor.
      * @param dicts Dictionaries
      */
-    public JoinedDict(final Dict... dicts)
-    {
+    public JoinedDict(final Dict... dicts) {
         super(() -> new HashDict(new Joined<>(dicts)));
     }
 }

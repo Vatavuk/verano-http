@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -29,14 +29,12 @@ import hr.com.vgv.verano.http.parts.Header;
  * Accept header.
  * @since 1.0
  */
-public class Accept extends Header
-{
+public class Accept extends Header {
     /**
      * Ctor.
      * @param value Header
      */
-    public Accept(final String value)
-    {
+    public Accept(final String value) {
         super("Accept", value);
     }
 }

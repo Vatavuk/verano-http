@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -24,7 +24,6 @@
 package hr.com.vgv.verano.http;
 
 import java.util.Map;
-
 import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.list.Mapped;
@@ -38,8 +37,7 @@ import org.cactoos.scalar.UncheckedScalar;
  * Dictionary implemented with HashMap.
  * @since 1.0
  */
-public class HashDict extends IterableEnvelope<Kvp> implements Dict
-{
+public class HashDict extends IterableEnvelope<Kvp> implements Dict {
     /**
      * Map.
      */
@@ -49,8 +47,7 @@ public class HashDict extends IterableEnvelope<Kvp> implements Dict
      * Ctor.
      * @param kvps Key-value pairs
      */
-    public HashDict(final Kvp... kvps)
-    {
+    public HashDict(final Kvp... kvps) {
         this(new IterableOf<>(kvps));
     }
 
@@ -58,8 +55,7 @@ public class HashDict extends IterableEnvelope<Kvp> implements Dict
      * Ctor.
      * @param kvps Key-value pairs
      */
-    public HashDict(final Iterable<Kvp> kvps)
-    {
+    public HashDict(final Iterable<Kvp> kvps) {
         this(
             kvps,
             new MapOf<>(
@@ -76,17 +72,14 @@ public class HashDict extends IterableEnvelope<Kvp> implements Dict
      * @param kvps Key-value pairs
      * @param map Map
      */
-    public HashDict(final Iterable<Kvp> kvps, final Map<String, String> map)
-    {
+    public HashDict(final Iterable<Kvp> kvps, final Map<String, String> map) {
         super(() -> new Sticky<>(kvps));
         this.map = map;
     }
 
     @Override
-    public final String get(final String key)
-    {
-        if (this.contains(key))
-        {
+    public final String get(final String key) {
+        if (this.contains(key)) {
             return this.map.get(key);
         }
         throw new IllegalStateException(
@@ -95,8 +88,7 @@ public class HashDict extends IterableEnvelope<Kvp> implements Dict
     }
 
     @Override
-    public final String get(final String key, final String def)
-    {
+    public final String get(final String key, final String def) {
         return new UncheckedScalar<>(
             new Ternary<>(
                 () -> this.contains(key),
@@ -107,8 +99,7 @@ public class HashDict extends IterableEnvelope<Kvp> implements Dict
     }
 
     @Override
-    public final boolean contains(final String key)
-    {
+    public final boolean contains(final String key) {
         return this.map.containsKey(key);
     }
 }

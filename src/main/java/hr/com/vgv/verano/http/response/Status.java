@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -23,18 +23,16 @@
  */
 package hr.com.vgv.verano.http.response;
 
-import org.cactoos.Text;
-
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.DictInput;
 import hr.com.vgv.verano.http.KvpOf;
+import org.cactoos.Text;
 
 /**
  * Http status.
  * @since 1.0
  */
-public class Status extends DictInput.Simple
-{
+public class Status extends DictInput.Simple {
     /**
      * Status key in dictionary.
      */
@@ -44,8 +42,7 @@ public class Status extends DictInput.Simple
      * Ctor.
      * @param status Http status
      */
-    public Status(final Integer status)
-    {
+    public Status(final Integer status) {
         this(status.toString());
     }
 
@@ -53,16 +50,14 @@ public class Status extends DictInput.Simple
      * Ctor.
      * @param status Http status
      */
-    public Status(final String status)
-    {
+    public Status(final String status) {
         super(new KvpOf(Status.KEY, status));
     }
 
     /**
      * Http status from response.
      */
-    public static class Of implements Text
-    {
+    public static class Of implements Text {
         /**
          * Response.
          */
@@ -72,14 +67,12 @@ public class Status extends DictInput.Simple
          * Ctor.
          * @param response Response
          */
-        public Of(final Dict response)
-        {
+        public Of(final Dict response) {
             this.response = response;
         }
 
         @Override
-        public final String asString()
-        {
+        public final String asString() {
             return this.response.get(Status.KEY);
         }
 
@@ -87,8 +80,7 @@ public class Status extends DictInput.Simple
          * Integer value of status.
          * @return Integer Status
          */
-        public final int intValue()
-        {
+        public final int intValue() {
             return Integer.parseInt(this.asString());
         }
     }

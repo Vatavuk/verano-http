@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -30,8 +30,7 @@ import org.cactoos.iterable.IterableOf;
  * Http POST request.
  * @since 1.0
  */
-public class Post extends Request
-{
+public class Post extends Request {
     /**
      * Ctor.
      * @param inputs Inputs
@@ -70,8 +69,7 @@ public class Post extends Request
      * @param uri Uri
      * @param inputs Inputs
      */
-    public Post(final String uri, final Iterable<DictInput> inputs)
-    {
+    public Post(final String uri, final Iterable<DictInput> inputs) {
         super(uri, "POST", inputs);
     }
 }

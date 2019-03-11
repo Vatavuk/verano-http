@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -24,15 +24,13 @@
 package hr.com.vgv.verano.http.wire.apache;
 
 import java.net.URI;
-
 import org.apache.http.impl.client.HttpClientBuilder;
 
 /**
  * Context to be attached to apache http client.
  * @since 1.0
  */
-public interface ApacheContext
-{
+public interface ApacheContext {
     /**
      * Apply http builder to apache context.
      * @param uri Uri

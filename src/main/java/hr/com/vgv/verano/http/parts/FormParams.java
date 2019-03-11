@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -39,14 +39,12 @@ import org.cactoos.text.UncheckedText;
  * Http form parameters.
  * @since 1.0
  */
-public class FormParams extends DictInput.Simple
-{
+public class FormParams extends DictInput.Simple {
     /**
      * Ctor.
      * @param params Parameters
      */
-    public FormParams(final FormParam... params)
-    {
+    public FormParams(final FormParam... params) {
         this(new IterableOf<>(params));
     }
 
@@ -79,14 +77,12 @@ public class FormParams extends DictInput.Simple
          * Ctor.
          * @param dict Response
          */
-        public Of(final Dict dict)
-        {
+        public Of(final Dict dict) {
             this.dict = dict;
         }
 
         @Override
-        public String asString()
-        {
+        public final String asString() {
             return new UncheckedText(
                 new JoinedText(
                     "&",

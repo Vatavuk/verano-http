@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -23,20 +23,17 @@
  */
 package hr.com.vgv.verano.http.parts;
 
-import java.net.URI;
-
-import org.cactoos.Text;
-
 import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.KvpOf;
 import hr.com.vgv.verano.http.DictInput;
+import hr.com.vgv.verano.http.KvpOf;
+import java.net.URI;
+import org.cactoos.Text;
 
 /**
  * Request Uri.
  * @since 1.0
  */
-public class RequestUri extends DictInput.Simple
-{
+public class RequestUri extends DictInput.Simple {
     /**
      * Uri key in dictionary.
      */
@@ -44,28 +41,31 @@ public class RequestUri extends DictInput.Simple
 
     /**
      * Ctor.
-     * @param uri uri
+     * @param uri Uri
      */
-    public RequestUri(final String uri)
-    {
+    public RequestUri(final String uri) {
         super(new KvpOf(RequestUri.KEY, uri));
     }
 
     /**
      * Request uri from response.
      */
-    public static class Of implements Text
-    {
+    public static class Of implements Text {
+        /**
+         * Dictionary.
+         */
         private final Dict dict;
 
-        public Of(final Dict dict)
-        {
+        /**
+         * Ctor.
+         * @param dict Dictionary
+         */
+        public Of(final Dict dict) {
             this.dict = dict;
         }
 
         @Override
-        public final String asString()
-        {
+        public final String asString() {
             return String.format(
                 "%s%s%s",
                 this.dict.get(RequestUri.KEY, ""),
@@ -74,6 +74,10 @@ public class RequestUri extends DictInput.Simple
             );
         }
 
+        /**
+         * Uri.
+         * @return Uri Uri
+         */
         public final URI uri() {
             return URI.create(this.asString());
         }

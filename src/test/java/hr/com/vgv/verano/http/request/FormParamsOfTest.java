@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -32,10 +32,10 @@ import org.junit.Test;
 
 /**
  * Test case for {@link FormParams.Of}.
+ * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
  */
-public final class FormParamsOfTest
-{
+public final class FormParamsOfTest {
     @Test
     public void buildsFormParamsInput() {
         MatcherAssert.assertThat(

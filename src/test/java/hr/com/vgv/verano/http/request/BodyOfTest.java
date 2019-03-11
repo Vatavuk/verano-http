@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -23,21 +23,20 @@
  */
 package hr.com.vgv.verano.http.request;
 
+import hr.com.vgv.verano.http.HashDict;
+import hr.com.vgv.verano.http.KvpOf;
 import hr.com.vgv.verano.http.parts.Body;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
-import hr.com.vgv.verano.http.HashDict;
-import hr.com.vgv.verano.http.KvpOf;
-
 /**
  * Test case for {@link Body.Of}.
+ * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class BodyOfTest
-{
+public final class BodyOfTest {
     @Test
     public void extractsBodyFromDict() {
         MatcherAssert.assertThat(

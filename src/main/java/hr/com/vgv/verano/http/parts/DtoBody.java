@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -74,6 +74,7 @@ public class DtoBody extends DictInput.Simple {
          * @param <T> Output type
          * @return Dto Dto
          * @throws Exception If fails
+         * @checkstyle MethodNameCheck (2 lines)
          */
         public final <T> T as(final Class<T> cls) throws Exception {
             return DtoBody.MAPPER.readValue(this.asString(), cls);

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -23,6 +23,8 @@
  */
 package hr.com.vgv.verano.http.response;
 
+import hr.com.vgv.verano.http.Assertion;
+import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.parts.Body;
 import hr.com.vgv.verano.http.parts.RequestUri;
 import java.io.IOException;
@@ -33,15 +35,13 @@ import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.UncheckedText;
-import hr.com.vgv.verano.http.Assertion;
-import hr.com.vgv.verano.http.Dict;
 
 /**
  * Assertion on http status.
  * @since 1.0
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public class ExpectedStatus implements Assertion
-{
+public class ExpectedStatus implements Assertion {
     /**
      * Statuses.
      */
@@ -67,7 +67,9 @@ public class ExpectedStatus implements Assertion
      * @param additional Additional statuses
      */
     public ExpectedStatus(final Integer status, final Integer... additional) {
-        this(new Joined<>(status, new IterableOf<>(additional)), new TextOf(""));
+        this(
+            new Joined<>(status, new IterableOf<>(additional)), new TextOf("")
+        );
     }
 
     /**
@@ -75,21 +77,22 @@ public class ExpectedStatus implements Assertion
      * @param statuses Statuses
      * @param message Error message
      */
-    public ExpectedStatus(final Iterable<Integer> statuses, final Text message)
-    {
+    public ExpectedStatus(
+        final Iterable<Integer> statuses, final Text message
+    ) {
         this.statuses = statuses;
         this.message = new UncheckedText(message);
     }
 
     @Override
-    public final void test(final Dict response)
-    {
+    public final void test(final Dict response) {
         final int status = new Status.Of(response).intValue();
         if (!new CollectionOf<>(this.statuses).contains(status)) {
             final String msg = String.format(
                 "%s\n%s",
                 this.message.asString(),
                 String.format(
+                    //@checkstyle LineLengthCheck (1 lines)
                     "Received response with status %d, instead of %d.\nReason: %s\nUrl: %s\nBody: %s",
                     status,
                     this.statuses.iterator().next(),

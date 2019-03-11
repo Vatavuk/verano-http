@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -24,7 +24,6 @@
 package hr.com.vgv.verano.http;
 
 import java.util.Iterator;
-
 import org.cactoos.Scalar;
 import org.cactoos.scalar.StickyScalar;
 import org.cactoos.scalar.UncheckedScalar;
@@ -72,32 +71,27 @@ public interface Dict extends Iterable<Kvp> {
          * Ctor.
          * @param origin Original dictionary
          */
-        public Simple(final Scalar<Dict> origin)
-        {
+        public Simple(final Scalar<Dict> origin) {
             this.origin = new UncheckedScalar<>(new StickyScalar<>(origin));
         }
 
         @Override
-        public final String get(final String key)
-        {
+        public final String get(final String key) {
             return this.origin.value().get(key);
         }
 
         @Override
-        public final String get(final String key, final String def)
-        {
+        public final String get(final String key, final String def) {
             return this.origin.value().get(key, def);
         }
 
         @Override
-        public final boolean contains(final String key)
-        {
+        public final boolean contains(final String key) {
             return this.origin.value().contains(key);
         }
 
         @Override
-        public final Iterator<Kvp> iterator()
-        {
+        public final Iterator<Kvp> iterator() {
             return this.origin.value().iterator();
         }
     }

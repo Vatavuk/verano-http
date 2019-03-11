@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -34,8 +34,7 @@ import hr.com.vgv.verano.http.wire.AssertionWire;
  * Http response.
  * @since 1.0
  */
-public class Response extends Dict.Simple
-{
+public class Response extends Dict.Simple {
     /**
      * Ctor.
      * @param uri Uri
@@ -89,7 +88,8 @@ public class Response extends Dict.Simple
      * @param request Request
      */
     public Response(final Wire wire, final Dict request) {
-        this(wire, request, in -> {});
+        this(wire, request, in -> {
+        });
     }
 
     /**

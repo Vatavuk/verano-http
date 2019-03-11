@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -33,13 +33,11 @@ import hr.com.vgv.verano.http.parts.Body;
 import hr.com.vgv.verano.http.parts.RequestUri;
 import hr.com.vgv.verano.http.response.ReasonPhrase;
 import hr.com.vgv.verano.http.response.Status;
-
 import hr.com.vgv.verano.http.wire.apache.ApacheContext;
 import hr.com.vgv.verano.http.wire.apache.ApacheHeaders;
 import hr.com.vgv.verano.http.wire.apache.ApacheRequest;
 import java.io.IOException;
 import java.net.URI;
-
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -50,9 +48,9 @@ import org.cactoos.iterable.IterableOf;
 /**
  * Apache http wire.
  * @since 1.0
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public class ApacheWire implements Wire
-{
+public class ApacheWire implements Wire {
     /**
      * Apache contexts.
      */
@@ -67,8 +65,7 @@ public class ApacheWire implements Wire
      * Ctor.
      * @param uri Uri
      */
-    public ApacheWire(final String uri)
-    {
+    public ApacheWire(final String uri) {
         this(uri, new IterableOf<>());
     }
 
@@ -77,8 +74,7 @@ public class ApacheWire implements Wire
      * @param uri Uri
      * @param inputs Inputs
      */
-    public ApacheWire(final String uri, final DictInput... inputs)
-    {
+    public ApacheWire(final String uri, final DictInput... inputs) {
         this(uri, new IterableOf<>(), new DictOf(inputs));
     }
 
@@ -87,8 +83,7 @@ public class ApacheWire implements Wire
      * @param uri Uri
      * @param contexts Apache contexts
      */
-    public ApacheWire(final String uri, final ApacheContext... contexts)
-    {
+    public ApacheWire(final String uri, final ApacheContext... contexts) {
         this(uri, new IterableOf<>(contexts));
     }
 
@@ -97,8 +92,9 @@ public class ApacheWire implements Wire
      * @param uri Uri
      * @param contexts Apache contexts
      */
-    public ApacheWire(final String uri, final Iterable<ApacheContext> contexts)
-    {
+    public ApacheWire(
+        final String uri, final Iterable<ApacheContext> contexts
+    ) {
         this(contexts, new DictOf(new RequestUri(uri)));
     }
 
@@ -132,16 +128,14 @@ public class ApacheWire implements Wire
     }
 
     @Override
-    public final Dict send(final Dict message) throws IOException
-    {
+    public final Dict send(final Dict message) throws IOException {
         final Dict request = new JoinedDict(message, this.parameters);
         HttpClientBuilder builder = HttpClients.custom();
         final URI uri = new RequestUri.Of(request).uri();
-        for (final ApacheContext context : this.contexts)
-        {
+        for (final ApacheContext context : this.contexts) {
             builder = context.apply(uri, builder);
         }
-        try(CloseableHttpResponse response = builder.build()
+        try (CloseableHttpResponse response = builder.build()
             .execute(new ApacheRequest(request).value())) {
             final StatusLine status = response.getStatusLine();
             return new DictOf(

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -29,8 +29,7 @@ import org.cactoos.Text;
  * Fail message.
  * @since 1.0
  */
-public class FailWith implements Text
-{
+public class FailWith implements Text {
     /**
      * Message text.
      */
@@ -40,14 +39,12 @@ public class FailWith implements Text
      * Ctor.
      * @param text Text message
      */
-    public FailWith(final String text)
-    {
+    public FailWith(final String text) {
         this.text = text;
     }
 
     @Override
-    public final String asString()
-    {
+    public final String asString() {
         return this.text;
     }
 }

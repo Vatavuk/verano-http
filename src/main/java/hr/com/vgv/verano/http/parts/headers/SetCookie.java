@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -29,14 +29,12 @@ import hr.com.vgv.verano.http.parts.Header;
  * Set-Cookie header.
  * @since 1.0
  */
-public class SetCookie extends Header
-{
+public class SetCookie extends Header {
     /**
      * Ctor.
      * @param value Header
      */
-    public SetCookie(final String value)
-    {
+    public SetCookie(final String value) {
         super("Set-Cookie", value);
     }
 }

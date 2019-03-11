@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Vedran Grgo Vatavuk
@@ -29,8 +29,7 @@ import org.cactoos.iterable.IterableOf;
  * Dictionary made of dictionary inputs.
  * @since 1.0
  */
-public class DictOf extends Dict.Simple
-{
+public class DictOf extends Dict.Simple {
     /**
      * Ctor.
      * @param inputs Inputs
@@ -43,11 +42,10 @@ public class DictOf extends Dict.Simple
      * Ctor.
      * @param inputs Inputs
      */
-    public DictOf(final Iterable<DictInput> inputs)
-    {
+    public DictOf(final Iterable<DictInput> inputs) {
         super(() -> {
             Dict dict = new HashDict();
-            for (final DictInput input: inputs) {
+            for (final DictInput input : inputs) {
                 dict = input.apply(dict);
             }
             return dict;
