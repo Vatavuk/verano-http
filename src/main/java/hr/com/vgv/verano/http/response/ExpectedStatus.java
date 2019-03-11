@@ -23,7 +23,7 @@
  */
 package hr.com.vgv.verano.http.response;
 
-import hr.com.vgv.verano.http.Assertion;
+import hr.com.vgv.verano.http.Verification;
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.parts.Body;
 import hr.com.vgv.verano.http.parts.RequestUri;
@@ -41,7 +41,7 @@ import org.cactoos.text.UncheckedText;
  * @since 1.0
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public class ExpectedStatus implements Assertion {
+public class ExpectedStatus implements Verification {
     /**
      * Statuses.
      */
@@ -85,7 +85,7 @@ public class ExpectedStatus implements Assertion {
     }
 
     @Override
-    public final void test(final Dict response) {
+    public final void verify(final Dict response) {
         final int status = new Status.Of(response).intValue();
         if (!new CollectionOf<>(this.statuses).contains(status)) {
             final String msg = String.format(

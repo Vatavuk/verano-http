@@ -21,42 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.wire;
-
-import hr.com.vgv.verano.http.Assertion;
-import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.Wire;
-import java.io.IOException;
+package hr.com.vgv.verano.http;
 
 /**
- * Wire with additional assertion on response.
+ * Dictionary verification.
  * @since 1.0
  */
-public class AssertionWire implements Wire {
+public interface Verification {
     /**
-     * Original wire.
+     * Verify dictionary.
+     * @param dict Dictionary
      */
-    private final Wire origin;
-
-    /**
-     * Assertion.
-     */
-    private final Assertion assertion;
-
-    /**
-     * Ctor.
-     * @param origin Origin
-     * @param assertion Assertion
-     */
-    public AssertionWire(final Wire origin, final Assertion assertion) {
-        this.origin = origin;
-        this.assertion = assertion;
-    }
-
-    @Override
-    public final Dict send(final Dict request) throws IOException {
-        final Dict response = this.origin.send(request);
-        this.assertion.test(response);
-        return response;
-    }
+    void verify(Dict dict);
 }
