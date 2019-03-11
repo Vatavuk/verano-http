@@ -158,3 +158,10 @@ public class CustomAuthWire implements Wire {
      }
 }
 ```
+### Contribution
+You can contribute by forking the repo and sending a pull request.
+Make sure your branch builds without any warnings/issues:
+
+```
+mvn clean install -Pqulice
+```

@@ -1,3 +1,26 @@
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2019 Vedran Grgo Vatavuk
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package hr.com.vgv.verano.http.parts;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -11,6 +34,9 @@ import hr.com.vgv.verano.http.DictInput;
  */
 public class DtoBody extends DictInput.Simple {
 
+    /**
+     * Object mapper.
+     */
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
     static {
@@ -19,17 +45,37 @@ public class DtoBody extends DictInput.Simple {
         );
     }
 
-    public <T> DtoBody(T body) {
-        super(() -> new Body(DtoBody.MAPPER.writeValueAsString(body)));
+    /**
+     * Ctor.
+     * @param dto Dto
+     * @param <T> Input type
+     */
+    public <T> DtoBody(final T dto) {
+        super(() -> new Body(DtoBody.MAPPER.writeValueAsString(dto)));
     }
 
+    /**
+     * Body from response as dto.
+     */
+    @SuppressWarnings("PMD.ShortMethodName")
     public static class Of extends Body.Of {
 
-        public Of(final Dict dict) {
-            super(dict);
+        /**
+         * Ctor.
+         * @param response Response
+         */
+        public Of(final Dict response) {
+            super(response);
         }
 
-        public final <T> T as(Class<T> cls) throws Exception {
+        /**
+         * Body deserialization to a concrete class.
+         * @param cls Class
+         * @param <T> Output type
+         * @return Dto Dto
+         * @throws Exception If fails
+         */
+        public final <T> T as(final Class<T> cls) throws Exception {
             return DtoBody.MAPPER.readValue(this.asString(), cls);
         }
     }

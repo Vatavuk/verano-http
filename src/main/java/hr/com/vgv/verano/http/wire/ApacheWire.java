@@ -1,3 +1,26 @@
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2019 Vedran Grgo Vatavuk
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package hr.com.vgv.verano.http.wire;
 
 import hr.com.vgv.verano.http.Dict;
@@ -24,58 +47,101 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.cactoos.iterable.IterableOf;
 
+/**
+ * Apache http wire.
+ * @since 1.0
+ */
 public class ApacheWire implements Wire
 {
+    /**
+     * Apache contexts.
+     */
     private final Iterable<ApacheContext> contexts;
 
+    /**
+     * Additional parameters.
+     */
     private final Dict parameters;
 
-    public ApacheWire(String uri)
+    /**
+     * Ctor.
+     * @param uri Uri
+     */
+    public ApacheWire(final String uri)
     {
         this(uri, new IterableOf<>());
     }
 
-    public ApacheWire(String uri, DictInput... inputs)
+    /**
+     * Ctor.
+     * @param uri Uri
+     * @param inputs Inputs
+     */
+    public ApacheWire(final String uri, final DictInput... inputs)
     {
         this(uri, new IterableOf<>(), new DictOf(inputs));
     }
 
-    public ApacheWire(String uri, ApacheContext... contexts)
+    /**
+     * Ctor.
+     * @param uri Uri
+     * @param contexts Apache contexts
+     */
+    public ApacheWire(final String uri, final ApacheContext... contexts)
     {
         this(uri, new IterableOf<>(contexts));
     }
 
-    public ApacheWire(String uri, Iterable<ApacheContext> contexts)
+    /**
+     * Ctor.
+     * @param uri Uri
+     * @param contexts Apache contexts
+     */
+    public ApacheWire(final String uri, final Iterable<ApacheContext> contexts)
     {
         this(contexts, new DictOf(new RequestUri(uri)));
     }
 
-    public ApacheWire(String uri, Iterable<ApacheContext> contexts,
-        Dict parameters)
-    {
+    /**
+     * Ctor.
+     * @param uri Uri
+     * @param contexts Apache contexts
+     * @param parameters Additional parameters
+     */
+    public ApacheWire(
+        final String uri,
+        final Iterable<ApacheContext> contexts,
+        final Dict parameters
+    ) {
         this(
             contexts,
             new HashDict(new JoinedDict(new RequestUri(uri), parameters))
         );
     }
 
-    public ApacheWire(Iterable<ApacheContext> contexts, Dict parameters)
-    {
+    /**
+     * Ctor.
+     * @param contexts Apache contexts
+     * @param parameters Additional parameters.
+     */
+    public ApacheWire(
+        final Iterable<ApacheContext> contexts, final Dict parameters
+    ) {
         this.contexts = contexts;
         this.parameters = parameters;
     }
 
     @Override
-    public final Dict send(Dict message) throws IOException
+    public final Dict send(final Dict message) throws IOException
     {
         final Dict request = new JoinedDict(message, this.parameters);
         HttpClientBuilder builder = HttpClients.custom();
         final URI uri = new RequestUri.Of(request).uri();
-        for (ApacheContext context : this.contexts)
+        for (final ApacheContext context : this.contexts)
         {
             builder = context.apply(uri, builder);
         }
-        try(final CloseableHttpResponse response = builder.build()
+        try(CloseableHttpResponse response = builder.build()
             .execute(new ApacheRequest(request).value())) {
             final StatusLine status = response.getStatusLine();
             return new DictOf(
