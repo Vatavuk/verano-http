@@ -23,16 +23,23 @@
  */
 package hr.com.vgv.verano.http.wire;
 
+import hr.com.vgv.verano.http.mock.MockWire;
 import hr.com.vgv.verano.http.parts.Body;
 import hr.com.vgv.verano.http.parts.JsonBody;
 import hr.com.vgv.verano.http.parts.headers.ContentType;
+import hr.com.vgv.verano.http.request.Delete;
+import hr.com.vgv.verano.http.request.Get;
 import hr.com.vgv.verano.http.request.Post;
 import hr.com.vgv.verano.http.response.ExpectedStatus;
 import hr.com.vgv.verano.http.response.FailWith;
 import hr.com.vgv.verano.http.response.Response;
 import hr.com.vgv.verano.http.wire.apache.BasicAuth;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import com.github.tomakehurst.wiremock.client.WireMock;
+import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
 /**
  * Integration test case for {@link ApacheWire}.
@@ -42,6 +49,15 @@ import org.junit.Test;
  * @checkstyle MagicNumberCheck (500 lines)
  */
 public final class ApacheWireIT {
+
+    /**
+     * Wiremock rule.
+     */
+    @Rule
+    public final WireMockRule mock = new WireMockRule(
+        WireMockConfiguration.wireMockConfig().dynamicPort().dynamicHttpsPort()
+    );
+
     @Test
     @Ignore
     public void postReq() {
@@ -66,4 +82,38 @@ public final class ApacheWireIT {
             new ExpectedStatus(301, new FailWith("Cannot fetch from Google"))
         ).touch();
     }
+
+    @Test
+    public void sendsDeletesRequest() {
+        this.mock.stubFor(WireMock.delete(WireMock.urlMatching("/.*"))
+            .willReturn(WireMock.aResponse().withStatus(204))
+        );
+        new Response(
+            String.format("http://localhost:%d", this.mock.port()),
+            new Delete("/items")
+        ).touch();
+        WireMock.verify(
+            WireMock.deleteRequestedFor(WireMock.urlMatching(".*/items"))
+        );
+    }
+
+    @Test
+    public void sendsDeletesRequestV2() {
+        MockWire wire = new MockWire(
+
+        );
+        sendRequest();
+        wire.verifyRequests(
+            new Get(
+
+            ),
+            new Post(
+
+            )
+        );
+    }
+
+    public void sendRequest() {
+
+    };
 }
