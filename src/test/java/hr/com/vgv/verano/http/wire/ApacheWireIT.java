@@ -23,6 +23,9 @@
  */
 package hr.com.vgv.verano.http.wire;
 
+import com.github.tomakehurst.wiremock.client.WireMock;
+import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import hr.com.vgv.verano.http.parts.Body;
 import hr.com.vgv.verano.http.parts.JsonBody;
 import hr.com.vgv.verano.http.parts.headers.ContentType;
@@ -35,9 +38,6 @@ import hr.com.vgv.verano.http.wire.apache.BasicAuth;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-import com.github.tomakehurst.wiremock.client.WireMock;
-import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
 /**
  * Integration test case for {@link ApacheWire}.
