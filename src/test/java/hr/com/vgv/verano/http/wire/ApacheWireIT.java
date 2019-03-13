@@ -35,12 +35,9 @@ import hr.com.vgv.verano.http.wire.apache.BasicAuth;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
-
 import com.github.tomakehurst.wiremock.client.WireMock;
-
-import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
+import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
 /**
  * Integration test case for {@link ApacheWire}.
@@ -51,9 +48,12 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMoc
  */
 public final class ApacheWireIT {
 
+    /**
+     * Wiremock rule.
+     */
     @Rule
     public final WireMockRule mock = new WireMockRule(
-        wireMockConfig().dynamicPort().dynamicHttpsPort()
+        WireMockConfiguration.wireMockConfig().dynamicPort().dynamicHttpsPort()
     );
 
     @Test
@@ -90,6 +90,8 @@ public final class ApacheWireIT {
             String.format("http://localhost:%d", this.mock.port()),
             new Delete("/items")
         ).touch();
-        WireMock.verify(WireMock.deleteRequestedFor(WireMock.urlMatching(".*/items")));
+        WireMock.verify(
+            WireMock.deleteRequestedFor(WireMock.urlMatching(".*/items"))
+        );
     }
 }
