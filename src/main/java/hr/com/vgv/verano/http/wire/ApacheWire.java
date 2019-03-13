@@ -38,12 +38,16 @@ import hr.com.vgv.verano.http.wire.apache.ApacheHeaders;
 import hr.com.vgv.verano.http.wire.apache.ApacheRequest;
 import java.io.IOException;
 import java.net.URI;
+
+import org.apache.http.HttpEntity;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.cactoos.iterable.IterableOf;
+import org.cactoos.scalar.Ternary;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
  * Apache http wire.
@@ -141,9 +145,26 @@ public class ApacheWire implements Wire {
             return new DictOf(
                 new Status(status.getStatusCode()),
                 new ReasonPhrase(status.getReasonPhrase()),
-                new Body(EntityUtils.toString(response.getEntity())),
+                new Body(fetchBody(response)),
                 new ApacheHeaders(response.getAllHeaders())
             );
         }
+    }
+
+    /**
+     * Fetch body from http response.
+     * @param response Http response
+     * @return Body Body
+     */
+    private String fetchBody(final CloseableHttpResponse response)
+    {
+        final HttpEntity entity = response.getEntity();
+        return new UncheckedScalar<>(
+            new Ternary<>(
+                () -> entity != null,
+                () -> EntityUtils.toString(entity),
+                () -> ""
+            )
+        ).value();
     }
 }
