@@ -30,7 +30,7 @@ import hr.com.vgv.verano.http.KvpOf;
  * Http header.
  * @since 1.0
  */
-public class Header extends DictInput.Simple {
+public class Header extends DictInput.Envelope {
 
     /**
      * Ctor.

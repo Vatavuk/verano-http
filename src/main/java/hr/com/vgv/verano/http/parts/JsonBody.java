@@ -35,7 +35,7 @@ import javax.json.JsonReader;
  * Http body from json.
  * @since 1.0
  */
-public class JsonBody extends DictInput.Simple {
+public class JsonBody extends DictInput.Envelope {
 
     /**
      * Ctor.

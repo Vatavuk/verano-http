@@ -33,7 +33,7 @@ import org.cactoos.Text;
  * Request Uri.
  * @since 1.0
  */
-public class RequestUri extends DictInput.Simple {
+public class RequestUri extends DictInput.Envelope {
     /**
      * Uri key in dictionary.
      */

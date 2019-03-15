@@ -34,7 +34,7 @@ import hr.com.vgv.verano.http.wire.AssertionWire;
  * Http response.
  * @since 1.0
  */
-public class Response extends Dict.Simple {
+public class Response extends Dict.Envelope {
     /**
      * Ctor.
      * @param uri Uri

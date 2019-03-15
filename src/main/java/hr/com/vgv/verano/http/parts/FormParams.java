@@ -39,7 +39,7 @@ import org.cactoos.text.UncheckedText;
  * Http form parameters.
  * @since 1.0
  */
-public class FormParams extends DictInput.Simple {
+public class FormParams extends DictInput.Envelope {
     /**
      * Ctor.
      * @param params Parameters
@@ -54,7 +54,7 @@ public class FormParams extends DictInput.Simple {
      */
     public FormParams(final Iterable<FormParam> params) {
         super(
-            (Dict dict) -> new DictOf(
+            new DictOf(
                 new Mapped<>(
                     input -> (DictInput) input,
                     params

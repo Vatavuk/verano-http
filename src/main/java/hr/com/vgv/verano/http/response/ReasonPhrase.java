@@ -32,7 +32,7 @@ import org.cactoos.Text;
  * Http reason phrase.
  * @since 1.0
  */
-public class ReasonPhrase extends DictInput.Simple {
+public class ReasonPhrase extends DictInput.Envelope {
 
     /**
      * Reason phrase key in dictionary.

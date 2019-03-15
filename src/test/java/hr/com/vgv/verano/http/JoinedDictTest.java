@@ -21,52 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.parts;
+package hr.com.vgv.verano.http;
 
-import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.DictInput;
-import hr.com.vgv.verano.http.KvpOf;
-import org.cactoos.Text;
+import org.cactoos.collection.CollectionOf;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsEqual;
+import org.junit.Test;
 
 /**
- * Http method.
+ * Test case for {@link JoinedDict}.
  * @since 1.0
+ * @checkstyle JavadocMethodCheck (500 lines)
  */
-public class Method extends DictInput.Envelope {
-    /**
-     * Method key in dictionary.
-     */
-    private static final String KEY = "method";
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
+public final class JoinedDictTest {
 
-    /**
-     * Ctor.
-     * @param method Http method
-     */
-    public Method(final String method) {
-        super(new KvpOf(Method.KEY, method));
-    }
-
-    /**
-     * Method from response.
-     */
-    public static class Of implements Text {
-
-        /**
-         * Response.
-         */
-        private final Dict response;
-
-        /**
-         * Ctor.
-         * @param response Response
-         */
-        public Of(final Dict response) {
-            this.response = response;
-        }
-
-        @Override
-        public final String asString() {
-            return this.response.get(Method.KEY, "GET");
-        }
+    @Test
+    public void joinsDictionaries() {
+        final Dict dict = new JoinedDict(
+            new HashDict(
+                new KvpOf("first", "first")
+            ),
+            new HashDict(
+                new KvpOf("first", "second"),
+                new KvpOf("foo", "bar")
+            )
+        );
+        MatcherAssert.assertThat(
+            new CollectionOf<>(dict).size(),
+            //@checkstyle MagicNumberCheck (1 lines)
+            new IsEqual<>(3)
+        );
+        MatcherAssert.assertThat(
+            dict.get("first"),
+            new IsEqual<>("second")
+        );
+        MatcherAssert.assertThat(
+            dict.get("foo"),
+            new IsEqual<>("bar")
+        );
     }
 }

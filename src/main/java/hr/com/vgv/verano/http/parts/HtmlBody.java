@@ -32,7 +32,7 @@ import org.jsoup.nodes.Element;
  * Http body from html.
  * @since 1.0
  */
-public class HtmlBody extends DictInput.Simple {
+public class HtmlBody extends DictInput.Envelope {
 
     /**
      * Ctor.

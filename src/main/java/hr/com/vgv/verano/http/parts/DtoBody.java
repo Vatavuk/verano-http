@@ -32,7 +32,7 @@ import hr.com.vgv.verano.http.DictInput;
  * Http body from dto object.
  * @since 1.0
  */
-public class DtoBody extends DictInput.Simple {
+public class DtoBody extends DictInput.Envelope {
 
     /**
      * Object mapper.

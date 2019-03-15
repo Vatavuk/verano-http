@@ -35,7 +35,7 @@ import org.cactoos.Text;
  * Http Body.
  * @since 1.0
  */
-public class Body extends DictInput.Simple {
+public class Body extends DictInput.Envelope {
     /**
      * Body key in dictionary.
      */

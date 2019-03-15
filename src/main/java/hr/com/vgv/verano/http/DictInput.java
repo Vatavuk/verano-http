@@ -43,7 +43,7 @@ public interface DictInput {
      * Simple implementation of {@link DictInput} used
      * to simplify DictInput decorators.
      */
-    class Simple implements DictInput {
+    class Envelope implements DictInput {
         /**
          * Original DictInput.
          */
@@ -53,7 +53,7 @@ public interface DictInput {
          * Ctor.
          * @param input Dictionary input
          */
-        public Simple(final Scalar<DictInput> input) {
+        public Envelope(final Scalar<DictInput> input) {
             this(
                 (Dict dict) -> new JoinedDict(dict, new DictOf(input.value()))
             );
@@ -63,15 +63,23 @@ public interface DictInput {
          * Ctor.
          * @param kvps Key-value pairs
          */
-        public Simple(final Kvp... kvps) {
-            this((Dict dict) -> new JoinedDict(dict, new HashDict(kvps)));
+        public Envelope(final Kvp... kvps) {
+            this(new HashDict(kvps));
+        }
+
+        /**
+         * Ctor.
+         * @param dict Dictionary
+         */
+        public Envelope(final Dict dict) {
+            this((Dict input) -> new JoinedDict(input, dict));
         }
 
         /**
          * Ctor.
          * @param origin Origin
          */
-        public Simple(final Func<Dict, Dict> origin) {
+        public Envelope(final Func<Dict, Dict> origin) {
             this.origin = new UncheckedFunc<>(origin);
         }
 

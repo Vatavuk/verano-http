@@ -35,7 +35,7 @@ import org.cactoos.iterable.Joined;
  * Http request.
  * @since 1.0
  */
-public class Request extends Dict.Simple {
+public class Request extends Dict.Envelope {
     /**
      * Ctor.
      * @param method Http method

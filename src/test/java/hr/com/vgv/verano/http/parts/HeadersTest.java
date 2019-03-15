@@ -23,46 +23,43 @@
  */
 package hr.com.vgv.verano.http.parts;
 
+import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.HashDict;
-import hr.com.vgv.verano.http.Kvp;
-import java.util.List;
-import org.cactoos.list.ListOf;
+import hr.com.vgv.verano.http.KvpOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 /**
  * Test case for {@link Headers}.
- * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
+ * @since 1.0
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class HeadersTest {
     @Test
     public void buildHeaderInput() {
-        final List<Kvp> kvps = new ListOf<>(
+        final Dict dict =
             new Headers(
                 new Header("Content-Type", "application/json"),
                 new Header("Authorization", "Bearer 1234")
-            ).apply(new HashDict())
-        );
-        final Kvp content = kvps.get(0);
+            ).apply(
+                new HashDict(
+                    new KvpOf("foo", "bar"),
+                    new KvpOf("h.Content-Type", "unknown")
+                )
+            );
         MatcherAssert.assertThat(
-            content.key(),
-            new IsEqual<>("h.Content-Type")
-        );
-        MatcherAssert.assertThat(
-            content.value(),
+            dict.get("h.Content-Type"),
             new IsEqual<>("application/json")
         );
-        final Kvp auth = kvps.get(1);
         MatcherAssert.assertThat(
-            auth.key(),
-            new IsEqual<>("h.Authorization")
+            dict.get("h.Authorization"),
+            new IsEqual<>("Bearer 1234")
         );
         MatcherAssert.assertThat(
-            auth.value(),
-            new IsEqual<>("Bearer 1234")
+            dict.get("foo"),
+            new IsEqual<>("bar")
         );
     }
 }

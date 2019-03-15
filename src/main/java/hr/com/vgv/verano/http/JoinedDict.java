@@ -29,7 +29,7 @@ import org.cactoos.iterable.Joined;
  * Joined dictionary.
  * @since 1.0
  */
-public class JoinedDict extends Dict.Simple {
+public class JoinedDict extends Dict.Envelope {
     /**
      * Ctor.
      * @param kvp Key-value pair

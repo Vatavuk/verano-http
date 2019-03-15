@@ -33,7 +33,7 @@ import org.cactoos.iterable.Mapped;
  * Apache headers.
  * @since 1.0
  */
-public class ApacheHeaders extends DictInput.Simple {
+public class ApacheHeaders extends DictInput.Envelope {
     /**
      * Ctor.
      * @param headers Headers

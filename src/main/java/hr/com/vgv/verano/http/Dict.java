@@ -60,7 +60,7 @@ public interface Dict extends Iterable<Kvp> {
     /**
      * Simple implementation of {@link Dict} used to simplify Dict decorators.
      */
-    class Simple implements Dict {
+    class Envelope implements Dict {
 
         /**
          * Original dictionary.
@@ -71,7 +71,7 @@ public interface Dict extends Iterable<Kvp> {
          * Ctor.
          * @param origin Original dictionary
          */
-        public Simple(final Scalar<Dict> origin) {
+        public Envelope(final Scalar<Dict> origin) {
             this.origin = new UncheckedScalar<>(new StickyScalar<>(origin));
         }
 
