@@ -21,47 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.request;
+package hr.com.vgv.verano.http.parts;
 
 import hr.com.vgv.verano.http.HashDict;
-import hr.com.vgv.verano.http.Kvp;
-import hr.com.vgv.verano.http.KvpOf;
-import hr.com.vgv.verano.http.parts.Headers;
-import java.util.List;
-import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 /**
- * Test case for {@link Headers.Of}.
+ * Test case for {@link Body}.
  * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class HeadersOfTest {
+public final class BodyTest {
+
     @Test
-    public void extractHeadersFromDict() {
-        final List<Kvp> kvps = new ListOf<>(
-            new Headers.Of(
-                new HashDict(
-                    new KvpOf("test", "test"),
-                    new KvpOf("h.kfirst", "first"),
-                    new KvpOf("h.ksecond", "second")
-                )
-            )
-        );
+    public void appliesBodyToRequest() {
+        final String body = "hello";
         MatcherAssert.assertThat(
-            kvps.size(),
-            new IsEqual<>(2)
-        );
-        MatcherAssert.assertThat(
-            kvps.get(0).key(),
-            new IsEqual<>("kfirst")
-        );
-        MatcherAssert.assertThat(
-            kvps.get(1).key(),
-            new IsEqual<>("ksecond")
+            new Body(body).apply(new HashDict()).get("body"),
+            new IsEqual<>(body)
         );
     }
 }

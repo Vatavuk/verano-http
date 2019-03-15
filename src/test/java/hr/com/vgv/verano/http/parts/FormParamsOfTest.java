@@ -21,42 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.request;
+package hr.com.vgv.verano.http.parts;
 
-import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.HashDict;
 import hr.com.vgv.verano.http.KvpOf;
-import hr.com.vgv.verano.http.parts.Path;
-import org.cactoos.collection.CollectionOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 /**
- * Test case for {@link Path}.
+ * Test case for {@link FormParams.Of}.
  * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
- * @checkstyle MagicNumberCheck (500 lines)
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class PathTest {
-
+public final class FormParamsOfTest {
     @Test
-    public void concatenatesPath() {
-        final Dict dict = new Path("/items")
-            .apply(
+    public void buildsFormParamsInput() {
+        MatcherAssert.assertThat(
+            new FormParams.Of(
                 new HashDict(
-                    new KvpOf("aaa", "test"),
-                    new KvpOf("path", "localhost")
+                    new KvpOf("f.name", "John"),
+                    new KvpOf("f.surname", "Smith")
                 )
-            );
-        MatcherAssert.assertThat(
-            new CollectionOf<>(dict).size(),
-            new IsEqual<>(3)
-        );
-        MatcherAssert.assertThat(
-            dict.get("path"),
-            new IsEqual<>("localhost/items")
+            ).asString(),
+            new IsEqual<>("name=John&surname=Smith")
         );
     }
 }

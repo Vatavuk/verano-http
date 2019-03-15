@@ -21,41 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.request;
+package hr.com.vgv.verano.http.parts;
 
 import hr.com.vgv.verano.http.HashDict;
 import hr.com.vgv.verano.http.KvpOf;
-import hr.com.vgv.verano.http.parts.RequestUri;
-import java.net.URI;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 /**
- * Test case for {@link RequestUri.Of}.
+ * Test case for {@link QueryParams.Of}.
  * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
  */
-public final class RequestUriOfTest {
+public final class QueryParamsOfTest {
     @Test
-    public void extractsUriFromDict() {
-        final String base = "http://localhost:8080";
-        final String path = "/example";
+    public void buildQueryParamsInput() {
         MatcherAssert.assertThat(
-            new RequestUri.Of(
+            new QueryParams.Of(
                 new HashDict(
-                    new KvpOf("uri", base),
-                    new KvpOf("path", path),
-                    new KvpOf("q.first", "10"),
-                    new KvpOf("q.second", "someStr")
+                    new KvpOf("q.name", "John"),
+                    new KvpOf("q.surname", "Smith")
                 )
-            ).uri().toString(),
-            new IsEqual<>(
-                String.format(
-                    "%s?first=10&second=someStr",
-                    URI.create(base + path).toString()
-                )
-            )
+            ).asString(),
+            new IsEqual<>("?name=John&surname=Smith")
         );
     }
 }

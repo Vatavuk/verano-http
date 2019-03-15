@@ -21,31 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.request;
-
-import hr.com.vgv.verano.http.HashDict;
-import hr.com.vgv.verano.http.KvpOf;
-import hr.com.vgv.verano.http.parts.QueryParams;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.core.IsEqual;
-import org.junit.Test;
 
 /**
- * Test case for {@link QueryParams.Of}.
- * @since 1.0
- * @checkstyle JavadocMethodCheck (500 lines)
+ * Http parts tests.
+ * @since 0.1
  */
-public final class QueryParamsOfTest {
-    @Test
-    public void buildQueryParamsInput() {
-        MatcherAssert.assertThat(
-            new QueryParams.Of(
-                new HashDict(
-                    new KvpOf("q.name", "John"),
-                    new KvpOf("q.surname", "Smith")
-                )
-            ).asString(),
-            new IsEqual<>("?name=John&surname=Smith")
-        );
-    }
-}
+package hr.com.vgv.verano.http.parts;

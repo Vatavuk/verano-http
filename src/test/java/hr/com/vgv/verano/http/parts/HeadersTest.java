@@ -21,31 +21,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.request;
+package hr.com.vgv.verano.http.parts;
 
 import hr.com.vgv.verano.http.HashDict;
-import hr.com.vgv.verano.http.KvpOf;
-import hr.com.vgv.verano.http.parts.FormParams;
+import hr.com.vgv.verano.http.Kvp;
+import java.util.List;
+import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 /**
- * Test case for {@link FormParams.Of}.
+ * Test case for {@link Headers}.
  * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
  */
-public final class FormParamsOfTest {
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
+public final class HeadersTest {
     @Test
-    public void buildsFormParamsInput() {
+    public void buildHeaderInput() {
+        final List<Kvp> kvps = new ListOf<>(
+            new Headers(
+                new Header("Content-Type", "application/json"),
+                new Header("Authorization", "Bearer 1234")
+            ).apply(new HashDict())
+        );
+        final Kvp content = kvps.get(0);
         MatcherAssert.assertThat(
-            new FormParams.Of(
-                new HashDict(
-                    new KvpOf("f.name", "John"),
-                    new KvpOf("f.surname", "Smith")
-                )
-            ).asString(),
-            new IsEqual<>("name=John&surname=Smith")
+            content.key(),
+            new IsEqual<>("h.Content-Type")
+        );
+        MatcherAssert.assertThat(
+            content.value(),
+            new IsEqual<>("application/json")
+        );
+        final Kvp auth = kvps.get(1);
+        MatcherAssert.assertThat(
+            auth.key(),
+            new IsEqual<>("h.Authorization")
+        );
+        MatcherAssert.assertThat(
+            auth.value(),
+            new IsEqual<>("Bearer 1234")
         );
     }
 }

@@ -38,6 +38,41 @@ public class Header extends DictInput.Simple {
      * @param value Value
      */
     public Header(final String key, final String value) {
-        super(new KvpOf(String.format("h.%s", key), value));
+        super(new KvpOf(String.format("h.%s", Header.normalize(key)), value));
+    }
+
+    /**
+     * Normalize key.
+     * Taken from https://github.com/jcabi/jcabi-http.
+     * Author: Yegor Bugayenko (yegor@tpc2.com)
+     * @param key The key to normalize
+     * @return Normalized key
+     */
+    private static String normalize(final String key) {
+        final char[] chars = key.toCharArray();
+        chars[0] = Header.upper(chars[0]);
+        for (int pos = 1; pos < chars.length; ++pos) {
+            if (chars[pos - 1] == '-') {
+                chars[pos] = Header.upper(chars[pos]);
+            }
+        }
+        return new String(chars);
+    }
+
+    /**
+     * Convert char to upper case, if required.
+     * Taken from https://github.com/jcabi/jcabi-http.
+     * Author: Yegor Bugayenko (yegor@tpc2.com)
+     * @param chr The char to convert
+     * @return Upper-case char
+     */
+    private static char upper(final char chr) {
+        final char upper;
+        if (chr >= 'a' && chr <= 'z') {
+            upper = (char) (chr - ('a' - 'A'));
+        } else {
+            upper = chr;
+        }
+        return upper;
     }
 }

@@ -21,12 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.request;
+package hr.com.vgv.verano.http.parts;
 
 import hr.com.vgv.verano.http.HashDict;
 import hr.com.vgv.verano.http.Kvp;
-import hr.com.vgv.verano.http.parts.Header;
-import hr.com.vgv.verano.http.parts.Headers;
+import hr.com.vgv.verano.http.KvpOf;
 import java.util.List;
 import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
@@ -34,37 +33,34 @@ import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 /**
- * Test case for {@link Headers}.
+ * Test case for {@link Headers.Of}.
  * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class HeadersTest {
+public final class HeadersOfTest {
     @Test
-    public void buildHeaderInput() {
+    public void extractHeadersFromDict() {
         final List<Kvp> kvps = new ListOf<>(
-            new Headers(
-                new Header("Content-Type", "application/json"),
-                new Header("Authorization", "Bearer 1234")
-            ).apply(new HashDict())
-        );
-        final Kvp content = kvps.get(0);
-        MatcherAssert.assertThat(
-            content.key(),
-            new IsEqual<>("h.Content-Type")
+            new Headers.Of(
+                new HashDict(
+                    new KvpOf("test", "test"),
+                    new KvpOf("h.kfirst", "first"),
+                    new KvpOf("h.ksecond", "second")
+                )
+            )
         );
         MatcherAssert.assertThat(
-            content.value(),
-            new IsEqual<>("application/json")
-        );
-        final Kvp auth = kvps.get(1);
-        MatcherAssert.assertThat(
-            auth.key(),
-            new IsEqual<>("h.Authorization")
+            kvps.size(),
+            new IsEqual<>(2)
         );
         MatcherAssert.assertThat(
-            auth.value(),
-            new IsEqual<>("Bearer 1234")
+            kvps.get(0).key(),
+            new IsEqual<>("kfirst")
+        );
+        MatcherAssert.assertThat(
+            kvps.get(1).key(),
+            new IsEqual<>("ksecond")
         );
     }
 }
