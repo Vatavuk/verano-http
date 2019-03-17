@@ -58,9 +58,9 @@ new Response(
 ### Serialization and Deserialization
 The library provides three type of request serialization:
 - JsonBody - javax.json
+- XmlBody  - jcabi-xml
 - DtoBody  - jackson object mapper
 - HtmlBody - jsoup
-- XmlBody  - coming soon
 
 Response deserialization can be achieved using their accompanied `*.Of` classes.
 
