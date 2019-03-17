@@ -21,46 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.parts;
-
-import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.DictInput;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Element;
 
 /**
- * Http body from html.
- * @since 1.0
+ * Http bodies.
+ * @since 0.1
  */
-public class HtmlBody extends DictInput.Envelope {
-
-    /**
-     * Ctor.
-     * @param html Html
-     */
-    public HtmlBody(final Element html) {
-        super(() -> new Body(html.html()));
-    }
-
-    /**
-     * Html body from response.
-     */
-    public static class Of extends Body.Of {
-
-        /**
-         * Ctor.
-         * @param response Response
-         */
-        public Of(final Dict response) {
-            super(response);
-        }
-
-        /**
-         * Jsoup html from response body.
-         * @return Element Html
-         */
-        public final Element html() {
-            return Jsoup.parse(this.asString());
-        }
-    }
-}
+package hr.com.vgv.verano.http.parts.body;

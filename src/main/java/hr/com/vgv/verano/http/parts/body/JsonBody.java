@@ -21,10 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.parts;
+package hr.com.vgv.verano.http.parts.body;
 
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.DictInput;
+import hr.com.vgv.verano.http.parts.Body;
 import java.io.StringReader;
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -32,7 +33,7 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 
 /**
- * Http body from json.
+ * Http body as json.
  * @since 1.0
  */
 public class JsonBody extends DictInput.Envelope {

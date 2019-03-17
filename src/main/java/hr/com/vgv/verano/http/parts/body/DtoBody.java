@@ -21,15 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.parts;
+package hr.com.vgv.verano.http.parts.body;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.DictInput;
+import hr.com.vgv.verano.http.parts.Body;
 
 /**
- * Http body from dto object.
+ * Http body as dto object.
  * @since 1.0
  */
 public class DtoBody extends DictInput.Envelope {
