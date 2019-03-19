@@ -7,12 +7,9 @@ import java.util.Queue;
 
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.Wire;
-import hr.com.vgv.verano.http.request.Request;
 
-import org.apache.commons.codec.binary.StringUtils;
 import org.apache.commons.text.similarity.LevenshteinDistance;
-import org.cactoos.iterable.IterableEnvelope;
-import org.cactoos.iterable.IterableOf;
+import org.cactoos.scalar.MinOf;
 
 /**
  * @author Vedran Vatavuk (123vgv@gmail.com)
@@ -23,7 +20,7 @@ public class MockWire implements Wire {
 
     private final Queue<Dict> responses;
 
-    private final List<Dict> requests;
+    private final List<Dict> received;
 
     /*public MockWire(final Dict... responses) {
         this(new IterableOf<>(responses));
@@ -31,17 +28,48 @@ public class MockWire implements Wire {
 
     public MockWire(final LinkedList<Dict> responses) {
         this.responses = responses;
-        this.requests = new ArrayList<>();
+        this.received = new ArrayList<>();
     }
 
     @Override
     public final Dict send(final Dict request) {
-        this.requests.add(request);
+        this.received.add(request);
         return this.responses.poll();
     }
 
-    public final void verifyRequests(Dict... requests) {
+    public final void assertThat(Dict... requests) {
 
-        new LevenshteinDistance().apply("", "")
+        for (final Dict request: requests) {
+            boolean matched = false;
+            for (final Dict rec: this.received) {
+                if (request.toString().equals(rec.toString())) {
+                    matched = true;
+                }
+            }
+            if (!matched) {
+                throw new AssertionError("No request matching found");
+            }
+        }
+
+    }
+
+    private Dict closestRequest(final Dict dict) {
+        Dict closest = dict;
+        Integer distance = null;
+        final String request = dict.toString();
+        for (final Dict rec: this.received) {
+            final int result = new LevenshteinDistance()
+                .apply(request, rec.toString());
+            if (distance == null) {
+                distance = result;
+                closest = rec;
+            } else {
+                if (result < distance) {
+                    distance = result;
+                    closest = rec;
+                }
+            }
+        }
+        return closest;
     }
 }

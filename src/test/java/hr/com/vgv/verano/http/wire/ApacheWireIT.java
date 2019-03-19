@@ -93,7 +93,8 @@ public final class ApacheWireIT {
             new Delete("/items")
         ).touch();
         WireMock.verify(
-            WireMock.deleteRequestedFor(WireMock.urlMatching(".*/items"))
+            WireMock.deleteRequestedFor(WireMock.urlMatching("/item"))
+                .withQueryParam("Content-Type", WireMock.equalTo("sth"))
         );
     }
 
@@ -103,10 +104,10 @@ public final class ApacheWireIT {
 
         );
         sendRequest();
-        wire.verifyRequests(
-            new Get(
+        wire.assertThat(
+            new RequestEqualTo(
 
-            ),
+            )
             new Post(
 
             )
