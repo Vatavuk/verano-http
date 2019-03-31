@@ -26,7 +26,7 @@ JsonObject json = new JsonBody.Of(
         new Get(
             "/items",
             new QueryParam("name", "John"),
-            new Accept("application/json"),
+            new Accept("application/json")
         )
     )
 ).json();
