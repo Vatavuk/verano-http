@@ -23,23 +23,21 @@
  */
 package hr.com.vgv.verano.http.wire;
 
-<<<<<<< HEAD
-import hr.com.vgv.verano.http.mock.MockWire;
-=======
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
->>>>>>> master
+import hr.com.vgv.verano.http.mock.MockWire;
 import hr.com.vgv.verano.http.parts.Body;
+import hr.com.vgv.verano.http.parts.Path;
 import hr.com.vgv.verano.http.parts.body.JsonBody;
 import hr.com.vgv.verano.http.parts.headers.ContentType;
 import hr.com.vgv.verano.http.request.Delete;
-import hr.com.vgv.verano.http.request.Get;
 import hr.com.vgv.verano.http.request.Post;
 import hr.com.vgv.verano.http.response.ExpectedStatus;
 import hr.com.vgv.verano.http.response.FailWith;
 import hr.com.vgv.verano.http.response.Response;
 import hr.com.vgv.verano.http.wire.apache.BasicAuth;
+import org.hamcrest.core.IsEqual;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -87,7 +85,7 @@ public final class ApacheWireIT {
     }
 
     @Test
-    public void sendsDeletesRequest() {
+    public void sendsDeleteRequest() {
         this.mock.stubFor(WireMock.delete(WireMock.urlMatching("/.*"))
             .willReturn(WireMock.aResponse().withStatus(204))
         );
@@ -108,11 +106,11 @@ public final class ApacheWireIT {
         );
         sendRequest();
         wire.assertThat(
-            new RequestEqualTo(
-
-            )
-            new Post(
-
+            new PostMatch(
+                new PathMatch(new Contains<>("sad")),
+                new BodyMatch(new IsEqual<>("asdas")),
+                new HeaderMatch("Content-Type", new IsEqual<>("asda")),
+                new QueryParamMatch("name", new IsEqual<>("adas"))
             )
         );
     }
