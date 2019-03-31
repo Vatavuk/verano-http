@@ -27,10 +27,12 @@ import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.DictInput;
 import hr.com.vgv.verano.http.parts.Body;
 import java.io.StringReader;
+import java.io.StringWriter;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
+import javax.json.JsonStructure;
 
 /**
  * Http body as json.
@@ -42,8 +44,12 @@ public class JsonBody extends DictInput.Envelope {
      * Ctor.
      * @param json Json
      */
-    public JsonBody(final JsonObject json) {
-        super(() -> new Body(json.toString()));
+    public JsonBody(final JsonStructure json) {
+        super(() -> {
+            final StringWriter writer = new StringWriter();
+            Json.createWriter(writer).write(json);
+            return  new Body(writer.toString());
+        });
     }
 
     /**
@@ -83,7 +89,7 @@ public class JsonBody extends DictInput.Envelope {
          * Read json from string.
          * @return JsonReader Json reader
          */
-        private JsonReader reader() {
+        public final JsonReader reader() {
             return Json.createReader(
                 new StringReader(this.asString())
             );

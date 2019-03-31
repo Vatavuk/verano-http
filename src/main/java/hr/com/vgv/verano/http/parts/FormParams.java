@@ -36,7 +36,7 @@ import org.cactoos.text.JoinedText;
 import org.cactoos.text.UncheckedText;
 
 /**
- * Http form parameters.
+ * Http form parameters for Content-Type application/x-www-form-urlencoded.
  * @since 1.0
  */
 public class FormParams extends DictInput.Envelope {
@@ -64,7 +64,7 @@ public class FormParams extends DictInput.Envelope {
     }
 
     /**
-     * Form parameters from dictionary.
+     * Form parameters (x-www-form-urlencoded) from dictionary.
      */
     public static class Of implements Text {
 
