@@ -23,50 +23,24 @@
  */
 package hr.com.vgv.verano.http.parts;
 
-import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.DictInput;
-import hr.com.vgv.verano.http.KvpOf;
-import org.cactoos.Text;
+import hr.com.vgv.verano.http.HashDict;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsEqual;
+import org.junit.Test;
 
 /**
- * Http method.
+ * Test case for {@link Body}.
  * @since 1.0
+ * @checkstyle JavadocMethodCheck (500 lines)
  */
-public class Method extends DictInput.Envelope {
-    /**
-     * Method key in dictionary.
-     */
-    private static final String KEY = "method";
+public final class BodyTest {
 
-    /**
-     * Ctor.
-     * @param method Http method
-     */
-    public Method(final String method) {
-        super(new KvpOf(Method.KEY, method));
-    }
-
-    /**
-     * Method from response.
-     */
-    public static class Of implements Text {
-
-        /**
-         * Response.
-         */
-        private final Dict response;
-
-        /**
-         * Ctor.
-         * @param response Response
-         */
-        public Of(final Dict response) {
-            this.response = response;
-        }
-
-        @Override
-        public final String asString() {
-            return this.response.get(Method.KEY, "GET");
-        }
+    @Test
+    public void appliesBodyToRequest() {
+        final String body = "hello";
+        MatcherAssert.assertThat(
+            new Body(body).apply(new HashDict()).get("body"),
+            new IsEqual<>(body)
+        );
     }
 }

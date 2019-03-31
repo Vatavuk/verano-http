@@ -21,33 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.parts;
+package hr.com.vgv.verano.http.parts.body;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.DictInput;
-import java.io.StringReader;
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
+import hr.com.vgv.verano.http.parts.Body;
 
 /**
- * Http body from json.
+ * Http body as dto object.
  * @since 1.0
  */
-public class JsonBody extends DictInput.Simple {
+public class DtoBody extends DictInput.Envelope {
 
     /**
-     * Ctor.
-     * @param json Json
+     * Object mapper.
      */
-    public JsonBody(final JsonObject json) {
-        super(() -> new Body(json.toString()));
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+
+    static {
+        DtoBody.MAPPER.configure(
+            DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false
+        );
     }
 
     /**
-     * Json body from response.
+     * Ctor.
+     * @param dto Dto
+     * @param <T> Input type
      */
+    public <T> DtoBody(final T dto) {
+        super(() -> new Body(DtoBody.MAPPER.writeValueAsString(dto)));
+    }
+
+    /**
+     * Body from response as dto.
+     */
+    @SuppressWarnings("PMD.ShortMethodName")
     public static class Of extends Body.Of {
 
         /**
@@ -59,33 +70,15 @@ public class JsonBody extends DictInput.Simple {
         }
 
         /**
-         * Body as json.
-         * @return Json Json
+         * Body deserialization to a concrete class.
+         * @param cls Class
+         * @param <T> Output type
+         * @return Dto Dto
+         * @throws Exception If fails
+         * @checkstyle MethodNameCheck (2 lines)
          */
-        public final JsonObject json() {
-            try (JsonReader reader = this.reader()) {
-                return reader.readObject();
-            }
-        }
-
-        /**
-         * Body as json array.
-         * @return JsonArray Json array
-         */
-        public final JsonArray jsonArray() {
-            try (JsonReader reader = this.reader()) {
-                return reader.readArray();
-            }
-        }
-
-        /**
-         * Read json from string.
-         * @return JsonReader Json reader
-         */
-        private JsonReader reader() {
-            return Json.createReader(
-                new StringReader(this.asString())
-            );
+        public final <T> T as(final Class<T> cls) throws Exception {
+            return DtoBody.MAPPER.readValue(this.asString(), cls);
         }
     }
 }

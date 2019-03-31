@@ -38,7 +38,7 @@ import org.cactoos.iterable.Mapped;
  * Http query parameters.
  * @since 1.0
  */
-public class QueryParams extends DictInput.Simple {
+public class QueryParams extends DictInput.Envelope {
     /**
      * Ctor.
      * @param params Parameters

@@ -21,40 +21,62 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.request;
+package hr.com.vgv.verano.http.wire.apache;
 
-import hr.com.vgv.verano.http.HashDict;
-import hr.com.vgv.verano.http.KvpOf;
-import hr.com.vgv.verano.http.parts.RequestUri;
 import java.net.URI;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.apache.http.HttpHost;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.conn.DefaultProxyRoutePlanner;
 
 /**
- * Test case for {@link RequestUri.Of}.
+ * Http proxy.
  * @since 1.0
- * @checkstyle JavadocMethodCheck (500 lines)
  */
-public final class RequestUriOfTest {
-    @Test
-    public void extractsUriFromDict() {
-        final String base = "http://localhost:8080";
-        final String path = "/example";
-        MatcherAssert.assertThat(
-            new RequestUri.Of(
-                new HashDict(
-                    new KvpOf("uri", base),
-                    new KvpOf("path", path),
-                    new KvpOf("q.first", "10"),
-                    new KvpOf("q.second", "someStr")
-                )
-            ).uri().toString(),
-            new IsEqual<>(
-                String.format(
-                    "%s?first=10&second=someStr",
-                    URI.create(base + path).toString()
-                )
+public class Proxy implements ApacheContext {
+
+    /**
+     * Scheme.
+     */
+    private final String scheme;
+
+    /**
+     * Host.
+     */
+    private final String host;
+
+    /**
+     * Port.
+     */
+    private final int port;
+
+    /**
+     * Ctor.
+     * @param host Host
+     * @param port Port
+     */
+    public Proxy(final String host, final int port) {
+        this("http", host, port);
+    }
+
+    /**
+     * Ctor.
+     * @param scheme Scheme
+     * @param host Host
+     * @param port Port
+     */
+    public Proxy(final String scheme, final String host, final int port) {
+        this.scheme = scheme;
+        this.host = host;
+        this.port = port;
+    }
+
+    @Override
+    public final HttpClientBuilder apply(
+        final URI uri, final HttpClientBuilder builder
+    ) {
+        return builder.setRoutePlanner(
+            new DefaultProxyRoutePlanner(
+                new HttpHost(this.host, this.port, this.scheme)
             )
         );
     }

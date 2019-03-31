@@ -24,49 +24,42 @@
 package hr.com.vgv.verano.http.parts;
 
 import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.DictInput;
+import hr.com.vgv.verano.http.HashDict;
 import hr.com.vgv.verano.http.KvpOf;
-import org.cactoos.Text;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsEqual;
+import org.junit.Test;
 
 /**
- * Http method.
+ * Test case for {@link Headers}.
+ * @checkstyle JavadocMethodCheck (500 lines)
  * @since 1.0
  */
-public class Method extends DictInput.Envelope {
-    /**
-     * Method key in dictionary.
-     */
-    private static final String KEY = "method";
-
-    /**
-     * Ctor.
-     * @param method Http method
-     */
-    public Method(final String method) {
-        super(new KvpOf(Method.KEY, method));
-    }
-
-    /**
-     * Method from response.
-     */
-    public static class Of implements Text {
-
-        /**
-         * Response.
-         */
-        private final Dict response;
-
-        /**
-         * Ctor.
-         * @param response Response
-         */
-        public Of(final Dict response) {
-            this.response = response;
-        }
-
-        @Override
-        public final String asString() {
-            return this.response.get(Method.KEY, "GET");
-        }
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
+public final class HeadersTest {
+    @Test
+    public void buildHeaderInput() {
+        final Dict dict =
+            new Headers(
+                new Header("Content-Type", "application/json"),
+                new Header("Authorization", "Bearer 1234")
+            ).apply(
+                new HashDict(
+                    new KvpOf("foo", "bar"),
+                    new KvpOf("h.Content-Type", "unknown")
+                )
+            );
+        MatcherAssert.assertThat(
+            dict.get("h.Content-Type"),
+            new IsEqual<>("application/json")
+        );
+        MatcherAssert.assertThat(
+            dict.get("h.Authorization"),
+            new IsEqual<>("Bearer 1234")
+        );
+        MatcherAssert.assertThat(
+            dict.get("foo"),
+            new IsEqual<>("bar")
+        );
     }
 }

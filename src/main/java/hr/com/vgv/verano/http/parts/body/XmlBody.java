@@ -21,52 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.parts;
+package hr.com.vgv.verano.http.parts.body;
 
+import com.jcabi.xml.XML;
+import com.jcabi.xml.XMLDocument;
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.DictInput;
-import hr.com.vgv.verano.http.KvpOf;
-import org.cactoos.Text;
+import hr.com.vgv.verano.http.parts.Body;
 
 /**
- * Http method.
+ * Http body as xml.
  * @since 1.0
  */
-public class Method extends DictInput.Envelope {
-    /**
-     * Method key in dictionary.
-     */
-    private static final String KEY = "method";
+public class XmlBody extends DictInput.Envelope {
 
     /**
      * Ctor.
-     * @param method Http method
+     * @param xml Xml
      */
-    public Method(final String method) {
-        super(new KvpOf(Method.KEY, method));
+    public XmlBody(final XML xml) {
+        super(() -> new Body(xml.toString()));
     }
 
     /**
-     * Method from response.
+     * Xml body from response.
      */
-    public static class Of implements Text {
-
-        /**
-         * Response.
-         */
-        private final Dict response;
+    public static class Of extends Body.Of {
 
         /**
          * Ctor.
          * @param response Response
          */
         public Of(final Dict response) {
-            this.response = response;
+            super(response);
         }
 
-        @Override
-        public final String asString() {
-            return this.response.get(Method.KEY, "GET");
+        /**
+         * Xml from response body.
+         * @return Element Html
+         */
+        public final XML xml() {
+            return new XMLDocument(this.asString());
         }
     }
 }

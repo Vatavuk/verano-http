@@ -42,7 +42,7 @@ import org.cactoos.iterable.Mapped;
  * Http headers.
  * @since 1.0
  */
-public class Headers extends DictInput.Simple {
+public class Headers extends DictInput.Envelope {
 
     /**
      * Ctor.
@@ -58,7 +58,7 @@ public class Headers extends DictInput.Simple {
      */
     public Headers(final Iterable<Header> headers) {
         super(
-            (Dict dict) -> new DictOf(
+            new DictOf(
                 new Mapped<>(
                     input -> (DictInput) input,
                     headers

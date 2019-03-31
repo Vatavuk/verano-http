@@ -44,7 +44,7 @@ public interface Kvp {
     /**
      * Simple implementation of {@link Kvp} used to simplify Kvp decorators.
      */
-    class Simple implements Kvp {
+    class Envelope implements Kvp {
 
         /**
          * Original key-value pair.
@@ -55,7 +55,7 @@ public interface Kvp {
          * Ctor.
          * @param origin Origin
          */
-        public Simple(final Kvp origin) {
+        public Envelope(final Kvp origin) {
             this.origin = origin;
         }
 

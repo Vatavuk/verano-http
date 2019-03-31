@@ -21,52 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.parts;
+package hr.com.vgv.verano.http.parts.body;
 
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.DictInput;
-import hr.com.vgv.verano.http.KvpOf;
-import org.cactoos.Text;
+import hr.com.vgv.verano.http.parts.Body;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Element;
 
 /**
- * Http method.
+ * Http body as html.
  * @since 1.0
  */
-public class Method extends DictInput.Envelope {
-    /**
-     * Method key in dictionary.
-     */
-    private static final String KEY = "method";
+public class HtmlBody extends DictInput.Envelope {
 
     /**
      * Ctor.
-     * @param method Http method
+     * @param html Html
      */
-    public Method(final String method) {
-        super(new KvpOf(Method.KEY, method));
+    public HtmlBody(final Element html) {
+        super(() -> new Body(html.html()));
     }
 
     /**
-     * Method from response.
+     * Html body from response.
      */
-    public static class Of implements Text {
-
-        /**
-         * Response.
-         */
-        private final Dict response;
+    public static class Of extends Body.Of {
 
         /**
          * Ctor.
          * @param response Response
          */
         public Of(final Dict response) {
-            this.response = response;
+            super(response);
         }
 
-        @Override
-        public final String asString() {
-            return this.response.get(Method.KEY, "GET");
+        /**
+         * Jsoup html from response body.
+         * @return Element Html
+         */
+        public final Element html() {
+            return Jsoup.parse(this.asString());
         }
     }
 }

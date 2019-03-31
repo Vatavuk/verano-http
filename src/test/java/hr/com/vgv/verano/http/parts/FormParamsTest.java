@@ -21,31 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.request;
+package hr.com.vgv.verano.http.parts;
 
+import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.HashDict;
 import hr.com.vgv.verano.http.KvpOf;
-import hr.com.vgv.verano.http.parts.FormParams;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 /**
- * Test case for {@link FormParams.Of}.
+ * Test case for {@link FormParams}.
  * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
  */
-public final class FormParamsOfTest {
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
+public class FormParamsTest {
     @Test
-    public void buildsFormParamsInput() {
-        MatcherAssert.assertThat(
-            new FormParams.Of(
+    public void buildHeaderInput() {
+        final Dict dict =
+            new FormParams(
+                new FormParam("name", "John"),
+                new FormParam("surname", "Smith")
+            ).apply(
                 new HashDict(
-                    new KvpOf("f.name", "John"),
-                    new KvpOf("f.surname", "Smith")
+                    new KvpOf("foo", "bar"),
+                    new KvpOf("f.name", "unknown")
                 )
-            ).asString(),
-            new IsEqual<>("name=John&surname=Smith")
+            );
+        MatcherAssert.assertThat(
+            dict.get("f.name"),
+            new IsEqual<>("John")
+        );
+        MatcherAssert.assertThat(
+            dict.get("f.surname"),
+            new IsEqual<>("Smith")
+        );
+        MatcherAssert.assertThat(
+            dict.get("foo"),
+            new IsEqual<>("bar")
         );
     }
 }

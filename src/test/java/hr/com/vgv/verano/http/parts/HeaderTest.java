@@ -23,50 +23,25 @@
  */
 package hr.com.vgv.verano.http.parts;
 
-import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.DictInput;
-import hr.com.vgv.verano.http.KvpOf;
-import org.cactoos.Text;
+import hr.com.vgv.verano.http.HashDict;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsEqual;
+import org.junit.Test;
 
 /**
- * Http method.
+ * Test case for {@link Header}.
  * @since 1.0
  */
-public class Method extends DictInput.Envelope {
-    /**
-     * Method key in dictionary.
-     */
-    private static final String KEY = "method";
+public final class HeaderTest {
 
-    /**
-     * Ctor.
-     * @param method Http method
-     */
-    public Method(final String method) {
-        super(new KvpOf(Method.KEY, method));
-    }
-
-    /**
-     * Method from response.
-     */
-    public static class Of implements Text {
-
-        /**
-         * Response.
-         */
-        private final Dict response;
-
-        /**
-         * Ctor.
-         * @param response Response
-         */
-        public Of(final Dict response) {
-            this.response = response;
-        }
-
-        @Override
-        public final String asString() {
-            return this.response.get(Method.KEY, "GET");
-        }
+    @Test
+    public void addsHeaderToRequest() {
+        final String value = "text/html";
+        MatcherAssert.assertThat(
+            new Header("content-type", value)
+                .apply(new HashDict())
+                .get("h.Content-Type"),
+            new IsEqual<>(value)
+        );
     }
 }

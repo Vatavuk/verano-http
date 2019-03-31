@@ -29,7 +29,7 @@ import org.cactoos.iterable.IterableOf;
  * Dictionary made of dictionary inputs.
  * @since 1.0
  */
-public class DictOf extends Dict.Simple {
+public class DictOf extends Dict.Envelope {
     /**
      * Ctor.
      * @param inputs Inputs

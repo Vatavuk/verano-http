@@ -23,50 +23,41 @@
  */
 package hr.com.vgv.verano.http.parts;
 
-import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.DictInput;
+import hr.com.vgv.verano.http.HashDict;
 import hr.com.vgv.verano.http.KvpOf;
-import org.cactoos.Text;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsEqual;
+import org.junit.Test;
 
 /**
- * Http method.
+ * Test case for {@link Body.Of}.
  * @since 1.0
+ * @checkstyle JavadocMethodCheck (500 lines)
  */
-public class Method extends DictInput.Envelope {
-    /**
-     * Method key in dictionary.
-     */
-    private static final String KEY = "method";
-
-    /**
-     * Ctor.
-     * @param method Http method
-     */
-    public Method(final String method) {
-        super(new KvpOf(Method.KEY, method));
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
+public final class BodyOfTest {
+    @Test
+    public void extractsBodyFromDict() {
+        MatcherAssert.assertThat(
+            new Body.Of(
+                new HashDict(
+                    new KvpOf("body", "test"), new KvpOf("unknown", "")
+                )
+            ).asString(),
+            new IsEqual<>("test")
+        );
     }
 
-    /**
-     * Method from response.
-     */
-    public static class Of implements Text {
-
-        /**
-         * Response.
-         */
-        private final Dict response;
-
-        /**
-         * Ctor.
-         * @param response Response
-         */
-        public Of(final Dict response) {
-            this.response = response;
-        }
-
-        @Override
-        public final String asString() {
-            return this.response.get(Method.KEY, "GET");
-        }
+    @Test
+    public void extractsBodyFromDictWithFormParams() {
+        MatcherAssert.assertThat(
+            new Body.Of(
+                new HashDict(
+                    new KvpOf("f.param1", "test1"),
+                    new KvpOf("f.param2", "test2")
+                )
+            ).asString(),
+            new IsEqual<>("param1=test1&param2=test2")
+        );
     }
 }

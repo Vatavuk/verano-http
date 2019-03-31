@@ -32,7 +32,7 @@ import org.cactoos.Text;
  * Http status.
  * @since 1.0
  */
-public class Status extends DictInput.Simple {
+public class Status extends DictInput.Envelope {
     /**
      * Status key in dictionary.
      */

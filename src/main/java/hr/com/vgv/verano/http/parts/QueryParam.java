@@ -30,7 +30,7 @@ import hr.com.vgv.verano.http.KvpOf;
  * Http query parameter.
  * @since 1.0
  */
-public class QueryParam extends DictInput.Simple {
+public class QueryParam extends DictInput.Envelope {
 
     /**
      * Ctor.

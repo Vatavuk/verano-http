@@ -27,10 +27,10 @@ import hr.com.vgv.verano.http.DictInput;
 import hr.com.vgv.verano.http.KvpOf;
 
 /**
- * Http form parameter.
+ * Http form parameter for Content-Type application/x-www-form-urlencoded.
  * @since 1.0
  */
-public class FormParam extends DictInput.Simple {
+public class FormParam extends DictInput.Envelope {
 
     /**
      * Ctor.

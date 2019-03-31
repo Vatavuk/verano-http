@@ -21,44 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.request;
+package hr.com.vgv.verano.http.parts;
 
+import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.HashDict;
 import hr.com.vgv.verano.http.KvpOf;
-import hr.com.vgv.verano.http.parts.Body;
+import org.cactoos.collection.CollectionOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 /**
- * Test case for {@link Body.Of}.
+ * Test case for {@link Path}.
  * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class BodyOfTest {
-    @Test
-    public void extractsBodyFromDict() {
-        MatcherAssert.assertThat(
-            new Body.Of(
-                new HashDict(
-                    new KvpOf("body", "test"), new KvpOf("unknown", "")
-                )
-            ).asString(),
-            new IsEqual<>("test")
-        );
-    }
+public final class PathTest {
 
     @Test
-    public void extractsBodyFromDictWithFormParams() {
-        MatcherAssert.assertThat(
-            new Body.Of(
+    public void concatenatesPath() {
+        final Dict dict = new Path("/items")
+            .apply(
                 new HashDict(
-                    new KvpOf("f.param1", "test1"),
-                    new KvpOf("f.param2", "test2")
+                    new KvpOf("aaa", "test"),
+                    new KvpOf("path", "localhost")
                 )
-            ).asString(),
-            new IsEqual<>("param1=test1&param2=test2")
+            );
+        MatcherAssert.assertThat(
+            new CollectionOf<>(dict).size(),
+            new IsEqual<>(3)
+        );
+        MatcherAssert.assertThat(
+            dict.get("path"),
+            new IsEqual<>("localhost/items")
         );
     }
 }

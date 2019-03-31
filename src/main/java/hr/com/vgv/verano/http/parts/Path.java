@@ -34,7 +34,7 @@ import org.cactoos.Text;
  * Path in url.
  * @since 1.0
  */
-public class Path extends DictInput.Simple {
+public class Path extends DictInput.Envelope {
     /**
      * Path key in dictionary.
      */

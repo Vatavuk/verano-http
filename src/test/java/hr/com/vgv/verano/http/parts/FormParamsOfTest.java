@@ -23,44 +23,28 @@
  */
 package hr.com.vgv.verano.http.parts;
 
-import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.DictInput;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Element;
+import hr.com.vgv.verano.http.HashDict;
+import hr.com.vgv.verano.http.KvpOf;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsEqual;
+import org.junit.Test;
 
 /**
- * Http body from html.
+ * Test case for {@link FormParams.Of}.
  * @since 1.0
+ * @checkstyle JavadocMethodCheck (500 lines)
  */
-public class HtmlBody extends DictInput.Simple {
-
-    /**
-     * Ctor.
-     * @param html Html
-     */
-    public HtmlBody(final Element html) {
-        super(() -> new Body(html.html()));
-    }
-
-    /**
-     * Html body from response.
-     */
-    public static class Of extends Body.Of {
-
-        /**
-         * Ctor.
-         * @param response Response
-         */
-        public Of(final Dict response) {
-            super(response);
-        }
-
-        /**
-         * Jsoup html from response body.
-         * @return Element Html
-         */
-        public final Element html() {
-            return Jsoup.parse(this.asString());
-        }
+public final class FormParamsOfTest {
+    @Test
+    public void buildsFormParamsInput() {
+        MatcherAssert.assertThat(
+            new FormParams.Of(
+                new HashDict(
+                    new KvpOf("f.name", "John"),
+                    new KvpOf("f.surname", "Smith")
+                )
+            ).asString(),
+            new IsEqual<>("name=John&surname=Smith")
+        );
     }
 }

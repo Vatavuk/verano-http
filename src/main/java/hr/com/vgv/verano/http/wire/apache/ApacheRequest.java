@@ -33,8 +33,7 @@ import java.io.IOException;
 import java.net.URI;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
-import org.apache.http.entity.BufferedHttpEntity;
-import org.apache.http.entity.InputStreamEntity;
+import org.apache.http.entity.StringEntity;
 import org.cactoos.Scalar;
 
 /**
@@ -74,9 +73,7 @@ public class ApacheRequest implements Scalar<HttpEntityEnclosingRequestBase> {
         );
         result.setURI(uri);
         result.setEntity(
-            new BufferedHttpEntity(
-                new InputStreamEntity(new Body.Of(this.request).stream())
-            )
+            new StringEntity(new Body.Of(this.request).asString())
         );
         for (final Kvp header : new Headers.Of(this.request)) {
             result.addHeader(header.key(), header.value());
