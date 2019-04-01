@@ -5,7 +5,7 @@ import java.util.Collection;
 import org.cactoos.Func;
 import org.cactoos.collection.CollectionOf;
 import org.cactoos.func.UncheckedFunc;
-import org.hamcrest.BaseMatcher;
+import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
 
 /**
@@ -16,10 +16,10 @@ public class HamcrestMatching implements Matching {
 
     private final UncheckedFunc<Dict, String> func;
 
-    private final BaseMatcher<String> matcher;
+    private final Matcher<String> matcher;
 
     public HamcrestMatching(final Func<Dict, String> func,
-        final BaseMatcher<String> matcher) {
+        final Matcher<String> matcher) {
         this.func = new UncheckedFunc<>(func);
         this.matcher = matcher;
     }
@@ -27,7 +27,8 @@ public class HamcrestMatching implements Matching {
     @Override
     public Collection<String> match(final Dict request) {
         final Collection<String> result;
-        if (this.matcher.matches(this.func.apply(request))) {
+        final String matching = this.func.apply(request);
+        if (this.matcher.matches(matching)) {
             result = new CollectionOf<>();
         } else {
             final StringDescription description = new StringDescription();
@@ -35,7 +36,7 @@ public class HamcrestMatching implements Matching {
                 .appendText("\nExpected: ")
                 .appendDescriptionOf(this.matcher)
                 .appendText("\n     but: ");
-            this.matcher.describeMismatch(request, description);
+            this.matcher.describeMismatch(matching, description);
             result = new CollectionOf<>(description.toString());
         }
         return result;

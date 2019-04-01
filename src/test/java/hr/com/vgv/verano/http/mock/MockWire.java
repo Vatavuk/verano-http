@@ -5,10 +5,9 @@ import hr.com.vgv.verano.http.Wire;
 import hr.com.vgv.verano.http.matchings.Matching;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import org.apache.commons.text.similarity.LevenshteinDistance;
+import org.cactoos.list.ListOf;
 
 /**
  * @author Vedran Vatavuk (123vgv@gmail.com)
@@ -17,23 +16,20 @@ import org.apache.commons.text.similarity.LevenshteinDistance;
  */
 public class MockWire implements Wire {
 
-    private final Queue<Dict> responses;
-
     private final List<Dict> received;
 
-    /*public MockWire(final Dict... responses) {
-        this(new IterableOf<>(responses));
-    }*/
+    public MockWire(final Dict... responses) {
+        this(new ListOf<>(responses));
+    }
 
-    public MockWire(final LinkedList<Dict> responses) {
-        this.responses = responses;
+    public MockWire(final List<Dict> responses) {
         this.received = new ArrayList<>();
     }
 
     @Override
     public final Dict send(final Dict request) {
         this.received.add(request);
-        return this.responses.poll();
+        return request;
     }
 
     public final void assertThat(Matching matching) {
@@ -80,14 +76,18 @@ public class MockWire implements Wire {
     }
 
     private Collection<String> closestMatch(final Matching matching) {
-        Collection<String> result = new ArrayList<>();
+        Collection<String> result = null;
         for (final Dict request : this.received) {
             final Collection<String> errors = matching.match(request);
-            if (errors.isEmpty()) {
+            if (result == null) {
                 result = errors;
             } else {
-                if (errors.size() < result.size()) {
+                if (errors.isEmpty()) {
                     result = errors;
+                } else {
+                    if (errors.size() < result.size()) {
+                        result = errors;
+                    }
                 }
             }
         }

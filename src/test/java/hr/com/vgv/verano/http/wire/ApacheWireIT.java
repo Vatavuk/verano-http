@@ -26,6 +26,8 @@ package hr.com.vgv.verano.http.wire;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
+import hr.com.vgv.verano.http.matchings.PathMatch;
+import hr.com.vgv.verano.http.matchings.PostMatch;
 import hr.com.vgv.verano.http.mock.MockWire;
 import hr.com.vgv.verano.http.parts.Body;
 import hr.com.vgv.verano.http.parts.Path;
@@ -37,7 +39,9 @@ import hr.com.vgv.verano.http.response.ExpectedStatus;
 import hr.com.vgv.verano.http.response.FailWith;
 import hr.com.vgv.verano.http.response.Response;
 import hr.com.vgv.verano.http.wire.apache.BasicAuth;
+import javax.rmi.CORBA.Stub;
 import org.hamcrest.core.IsEqual;
+import static org.hamcrest.text.MatchesPattern.matchesPattern;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -78,7 +82,7 @@ public final class ApacheWireIT {
         new Response(
             new ApacheWire(
                 "http://google.com",
-                new BasicAuth("userame", "password")
+                new BasicAuth("username", "password")
             ),
             new ExpectedStatus(301, new FailWith("Cannot fetch from Google"))
         ).touch();
@@ -102,20 +106,32 @@ public final class ApacheWireIT {
     @Test
     public void sendsDeletesRequestV2() {
         MockWire wire = new MockWire(
+            new Stub(
+                new PostMatch(
+                    new PathMatch(matchesPattern("/my/resource/[a-z0-9]+"))
+                ),
 
+                new Body("sth"),
+                new ContentType("html/txt")
+            )
         );
-        sendRequest();
+
+        this.sendRequest(wire);
+
         wire.assertThat(
             new PostMatch(
-                new PathMatch(new Contains<>("sad")),
-                new BodyMatch(new IsEqual<>("asdas")),
-                new HeaderMatch("Content-Type", new IsEqual<>("asda")),
-                new QueryParamMatch("name", new IsEqual<>("adas"))
+                new PathMatch(new IsEqual<>("localhost"))
             )
         );
     }
 
-    public void sendRequest() {
+    private void sendRequest(final MockWire wire) {
+        new Response(
+            wire,
+            new Post(
+                new Path("localhost")
+            )
+        ).touch();
+    }
 
-    };
 }
