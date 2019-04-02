@@ -26,8 +26,10 @@ package hr.com.vgv.verano.http.wire;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
+import hr.com.vgv.verano.http.Wire;
 import hr.com.vgv.verano.http.matchings.PathMatch;
 import hr.com.vgv.verano.http.matchings.PostMatch;
+import hr.com.vgv.verano.http.matchings.StubFor;
 import hr.com.vgv.verano.http.mock.MockWire;
 import hr.com.vgv.verano.http.parts.Body;
 import hr.com.vgv.verano.http.parts.Path;
@@ -39,9 +41,8 @@ import hr.com.vgv.verano.http.response.ExpectedStatus;
 import hr.com.vgv.verano.http.response.FailWith;
 import hr.com.vgv.verano.http.response.Response;
 import hr.com.vgv.verano.http.wire.apache.BasicAuth;
-import javax.rmi.CORBA.Stub;
 import org.hamcrest.core.IsEqual;
-import static org.hamcrest.text.MatchesPattern.matchesPattern;
+import org.hamcrest.text.MatchesPattern;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -53,6 +54,7 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle MagicNumberCheck (500 lines)
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class ApacheWireIT {
 
     /**
@@ -104,32 +106,36 @@ public final class ApacheWireIT {
     }
 
     @Test
-    public void sendsDeletesRequestV2() {
-        MockWire wire = new MockWire(
-            new Stub(
+    public void sendsDeletesRequestNew() {
+        final MockWire wire = new MockWire(
+            new StubFor(
                 new PostMatch(
-                    new PathMatch(matchesPattern("/my/resource/[a-z0-9]+"))
-                ),
-
-                new Body("sth"),
+                    new PathMatch(
+                        MatchesPattern.matchesPattern("/my/resource/[a-z0-9]+")
+                    )
+                )
+            ).withResponse(
+                new Body("something"),
                 new ContentType("html/txt")
             )
         );
-
         this.sendRequest(wire);
-
         wire.assertThat(
             new PostMatch(
-                new PathMatch(new IsEqual<>("localhost"))
+                new PathMatch(new IsEqual<>("/my/resource/1"))
             )
         );
     }
 
-    private void sendRequest(final MockWire wire) {
+    /**
+     * Send request.
+     * @param wire Wire
+     */
+    private void sendRequest(final Wire wire) {
         new Response(
             wire,
             new Post(
-                new Path("localhost")
+                new Path("/my/resource/1")
             )
         ).touch();
     }

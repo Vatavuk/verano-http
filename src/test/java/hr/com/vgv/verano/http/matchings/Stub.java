@@ -24,18 +24,23 @@
 package hr.com.vgv.verano.http.matchings;
 
 import hr.com.vgv.verano.http.Dict;
-import java.util.Collection;
 
 /**
- * Request data matching.
+ * Stub.
  * @since 1.0
  */
-public interface Matching {
+public interface Stub {
 
     /**
-     * Match request data.
+     * Check if request is applicable for this stub.
      * @param request Request
-     * @return Errors Errors
+     * @return Boolean Boolean
      */
-    Collection<String> match(Dict request);
+    boolean applicable(Dict request);
+
+    /**
+     * Response.
+     * @return Dict Response
+     */
+    Dict response();
 }

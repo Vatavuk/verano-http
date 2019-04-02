@@ -23,9 +23,9 @@
  */
 package hr.com.vgv.verano.http.response;
 
-import hr.com.vgv.verano.http.Verification;
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.HashDict;
+import hr.com.vgv.verano.http.Verification;
 import hr.com.vgv.verano.http.Wire;
 import hr.com.vgv.verano.http.wire.ApacheWire;
 import hr.com.vgv.verano.http.wire.VerificationWire;

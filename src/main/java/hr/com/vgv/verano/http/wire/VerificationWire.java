@@ -23,8 +23,8 @@
  */
 package hr.com.vgv.verano.http.wire;
 
-import hr.com.vgv.verano.http.Verification;
 import hr.com.vgv.verano.http.Dict;
+import hr.com.vgv.verano.http.Verification;
 import hr.com.vgv.verano.http.Wire;
 import java.io.IOException;
 
@@ -48,7 +48,9 @@ public class VerificationWire implements Wire {
      * @param origin Origin
      * @param verification Assertion
      */
-    public VerificationWire(final Wire origin, final Verification verification) {
+    public VerificationWire(
+        final Wire origin, final Verification verification
+    ) {
         this.origin = origin;
         this.verification = verification;
     }
