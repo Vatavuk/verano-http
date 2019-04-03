@@ -21,65 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.parts;
+package hr.com.vgv.verano.http.mock;
 
 import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.DictInput;
-import hr.com.vgv.verano.http.KvpOf;
-import org.cactoos.Text;
+import hr.com.vgv.verano.http.parts.QueryParam;
+import org.hamcrest.Matcher;
 
 /**
- * Http query parameter.
+ * Query parameter matching.
  * @since 1.0
  */
-public class QueryParam extends DictInput.Envelope {
+public class QueryParamMatch extends HamcrestMatching {
 
     /**
      * Ctor.
-     * @param key Key
-     * @param value Value
+     * @param key Parameter key
+     * @param matcher Matcher
      */
-    public QueryParam(final String key, final String value) {
-        super(new KvpOf(QueryParam.buildKey(key), value));
-    }
-
-    /**
-     * Build key.
-     * @param key Key
-     * @return Key Key
-     */
-    private static String buildKey(final String key) {
-        return String.format("q.%s", key);
-    }
-
-    /**
-     * Query parameter from dictionary.
-     */
-    public static class Of implements Text {
-
-        /**
-         * Parameter key.
-         */
-        private final String key;
-
-        /**
-         * Dictionary.
-         */
-        private final Dict dict;
-
-        /**
-         * Ctor.
-         * @param key Key
-         * @param dict Dictionary
-         */
-        public Of(final String key, final Dict dict) {
-            this.key = key;
-            this.dict = dict;
-        }
-
-        @Override
-        public final String asString() throws Exception {
-            return this.dict.get(QueryParam.buildKey(this.key));
-        }
+    public QueryParamMatch(final String key, final Matcher<String> matcher) {
+        super((Dict req) -> new QueryParam.Of(key, req).asString(), matcher);
     }
 }
