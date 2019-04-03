@@ -83,12 +83,14 @@ public class MockWire implements Wire {
 
     /**
      * Assert defined matching condition against the wire.
-     * @param matching Matching
+     * @param matchings Matchings
      */
-    public final void verify(final Matching matching) {
-        final Collection<String> errors = this.closestMatch(matching);
-        if (!errors.isEmpty()) {
-            throw new AssertionError(errors.iterator().next());
+    public final void verify(final Matching... matchings) {
+        for (final Matching matching: matchings) {
+            final Collection<String> errors = this.closestMatch(matching);
+            if (!errors.isEmpty()) {
+                throw new AssertionError(errors.iterator().next());
+            }
         }
     }
 
