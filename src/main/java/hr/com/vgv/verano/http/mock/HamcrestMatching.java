@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.matchings;
+package hr.com.vgv.verano.http.mock;
 
 import hr.com.vgv.verano.http.Dict;
 import java.util.Collection;

@@ -21,26 +21,63 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.matchings;
+package hr.com.vgv.verano.http.mock;
 
 import hr.com.vgv.verano.http.Dict;
+import hr.com.vgv.verano.http.DictInput;
+import hr.com.vgv.verano.http.DictOf;
+import hr.com.vgv.verano.http.HashDict;
 
 /**
- * Stub.
+ * Mocked answer to specific request.
  * @since 1.0
  */
-public interface Stub {
+public class MockAnswer implements Answer {
 
     /**
-     * Check if request is applicable for this stub.
-     * @param request Request
-     * @return Boolean Boolean
+     * Matching.
      */
-    boolean applicable(Dict request);
+    private final Matching matching;
 
     /**
      * Response.
-     * @return Dict Response
      */
-    Dict response();
+    private final Dict resp;
+
+    /**
+     * Ctor.
+     * @param matching Matching
+     */
+    public MockAnswer(final Matching matching) {
+        this(matching, new HashDict());
+    }
+
+    /**
+     * Ctor.
+     * @param matching Matching
+     * @param inputs Inputs
+     */
+    public MockAnswer(final Matching matching, final DictInput inputs) {
+        this(matching, new DictOf(inputs));
+    }
+
+    /**
+     * Ctor.
+     * @param matching Matching
+     * @param resp Response
+     */
+    public MockAnswer(final Matching matching, final Dict resp) {
+        this.matching = matching;
+        this.resp = resp;
+    }
+
+    @Override
+    public final boolean applicable(final Dict request) {
+        return this.matching.match(request).isEmpty();
+    }
+
+    @Override
+    public final Dict response() {
+        return this.resp;
+    }
 }

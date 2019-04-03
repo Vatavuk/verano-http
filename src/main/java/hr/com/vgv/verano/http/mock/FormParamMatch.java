@@ -21,65 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.parts;
+package hr.com.vgv.verano.http.mock;
 
 import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.DictInput;
-import hr.com.vgv.verano.http.KvpOf;
-import org.cactoos.Text;
+import hr.com.vgv.verano.http.parts.FormParam;
+import org.hamcrest.Matcher;
 
 /**
- * Http form parameter for Content-Type application/x-www-form-urlencoded.
+ * Form parameter matching.
  * @since 1.0
  */
-public class FormParam extends DictInput.Envelope {
-
-    /**
-     * Ctor.
-     * @param key Key
-     * @param value Value
-     */
-    public FormParam(final String key, final String value) {
-        super(new KvpOf(FormParam.buildKey(key), value));
-    }
+public class FormParamMatch extends HamcrestMatching {
 
     /**
      * Ctor.
      * @param key Parameter key
-     * @return Key Key
+     * @param matcher Matcher
      */
-    private static String buildKey(final String key) {
-        return String.format("f.%s", key);
-    }
-
-    /**
-     * Form parameter (x-www-form-urlencoded) from dictionary.
-     */
-    public static class Of implements Text {
-
-        /**
-         * Parameter key.
-         */
-        private final String key;
-
-        /**
-         * Dictionary.
-         */
-        private final Dict dict;
-
-        /**
-         * Ctor.
-         * @param key Key
-         * @param dict Dictionary
-         */
-        public Of(final String key, final Dict dict) {
-            this.key = key;
-            this.dict = dict;
-        }
-
-        @Override
-        public final String asString() throws Exception {
-            return this.dict.get(FormParam.buildKey(this.key));
-        }
+    public FormParamMatch(final String key, final Matcher<String> matcher) {
+        super((Dict req) -> new FormParam.Of(key, req).asString(), matcher);
     }
 }

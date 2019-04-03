@@ -24,11 +24,14 @@
 package hr.com.vgv.verano.http.response;
 
 import hr.com.vgv.verano.http.Dict;
+import hr.com.vgv.verano.http.DictInput;
+import hr.com.vgv.verano.http.DictOf;
 import hr.com.vgv.verano.http.HashDict;
 import hr.com.vgv.verano.http.Verification;
 import hr.com.vgv.verano.http.Wire;
 import hr.com.vgv.verano.http.wire.ApacheWire;
 import hr.com.vgv.verano.http.wire.VerificationWire;
+import org.cactoos.iterable.IterableOf;
 
 /**
  * Http response.
@@ -102,6 +105,22 @@ public class Response extends Dict.Envelope {
         final Wire wire, final Dict request, final Verification verification
     ) {
         super(() -> new VerificationWire(wire, verification).send(request));
+    }
+
+    /**
+     * Ctor.
+     * @param inputs Inputs
+     */
+    public Response(final DictInput... inputs) {
+        this(new IterableOf<>(inputs));
+    }
+
+    /**
+     * Ctor.
+     * @param inputs Inputs
+     */
+    public Response(final Iterable<DictInput> inputs) {
+        super(() -> new DictOf(inputs));
     }
 
     /**

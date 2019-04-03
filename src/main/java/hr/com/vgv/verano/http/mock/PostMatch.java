@@ -21,65 +21,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.parts;
+package hr.com.vgv.verano.http.mock;
 
 import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.DictInput;
-import hr.com.vgv.verano.http.KvpOf;
-import org.cactoos.Text;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.iterable.Joined;
+import org.hamcrest.core.IsEqual;
 
 /**
- * Http form parameter for Content-Type application/x-www-form-urlencoded.
+ * Post request matching.
  * @since 1.0
  */
-public class FormParam extends DictInput.Envelope {
+public class PostMatch implements Matching {
+
+    /**
+     * Matchings.
+     */
+    private final Iterable<Matching> matchings;
 
     /**
      * Ctor.
-     * @param key Key
-     * @param value Value
+     * @param matchings Matchings
      */
-    public FormParam(final String key, final String value) {
-        super(new KvpOf(FormParam.buildKey(key), value));
+    public PostMatch(final Matching... matchings) {
+        this(new IterableOf<>(matchings));
     }
 
     /**
      * Ctor.
-     * @param key Parameter key
-     * @return Key Key
+     * @param matchings Matchings
      */
-    private static String buildKey(final String key) {
-        return String.format("f.%s", key);
+    public PostMatch(final Iterable<Matching> matchings) {
+        this.matchings = new Joined<>(
+            new MethodMatch(new IsEqual<>("POST")), matchings
+        );
     }
 
-    /**
-     * Form parameter (x-www-form-urlencoded) from dictionary.
-     */
-    public static class Of implements Text {
-
-        /**
-         * Parameter key.
-         */
-        private final String key;
-
-        /**
-         * Dictionary.
-         */
-        private final Dict dict;
-
-        /**
-         * Ctor.
-         * @param key Key
-         * @param dict Dictionary
-         */
-        public Of(final String key, final Dict dict) {
-            this.key = key;
-            this.dict = dict;
+    @Override
+    public final Collection<String> match(final Dict request) {
+        final List<String> result = new ArrayList<>(0);
+        for (final Matching matching: this.matchings) {
+            result.addAll(matching.match(request));
         }
-
-        @Override
-        public final String asString() throws Exception {
-            return this.dict.get(FormParam.buildKey(this.key));
-        }
+        return result;
     }
 }

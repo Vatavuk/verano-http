@@ -21,23 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.matchings;
+package hr.com.vgv.verano.http.mock;
 
 import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.parts.Method;
-import org.hamcrest.BaseMatcher;
 
 /**
- * Method matching.
+ * Answer to a request.
  * @since 1.0
  */
-public class MethodMatch extends HamcrestMatching {
+public interface Answer {
 
     /**
-     * Ctor.
-     * @param matcher Matcher
+     * Check if answer is applicable for specified request.
+     * @param request Request
+     * @return Boolean Boolean
      */
-    public MethodMatch(final BaseMatcher<String> matcher) {
-        super((Dict req) -> new Method.Of(req).asString(), matcher);
-    }
+    boolean applicable(Dict request);
+
+    /**
+     * Return response as an answer.
+     * @return Dict Response
+     */
+    Dict response();
 }

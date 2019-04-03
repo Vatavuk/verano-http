@@ -21,21 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.matchings;
+package hr.com.vgv.verano.http.mock;
 
 import hr.com.vgv.verano.http.Dict;
-import java.util.Collection;
+import hr.com.vgv.verano.http.parts.RequestUri;
+import org.hamcrest.Matcher;
 
 /**
- * Request data matching.
+ * Request uri matching.
  * @since 1.0
  */
-public interface Matching {
+public class RequestUriMatch extends HamcrestMatching {
 
     /**
-     * Match request data.
-     * @param request Request
-     * @return Errors Errors
+     * Ctor.
+     * @param matcher Matcher
      */
-    Collection<String> match(Dict request);
+    public RequestUriMatch(final Matcher<String> matcher) {
+        super((Dict req) -> new RequestUri.Of(req).asString(), matcher);
+    }
 }

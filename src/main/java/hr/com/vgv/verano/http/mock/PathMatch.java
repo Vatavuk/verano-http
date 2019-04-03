@@ -21,51 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.matchings;
+package hr.com.vgv.verano.http.mock;
 
 import hr.com.vgv.verano.http.Dict;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import org.cactoos.iterable.IterableOf;
-import org.cactoos.iterable.Joined;
-import org.hamcrest.core.IsEqual;
+import hr.com.vgv.verano.http.parts.Path;
+import org.hamcrest.Matcher;
 
 /**
- * Post request matching.
+ * Path matching.
  * @since 1.0
  */
-public class PostMatch implements Matching {
-
-    /**
-     * Matchings.
-     */
-    private final Iterable<Matching> matchings;
+public class PathMatch extends HamcrestMatching {
 
     /**
      * Ctor.
-     * @param matchings Matchings
+     * @param matcher Matcher
      */
-    public PostMatch(final Matching... matchings) {
-        this(new IterableOf<>(matchings));
-    }
-
-    /**
-     * Ctor.
-     * @param matchings Matchings
-     */
-    public PostMatch(final Iterable<Matching> matchings) {
-        this.matchings = new Joined<>(
-            new MethodMatch(new IsEqual<>("POST")), matchings
-        );
-    }
-
-    @Override
-    public final Collection<String> match(final Dict request) {
-        final List<String> result = new ArrayList<>(0);
-        for (final Matching matching: this.matchings) {
-            result.addAll(matching.match(request));
-        }
-        return result;
+    public PathMatch(final Matcher<String> matcher) {
+        super((Dict req) -> new Path.Of(req).asString(), matcher);
     }
 }

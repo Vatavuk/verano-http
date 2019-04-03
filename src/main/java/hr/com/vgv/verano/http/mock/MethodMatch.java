@@ -21,23 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.matchings;
+package hr.com.vgv.verano.http.mock;
 
 import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.parts.Path;
-import org.hamcrest.Matcher;
+import hr.com.vgv.verano.http.parts.Method;
+import org.hamcrest.BaseMatcher;
 
 /**
- * Path matching.
+ * Method matching.
  * @since 1.0
  */
-public class PathMatch extends HamcrestMatching {
+public class MethodMatch extends HamcrestMatching {
 
     /**
      * Ctor.
      * @param matcher Matcher
      */
-    public PathMatch(final Matcher<String> matcher) {
-        super((Dict req) -> new Path.Of(req).asString(), matcher);
+    public MethodMatch(final BaseMatcher<String> matcher) {
+        super((Dict req) -> new Method.Of(req).asString(), matcher);
     }
 }

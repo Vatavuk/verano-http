@@ -27,10 +27,10 @@ import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import hr.com.vgv.verano.http.Wire;
-import hr.com.vgv.verano.http.matchings.PathMatch;
-import hr.com.vgv.verano.http.matchings.PostMatch;
-import hr.com.vgv.verano.http.matchings.StubFor;
+import hr.com.vgv.verano.http.mock.MockAnswer;
 import hr.com.vgv.verano.http.mock.MockWire;
+import hr.com.vgv.verano.http.mock.PathMatch;
+import hr.com.vgv.verano.http.mock.PostMatch;
 import hr.com.vgv.verano.http.parts.Body;
 import hr.com.vgv.verano.http.parts.Path;
 import hr.com.vgv.verano.http.parts.body.JsonBody;
@@ -108,19 +108,20 @@ public final class ApacheWireIT {
     @Test
     public void sendsDeletesRequestNew() {
         final MockWire wire = new MockWire(
-            new StubFor(
+            new MockAnswer(
                 new PostMatch(
                     new PathMatch(
                         MatchesPattern.matchesPattern("/my/resource/[a-z0-9]+")
                     )
+                ),
+                new Response(
+                    new Body("something"),
+                    new ContentType("html/txt")
                 )
-            ).withResponse(
-                new Body("something"),
-                new ContentType("html/txt")
             )
         );
         this.sendRequest(wire);
-        wire.assertThat(
+        wire.verify(
             new PostMatch(
                 new PathMatch(new IsEqual<>("/my/resource/1"))
             )

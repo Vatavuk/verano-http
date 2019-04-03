@@ -25,8 +25,6 @@ package hr.com.vgv.verano.http.mock;
 
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.Wire;
-import hr.com.vgv.verano.http.matchings.Matching;
-import hr.com.vgv.verano.http.matchings.Stub;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -46,24 +44,24 @@ public class MockWire implements Wire {
     private final List<Dict> received;
 
     /**
-     * List of defined stubs.
+     * List of defined answers.
      */
-    private final Iterable<Stub> stubs;
+    private final Iterable<Answer> answers;
 
     /**
      * Ctor.
-     * @param stubs Stubs
+     * @param answers Answers
      */
-    public MockWire(final Stub... stubs) {
-        this(new IterableOf<>(stubs));
+    public MockWire(final Answer... answers) {
+        this(new IterableOf<>(answers));
     }
 
     /**
      * Ctor.
-     * @param stubs Stubs
+     * @param answers Answers
      */
-    public MockWire(final Iterable<Stub> stubs) {
-        this.stubs = stubs;
+    public MockWire(final Iterable<Answer> answers) {
+        this.answers = answers;
         this.received = new ArrayList<>(0);
     }
 
@@ -72,8 +70,8 @@ public class MockWire implements Wire {
         this.received.add(request);
         return new UncheckedScalar<>(
             new FirstOf<>(
-                stub -> stub.applicable(request),
-                this.stubs,
+                answer -> answer.applicable(request),
+                this.answers,
                 () -> {
                     throw new AssertionError(
                         String.format("No stub found for request: %s", request)
@@ -87,7 +85,7 @@ public class MockWire implements Wire {
      * Assert defined matching condition against the wire.
      * @param matching Matching
      */
-    public final void assertThat(final Matching matching) {
+    public final void verify(final Matching matching) {
         final Collection<String> errors = this.closestMatch(matching);
         if (!errors.isEmpty()) {
             throw new AssertionError(errors.iterator().next());

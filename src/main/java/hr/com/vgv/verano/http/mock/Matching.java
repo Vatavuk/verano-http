@@ -21,9 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package hr.com.vgv.verano.http.mock;
+
+import hr.com.vgv.verano.http.Dict;
+import java.util.Collection;
 
 /**
- * Stubs.
- * @since 0.1
+ * Request data matching.
+ * @since 1.0
  */
-package hr.com.vgv.verano.http.matchings;
+public interface Matching {
+
+    /**
+     * Match request data.
+     * @param request Request
+     * @return Errors Errors
+     */
+    Collection<String> match(Dict request);
+}
