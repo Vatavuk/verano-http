@@ -15,7 +15,7 @@ Latest version [here](https://github.com/Vatavuk/verano-http/releases)
 <dependency>
     <groupId>hr.com.vgv.verano.http</groupId>
     <artifactId>verano-http</artifactId>
-    <version>0.31</version>
+    <version>0.41</version>
 </dependency>
 ```
 ### Get a Url
@@ -58,9 +58,9 @@ new Response(
 ### Serialization and Deserialization
 The library provides following types of request serialization:
 - JsonBody - javax.json
-- XmlBody  - jcabi-xml
+- XmlBody  - [jcabi-xml](https://github.com/jcabi/jcabi-xml)
 - DtoBody  - jackson object mapper
-- HtmlBody - jsoup
+- HtmlBody - [jsoup](https://github.com/jhy/jsoup)
 
 Response deserialization can be achieved using their accompanied `*.Of` classes.
 

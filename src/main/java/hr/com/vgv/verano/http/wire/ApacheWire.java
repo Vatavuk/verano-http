@@ -33,7 +33,6 @@ import hr.com.vgv.verano.http.parts.Body;
 import hr.com.vgv.verano.http.parts.RequestUri;
 import hr.com.vgv.verano.http.response.ReasonPhrase;
 import hr.com.vgv.verano.http.response.Status;
-import hr.com.vgv.verano.http.wire.apache.ApacheContext;
 import hr.com.vgv.verano.http.wire.apache.ApacheHeaders;
 import hr.com.vgv.verano.http.wire.apache.ApacheRequest;
 import java.io.IOException;

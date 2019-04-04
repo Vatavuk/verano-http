@@ -44,7 +44,7 @@ public class QueryParam extends DictInput.Envelope {
     }
 
     /**
-     * Build key.
+     * Build query param key in dictionary.
      * @param key Key
      * @return Key Key
      */

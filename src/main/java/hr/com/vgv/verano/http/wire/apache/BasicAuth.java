@@ -23,6 +23,7 @@
  */
 package hr.com.vgv.verano.http.wire.apache;
 
+import hr.com.vgv.verano.http.wire.ApacheContext;
 import java.net.URI;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;

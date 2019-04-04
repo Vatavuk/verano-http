@@ -37,7 +37,7 @@ public class MockAnswer implements Answer {
     /**
      * Matching.
      */
-    private final Matching matching;
+    private final MatchingCriteria matching;
 
     /**
      * Response.
@@ -48,7 +48,7 @@ public class MockAnswer implements Answer {
      * Ctor.
      * @param matching Matching
      */
-    public MockAnswer(final Matching matching) {
+    public MockAnswer(final MatchingCriteria matching) {
         this(matching, new HashDict());
     }
 
@@ -57,7 +57,7 @@ public class MockAnswer implements Answer {
      * @param matching Matching
      * @param inputs Inputs
      */
-    public MockAnswer(final Matching matching, final DictInput inputs) {
+    public MockAnswer(final MatchingCriteria matching, final DictInput inputs) {
         this(matching, new DictOf(inputs));
     }
 
@@ -66,14 +66,14 @@ public class MockAnswer implements Answer {
      * @param matching Matching
      * @param resp Response
      */
-    public MockAnswer(final Matching matching, final Dict resp) {
+    public MockAnswer(final MatchingCriteria matching, final Dict resp) {
         this.matching = matching;
         this.resp = resp;
     }
 
     @Override
     public final boolean applicable(final Dict request) {
-        return this.matching.match(request).isEmpty();
+        return this.matching.apply(request).isEmpty();
     }
 
     @Override

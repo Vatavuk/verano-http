@@ -83,10 +83,10 @@ public class MockWire implements Wire {
 
     /**
      * Assert defined matching condition against the wire.
-     * @param matchings Matchings
+     * @param matches Matches
      */
-    public final void verify(final Matching... matchings) {
-        for (final Matching matching: matchings) {
+    public final void verify(final MatchingCriteria... matches) {
+        for (final MatchingCriteria matching: matches) {
             final Collection<String> errors = this.closestMatch(matching);
             if (!errors.isEmpty()) {
                 throw new AssertionError(errors.iterator().next());
@@ -96,13 +96,13 @@ public class MockWire implements Wire {
 
     /**
      * Find closest match and return list of matching errors.
-     * @param matching Matching
+     * @param criteria Match criteria
      * @return Collection Collection
      */
-    private Collection<String> closestMatch(final Matching matching) {
+    private Collection<String> closestMatch(final MatchingCriteria criteria) {
         Collection<String> result = null;
         for (final Dict request : this.received) {
-            final Collection<String> errors = matching.match(request);
+            final Collection<String> errors = criteria.apply(request);
             if (result == null) {
                 result = errors;
             } else {

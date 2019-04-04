@@ -44,7 +44,7 @@ public class FormParam extends DictInput.Envelope {
     }
 
     /**
-     * Ctor.
+     * Build form param key in dictionary.
      * @param key Parameter key
      * @return Key Key
      */

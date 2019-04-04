@@ -24,54 +24,34 @@
 package hr.com.vgv.verano.http.mock;
 
 import hr.com.vgv.verano.http.Dict;
+import java.util.ArrayList;
 import java.util.Collection;
-import org.cactoos.Func;
-import org.cactoos.collection.CollectionOf;
-import org.cactoos.func.UncheckedFunc;
-import org.hamcrest.Matcher;
-import org.hamcrest.StringDescription;
+import java.util.List;
 
 /**
- * Matching backed by Hamcrest.
+ * Multiple matching criteria.
  * @since 1.0
  */
-public class HamcrestMatching implements MatchingCriteria {
+public class MultiMatching implements MatchingCriteria {
 
     /**
-     * Function that extracts parameter from request.
+     * Matches.
      */
-    private final UncheckedFunc<Dict, String> func;
-
-    /**
-     * Matcher.
-     */
-    private final Matcher<String> matcher;
+    private final Iterable<MatchingCriteria> matches;
 
     /**
      * Ctor.
-     * @param func Function that extracts parameter from request
-     * @param matcher Matcher
+     * @param matches Matches
      */
-    public HamcrestMatching(final Func<Dict, String> func,
-        final Matcher<String> matcher) {
-        this.func = new UncheckedFunc<>(func);
-        this.matcher = matcher;
+    public MultiMatching(final Iterable<MatchingCriteria> matches) {
+        this.matches = matches;
     }
 
     @Override
-    public final Collection<String> apply(final Dict request) {
-        final Collection<String> result;
-        final String matching = this.func.apply(request);
-        if (this.matcher.matches(matching)) {
-            result = new CollectionOf<>();
-        } else {
-            final StringDescription description = new StringDescription();
-            description
-                .appendText("\nExpected: ")
-                .appendDescriptionOf(this.matcher)
-                .appendText("\n     but: ");
-            this.matcher.describeMismatch(matching, description);
-            result = new CollectionOf<>(description.toString());
+    public final Collection<String> apply(final Dict dict) {
+        final List<String> result = new ArrayList<>(0);
+        for (final MatchingCriteria criteria: this.matches) {
+            result.addAll(criteria.apply(dict));
         }
         return result;
     }

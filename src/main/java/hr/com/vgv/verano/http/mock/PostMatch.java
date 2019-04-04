@@ -23,10 +23,6 @@
  */
 package hr.com.vgv.verano.http.mock;
 
-import hr.com.vgv.verano.http.Dict;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
 import org.hamcrest.core.IsEqual;
@@ -35,37 +31,21 @@ import org.hamcrest.core.IsEqual;
  * Post request matching.
  * @since 1.0
  */
-public class PostMatch implements Matching {
-
-    /**
-     * Matchings.
-     */
-    private final Iterable<Matching> matchings;
+public class PostMatch extends MultiMatching {
 
     /**
      * Ctor.
-     * @param matchings Matchings
+     * @param matches Matches
      */
-    public PostMatch(final Matching... matchings) {
-        this(new IterableOf<>(matchings));
+    public PostMatch(final MatchingCriteria... matches) {
+        this(new IterableOf<>(matches));
     }
 
     /**
      * Ctor.
-     * @param matchings Matchings
+     * @param matches Matches
      */
-    public PostMatch(final Iterable<Matching> matchings) {
-        this.matchings = new Joined<>(
-            new MethodMatch(new IsEqual<>("POST")), matchings
-        );
-    }
-
-    @Override
-    public final Collection<String> match(final Dict request) {
-        final List<String> result = new ArrayList<>(0);
-        for (final Matching matching: this.matchings) {
-            result.addAll(matching.match(request));
-        }
-        return result;
+    public PostMatch(final Iterable<MatchingCriteria> matches) {
+        super(new Joined<>(new MethodMatch(new IsEqual<>("POST")), matches));
     }
 }

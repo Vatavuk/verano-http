@@ -21,21 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.wire.apache;
+package hr.com.vgv.verano.http.mock;
 
-import java.net.URI;
-import org.apache.http.impl.client.HttpClientBuilder;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.iterable.Joined;
+import org.hamcrest.core.IsEqual;
 
 /**
- * Context to be attached to apache http client.
+ * Get request matching.
  * @since 1.0
  */
-public interface ApacheContext {
+public class GetMatch extends MultiMatching {
+
     /**
-     * Apply http builder to apache context.
-     * @param uri Uri
-     * @param builder Builder
-     * @return HttpClientBuilder Builder
+     * Ctor.
+     * @param matches Matches
      */
-    HttpClientBuilder apply(URI uri, HttpClientBuilder builder);
+    public GetMatch(final MatchingCriteria... matches) {
+        this(new IterableOf<>(matches));
+    }
+
+    /**
+     * Ctor.
+     * @param matches Matches
+     */
+    public GetMatch(final Iterable<MatchingCriteria> matches) {
+        super(new Joined<>(new MethodMatch(new IsEqual<>("GET")), matches));
+    }
 }

@@ -23,19 +23,29 @@
  */
 package hr.com.vgv.verano.http.mock;
 
-import hr.com.vgv.verano.http.Dict;
-import java.util.Collection;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.iterable.Joined;
+import org.hamcrest.core.IsEqual;
 
 /**
- * Request data matching.
+ * Delete request matching.
  * @since 1.0
  */
-public interface Matching {
+public class DeleteMatch extends MultiMatching {
 
     /**
-     * Match request data.
-     * @param request Request
-     * @return Errors Errors
+     * Ctor.
+     * @param matches Matches
      */
-    Collection<String> match(Dict request);
+    public DeleteMatch(final MatchingCriteria... matches) {
+        this(new IterableOf<>(matches));
+    }
+
+    /**
+     * Ctor.
+     * @param matches Matches
+     */
+    public DeleteMatch(final Iterable<MatchingCriteria> matches) {
+        super(new Joined<>(new MethodMatch(new IsEqual<>("DELETE")), matches));
+    }
 }
