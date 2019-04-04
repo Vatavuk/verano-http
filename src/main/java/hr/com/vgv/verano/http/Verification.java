@@ -21,37 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.wire.apache;
-
-import hr.com.vgv.verano.http.wire.ApacheContext;
-import java.net.URI;
-import javax.net.ssl.SSLContext;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.ssl.SSLContextBuilder;
-import org.apache.http.ssl.SSLContexts;
+package hr.com.vgv.verano.http;
 
 /**
- * Trust all ssl certificates.
+ * Dictionary verification.
  * @since 1.0
  */
-@SuppressWarnings("PMD.AvoidCatchingGenericException")
-public class SslTrusted implements ApacheContext {
-    @Override
-    public final HttpClientBuilder apply(
-        final URI uri, final HttpClientBuilder builder
-    ) {
-        final SSLContext context;
-        try {
-            final SSLContextBuilder ssl = SSLContexts.custom();
-            ssl.loadTrustMaterial((chain, type) -> true);
-            context = ssl.build();
-            //@checkstyle IllegalCatchCheck (1 lines)
-        } catch (final Exception exp) {
-            throw new IllegalStateException(exp);
-        }
-        return builder.setSSLSocketFactory(
-            new SSLConnectionSocketFactory(context, (ctx, session) -> true)
-        );
-    }
+public interface Verification {
+    /**
+     * Verify dictionary.
+     * @param dict Dictionary
+     */
+    void verify(Dict dict);
 }

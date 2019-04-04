@@ -21,42 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.wire;
+package hr.com.vgv.verano.http.mock;
 
-import hr.com.vgv.verano.http.Assertion;
-import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.Wire;
-import java.io.IOException;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.iterable.Joined;
+import org.hamcrest.core.IsEqual;
 
 /**
- * Wire with additional assertion on response.
+ * Get request matching.
  * @since 1.0
  */
-public class AssertionWire implements Wire {
-    /**
-     * Original wire.
-     */
-    private final Wire origin;
-
-    /**
-     * Assertion.
-     */
-    private final Assertion assertion;
+public class GetMatch extends MultiMatching {
 
     /**
      * Ctor.
-     * @param origin Origin
-     * @param assertion Assertion
+     * @param matches Matches
      */
-    public AssertionWire(final Wire origin, final Assertion assertion) {
-        this.origin = origin;
-        this.assertion = assertion;
+    public GetMatch(final MatchingCriteria... matches) {
+        this(new IterableOf<>(matches));
     }
 
-    @Override
-    public final Dict send(final Dict request) throws IOException {
-        final Dict response = this.origin.send(request);
-        this.assertion.test(response);
-        return response;
+    /**
+     * Ctor.
+     * @param matches Matches
+     */
+    public GetMatch(final Iterable<MatchingCriteria> matches) {
+        super(new Joined<>(new MethodMatch(new IsEqual<>("GET")), matches));
     }
 }

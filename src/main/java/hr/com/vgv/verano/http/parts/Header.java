@@ -23,8 +23,10 @@
  */
 package hr.com.vgv.verano.http.parts;
 
+import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.DictInput;
 import hr.com.vgv.verano.http.KvpOf;
+import org.cactoos.Text;
 
 /**
  * Http header.
@@ -38,7 +40,16 @@ public class Header extends DictInput.Envelope {
      * @param value Value
      */
     public Header(final String key, final String value) {
-        super(new KvpOf(String.format("h.%s", Header.normalize(key)), value));
+        super(new KvpOf(Header.buildKey(key), value));
+    }
+
+    /**
+     * Build header key in dictionary.
+     * @param key Key
+     * @return Key Key
+     */
+    private static String buildKey(final String key) {
+        return String.format("h.%s", Header.normalize(key));
     }
 
     /**
@@ -74,5 +85,36 @@ public class Header extends DictInput.Envelope {
             upper = chr;
         }
         return upper;
+    }
+
+    /**
+     * Header from dictionary.
+     */
+    public static class Of implements Text {
+
+        /**
+         * Parameter key.
+         */
+        private final String key;
+
+        /**
+         * Dictionary.
+         */
+        private final Dict dict;
+
+        /**
+         * Ctor.
+         * @param key Key
+         * @param dict Dictionary
+         */
+        public Of(final String key, final Dict dict) {
+            this.key = key;
+            this.dict = dict;
+        }
+
+        @Override
+        public final String asString() throws Exception {
+            return this.dict.get(Header.buildKey(this.key));
+        }
     }
 }

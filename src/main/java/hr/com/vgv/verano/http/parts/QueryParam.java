@@ -23,8 +23,10 @@
  */
 package hr.com.vgv.verano.http.parts;
 
+import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.DictInput;
 import hr.com.vgv.verano.http.KvpOf;
+import org.cactoos.Text;
 
 /**
  * Http query parameter.
@@ -38,6 +40,46 @@ public class QueryParam extends DictInput.Envelope {
      * @param value Value
      */
     public QueryParam(final String key, final String value) {
-        super(new KvpOf(String.format("q.%s", key), value));
+        super(new KvpOf(QueryParam.buildKey(key), value));
+    }
+
+    /**
+     * Build query param key in dictionary.
+     * @param key Key
+     * @return Key Key
+     */
+    private static String buildKey(final String key) {
+        return String.format("q.%s", key);
+    }
+
+    /**
+     * Query parameter from dictionary.
+     */
+    public static class Of implements Text {
+
+        /**
+         * Parameter key.
+         */
+        private final String key;
+
+        /**
+         * Dictionary.
+         */
+        private final Dict dict;
+
+        /**
+         * Ctor.
+         * @param key Key
+         * @param dict Dictionary
+         */
+        public Of(final String key, final Dict dict) {
+            this.key = key;
+            this.dict = dict;
+        }
+
+        @Override
+        public final String asString() throws Exception {
+            return this.dict.get(QueryParam.buildKey(this.key));
+        }
     }
 }

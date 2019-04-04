@@ -21,16 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http;
+package hr.com.vgv.verano.http.mock;
+
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.iterable.Joined;
+import org.hamcrest.core.IsEqual;
 
 /**
- * Assertion on dictionary.
+ * Post request matching.
  * @since 1.0
  */
-public interface Assertion {
+public class PostMatch extends MultiMatching {
+
     /**
-     * Assert dictionary.
-     * @param dict Dictionary
+     * Ctor.
+     * @param matches Matches
      */
-    void test(Dict dict);
+    public PostMatch(final MatchingCriteria... matches) {
+        this(new IterableOf<>(matches));
+    }
+
+    /**
+     * Ctor.
+     * @param matches Matches
+     */
+    public PostMatch(final Iterable<MatchingCriteria> matches) {
+        super(new Joined<>(new MethodMatch(new IsEqual<>("POST")), matches));
+    }
 }

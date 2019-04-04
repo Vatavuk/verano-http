@@ -23,6 +23,7 @@
  */
 package hr.com.vgv.verano.http.wire.apache;
 
+import hr.com.vgv.verano.http.wire.ApacheContext;
 import java.net.URI;
 import org.apache.http.HttpHost;
 import org.apache.http.impl.client.HttpClientBuilder;

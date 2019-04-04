@@ -21,21 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.wire.apache;
+package hr.com.vgv.verano.http.mock;
 
-import java.net.URI;
-import org.apache.http.impl.client.HttpClientBuilder;
+import hr.com.vgv.verano.http.Dict;
+import hr.com.vgv.verano.http.parts.RequestUri;
+import org.hamcrest.Matcher;
 
 /**
- * Context to be attached to apache http client.
+ * Request uri matching.
  * @since 1.0
  */
-public interface ApacheContext {
+public class RequestUriMatch extends HamcrestMatching {
+
     /**
-     * Apply http builder to apache context.
-     * @param uri Uri
-     * @param builder Builder
-     * @return HttpClientBuilder Builder
+     * Ctor.
+     * @param matcher Matcher
      */
-    HttpClientBuilder apply(URI uri, HttpClientBuilder builder);
+    public RequestUriMatch(final Matcher<String> matcher) {
+        super((Dict req) -> new RequestUri.Of(req).asString(), matcher);
+    }
 }

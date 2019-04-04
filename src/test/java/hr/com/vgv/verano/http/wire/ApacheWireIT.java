@@ -26,7 +26,13 @@ package hr.com.vgv.verano.http.wire;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
+import hr.com.vgv.verano.http.Wire;
+import hr.com.vgv.verano.http.mock.MockAnswer;
+import hr.com.vgv.verano.http.mock.MockWire;
+import hr.com.vgv.verano.http.mock.PathMatch;
+import hr.com.vgv.verano.http.mock.PostMatch;
 import hr.com.vgv.verano.http.parts.Body;
+import hr.com.vgv.verano.http.parts.Path;
 import hr.com.vgv.verano.http.parts.body.JsonBody;
 import hr.com.vgv.verano.http.parts.headers.ContentType;
 import hr.com.vgv.verano.http.request.Delete;
@@ -35,6 +41,8 @@ import hr.com.vgv.verano.http.response.ExpectedStatus;
 import hr.com.vgv.verano.http.response.FailWith;
 import hr.com.vgv.verano.http.response.Response;
 import hr.com.vgv.verano.http.wire.apache.BasicAuth;
+import org.hamcrest.core.IsEqual;
+import org.hamcrest.text.MatchesPattern;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -46,6 +54,7 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle MagicNumberCheck (500 lines)
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class ApacheWireIT {
 
     /**
@@ -75,14 +84,14 @@ public final class ApacheWireIT {
         new Response(
             new ApacheWire(
                 "http://google.com",
-                new BasicAuth("userame", "password")
+                new BasicAuth("username", "password")
             ),
             new ExpectedStatus(301, new FailWith("Cannot fetch from Google"))
         ).touch();
     }
 
     @Test
-    public void sendsDeletesRequest() {
+    public void sendsDeleteRequest() {
         this.mock.stubFor(WireMock.delete(WireMock.urlMatching("/.*"))
             .willReturn(WireMock.aResponse().withStatus(204))
         );
@@ -91,7 +100,45 @@ public final class ApacheWireIT {
             new Delete("/items")
         ).touch();
         WireMock.verify(
-            WireMock.deleteRequestedFor(WireMock.urlMatching(".*/items"))
+            WireMock.deleteRequestedFor(WireMock.urlMatching("/item"))
+                .withQueryParam("Content-Type", WireMock.equalTo("sth"))
         );
     }
+
+    @Test
+    public void sendsDeletesRequestNew() {
+        final MockWire wire = new MockWire(
+            new MockAnswer(
+                new PostMatch(
+                    new PathMatch(
+                        MatchesPattern.matchesPattern("/my/resource/[a-z0-9]+")
+                    )
+                ),
+                new Response(
+                    new Body("something"),
+                    new ContentType("html/txt")
+                )
+            )
+        );
+        this.sendRequest(wire);
+        wire.verify(
+            new PostMatch(
+                new PathMatch(new IsEqual<>("/my/resource/1"))
+            )
+        );
+    }
+
+    /**
+     * Send request.
+     * @param wire Wire
+     */
+    private void sendRequest(final Wire wire) {
+        new Response(
+            wire,
+            new Post(
+                new Path("/my/resource/1")
+            )
+        ).touch();
+    }
+
 }

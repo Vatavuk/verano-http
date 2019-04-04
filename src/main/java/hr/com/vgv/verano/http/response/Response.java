@@ -23,12 +23,15 @@
  */
 package hr.com.vgv.verano.http.response;
 
-import hr.com.vgv.verano.http.Assertion;
 import hr.com.vgv.verano.http.Dict;
+import hr.com.vgv.verano.http.DictInput;
+import hr.com.vgv.verano.http.DictOf;
 import hr.com.vgv.verano.http.HashDict;
+import hr.com.vgv.verano.http.Verification;
 import hr.com.vgv.verano.http.Wire;
 import hr.com.vgv.verano.http.wire.ApacheWire;
-import hr.com.vgv.verano.http.wire.AssertionWire;
+import hr.com.vgv.verano.http.wire.VerificationWire;
+import org.cactoos.iterable.IterableOf;
 
 /**
  * Http response.
@@ -38,10 +41,10 @@ public class Response extends Dict.Envelope {
     /**
      * Ctor.
      * @param uri Uri
-     * @param assertion Assertion
+     * @param verification Assertion
      */
-    public Response(final String uri, final Assertion assertion) {
-        this(new ApacheWire(uri), assertion);
+    public Response(final String uri, final Verification verification) {
+        this(new ApacheWire(uri), verification);
     }
 
     /**
@@ -57,12 +60,12 @@ public class Response extends Dict.Envelope {
      * Ctor.
      * @param uri Uri
      * @param request Request
-     * @param assertion Assertion
+     * @param verification Assertion
      */
     public Response(
-        final String uri, final Dict request, final Assertion assertion
+        final String uri, final Dict request, final Verification verification
     ) {
-        this(new ApacheWire(uri), request, assertion);
+        this(new ApacheWire(uri), request, verification);
     }
 
     /**
@@ -76,10 +79,10 @@ public class Response extends Dict.Envelope {
     /**
      * Ctor.
      * @param wire Wire
-     * @param assertion Assertion
+     * @param verification Assertion
      */
-    public Response(final Wire wire, final Assertion assertion) {
-        this(wire, new HashDict(), assertion);
+    public Response(final Wire wire, final Verification verification) {
+        this(wire, new HashDict(), verification);
     }
 
     /**
@@ -96,12 +99,28 @@ public class Response extends Dict.Envelope {
      * Ctor.
      * @param wire Wire
      * @param request Request
-     * @param assertion Assertion
+     * @param verification Assertion
      */
     public Response(
-        final Wire wire, final Dict request, final Assertion assertion
+        final Wire wire, final Dict request, final Verification verification
     ) {
-        super(() -> new AssertionWire(wire, assertion).send(request));
+        super(() -> new VerificationWire(wire, verification).send(request));
+    }
+
+    /**
+     * Ctor.
+     * @param inputs Inputs
+     */
+    public Response(final DictInput... inputs) {
+        this(new IterableOf<>(inputs));
+    }
+
+    /**
+     * Ctor.
+     * @param inputs Inputs
+     */
+    public Response(final Iterable<DictInput> inputs) {
+        super(() -> new DictOf(inputs));
     }
 
     /**

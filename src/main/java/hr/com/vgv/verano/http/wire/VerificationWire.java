@@ -21,37 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.wire.apache;
+package hr.com.vgv.verano.http.wire;
 
-import hr.com.vgv.verano.http.wire.ApacheContext;
-import java.net.URI;
-import javax.net.ssl.SSLContext;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.ssl.SSLContextBuilder;
-import org.apache.http.ssl.SSLContexts;
+import hr.com.vgv.verano.http.Dict;
+import hr.com.vgv.verano.http.Verification;
+import hr.com.vgv.verano.http.Wire;
+import java.io.IOException;
 
 /**
- * Trust all ssl certificates.
+ * Wire with additional assertion on response.
  * @since 1.0
  */
-@SuppressWarnings("PMD.AvoidCatchingGenericException")
-public class SslTrusted implements ApacheContext {
-    @Override
-    public final HttpClientBuilder apply(
-        final URI uri, final HttpClientBuilder builder
+public class VerificationWire implements Wire {
+    /**
+     * Original wire.
+     */
+    private final Wire origin;
+
+    /**
+     * Assertion.
+     */
+    private final Verification verification;
+
+    /**
+     * Ctor.
+     * @param origin Origin
+     * @param verification Assertion
+     */
+    public VerificationWire(
+        final Wire origin, final Verification verification
     ) {
-        final SSLContext context;
-        try {
-            final SSLContextBuilder ssl = SSLContexts.custom();
-            ssl.loadTrustMaterial((chain, type) -> true);
-            context = ssl.build();
-            //@checkstyle IllegalCatchCheck (1 lines)
-        } catch (final Exception exp) {
-            throw new IllegalStateException(exp);
-        }
-        return builder.setSSLSocketFactory(
-            new SSLConnectionSocketFactory(context, (ctx, session) -> true)
-        );
+        this.origin = origin;
+        this.verification = verification;
+    }
+
+    @Override
+    public final Dict send(final Dict request) throws IOException {
+        final Dict response = this.origin.send(request);
+        this.verification.verify(response);
+        return response;
     }
 }
