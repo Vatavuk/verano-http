@@ -25,6 +25,7 @@ package hr.com.vgv.verano.http.parts.body;
 
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.DictInput;
+import hr.com.vgv.verano.http.JsonSource;
 import hr.com.vgv.verano.http.parts.Body;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -39,6 +40,18 @@ import javax.json.JsonStructure;
  * @since 1.0
  */
 public class JsonBody extends DictInput.Envelope {
+
+    /**
+     * Ctor.
+     * @param source Json source
+     */
+    public JsonBody(final JsonSource source) {
+        super(() -> {
+            final StringWriter writer = new StringWriter();
+            Json.createWriter(writer).write(source.json());
+            return  new Body(writer.toString());
+        });
+    }
 
     /**
      * Ctor.

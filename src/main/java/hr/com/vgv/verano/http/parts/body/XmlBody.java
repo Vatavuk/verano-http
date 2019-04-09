@@ -27,6 +27,7 @@ import com.jcabi.xml.XML;
 import com.jcabi.xml.XMLDocument;
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.DictInput;
+import hr.com.vgv.verano.http.XmlSource;
 import hr.com.vgv.verano.http.parts.Body;
 
 /**
@@ -34,6 +35,15 @@ import hr.com.vgv.verano.http.parts.Body;
  * @since 1.0
  */
 public class XmlBody extends DictInput.Envelope {
+
+    /**
+     * Ctor.
+     * @param source Xml source
+     */
+    public XmlBody(final XmlSource source) {
+        super(() -> new Body(source.xml().toString()));
+    }
+
 
     /**
      * Ctor.

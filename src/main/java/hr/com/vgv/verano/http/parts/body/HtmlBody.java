@@ -25,6 +25,7 @@ package hr.com.vgv.verano.http.parts.body;
 
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.DictInput;
+import hr.com.vgv.verano.http.HtmlSource;
 import hr.com.vgv.verano.http.parts.Body;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
@@ -34,6 +35,15 @@ import org.jsoup.nodes.Element;
  * @since 1.0
  */
 public class HtmlBody extends DictInput.Envelope {
+
+    /**
+     * Ctor.
+     * @param source Html source
+     */
+    public HtmlBody(final HtmlSource source) {
+        super(() -> new Body(source.htmlElement().html()));
+    }
+
 
     /**
      * Ctor.
