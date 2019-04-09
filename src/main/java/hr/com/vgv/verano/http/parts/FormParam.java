@@ -78,7 +78,7 @@ public class FormParam extends DictInput.Envelope {
         }
 
         @Override
-        public final String asString() throws Exception {
+        public final String asString() {
             return this.dict.get(FormParam.buildKey(this.key));
         }
     }

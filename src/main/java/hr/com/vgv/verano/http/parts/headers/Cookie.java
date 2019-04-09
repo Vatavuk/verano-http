@@ -23,7 +23,15 @@
  */
 package hr.com.vgv.verano.http.parts.headers;
 
+import java.net.HttpCookie;
+import java.util.List;
+import java.util.Map;
+
+import org.cactoos.Text;
+
+import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.parts.Header;
+import hr.com.vgv.verano.http.parts.Headers;
 
 /**
  * Cookie header.
@@ -36,5 +44,41 @@ public class Cookie extends Header {
      */
     public Cookie(final String value) {
         super("Cookie", value);
+    }
+
+    public static class Of implements Text {
+
+        private final String key;
+
+        private final Dict dict;
+
+        public Of(String key, Dict dict)
+        {
+            this.key = key;
+            this.dict = dict;
+        }
+
+        @Override
+        public String asString()
+        {
+            final Map<String, List<String>> headers =
+                new Headers.Of(this.dict).asMap();
+            if (headers.containsKey("Cookie")) {
+
+                for (final String header : headers.get("Cookie"))
+                {
+                    for (final HttpCookie candidate : HttpCookie.parse(header))
+                    {
+                        if (candidate.getName().equals(this.key))
+                        {
+                            cookie = RestResponse.cookie(candidate);
+                            break;
+                        }
+                    }
+                }
+                return this.dict.;
+            }
+            throw new IllegalArgumentException("Cookie header not found.");
+        }
     }
 }
