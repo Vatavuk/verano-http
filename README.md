@@ -72,6 +72,7 @@ Response response = new Response(
     new Get("/items")
 );
 Map<String, List<String>> headers = new Headers.Of(response).asMap();
+String cookie = new Cookie.Of("cookieName", response).asString();
 String body = new Body.Of(response).asString();
 ```
 
