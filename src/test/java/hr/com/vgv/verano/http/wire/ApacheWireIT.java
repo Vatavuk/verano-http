@@ -128,6 +128,15 @@ public final class ApacheWireIT {
         );
     }
 
+    @Test
+    public void tmp() {
+        new Response(
+            new RetryWire(
+                new ApacheWire("https://google.com")
+            )
+        ).touch();
+    }
+
     /**
      * Send request.
      * @param wire Wire

@@ -30,6 +30,7 @@ import hr.com.vgv.verano.http.HashDict;
 import hr.com.vgv.verano.http.JoinedDict;
 import hr.com.vgv.verano.http.Wire;
 import hr.com.vgv.verano.http.parts.Body;
+import hr.com.vgv.verano.http.parts.Method;
 import hr.com.vgv.verano.http.parts.RequestUri;
 import hr.com.vgv.verano.http.response.ReasonPhrase;
 import hr.com.vgv.verano.http.response.Status;
@@ -141,6 +142,8 @@ public class ApacheWire implements Wire {
             .execute(new ApacheRequest(request).value())) {
             final StatusLine status = response.getStatusLine();
             return new DictOf(
+                new Method(new Method.Of(message).asString()),
+                new RequestUri(uri.getPath()),
                 new Status(status.getStatusCode()),
                 new ReasonPhrase(status.getReasonPhrase()),
                 new Body(ApacheWire.fetchBody(response)),
