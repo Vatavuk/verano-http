@@ -31,7 +31,7 @@ import org.jsoup.nodes.Element;
  */
 public interface HtmlSource {
     /**
-     * Return html representation of the source.
+     * Return source as an html element.
      * @return Html Html
      */
     Element htmlElement();

@@ -23,15 +23,13 @@
  */
 package hr.com.vgv.verano.http.parts.headers;
 
-import java.net.HttpCookie;
-import java.util.List;
-import java.util.Map;
-
-import org.cactoos.Text;
-
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.parts.Header;
 import hr.com.vgv.verano.http.parts.Headers;
+import java.net.HttpCookie;
+import java.util.List;
+import java.util.Map;
+import org.cactoos.Text;
 
 /**
  * Cookie header.
@@ -46,39 +44,53 @@ public class Cookie extends Header {
         super("Cookie", value);
     }
 
+    /**
+     * Cookie from dictionary.
+     */
     public static class Of implements Text {
 
-        private final String key;
+        /**
+         * Cookie name.
+         */
+        private final String name;
 
+        /**
+         * Dictionary.
+         */
         private final Dict dict;
 
-        public Of(String key, Dict dict)
-        {
-            this.key = key;
+        /**
+         * Ctor.
+         * @param name Cookie name
+         * @param dict Dictionary
+         */
+        public Of(final String name, final Dict dict) {
+            this.name = name;
             this.dict = dict;
         }
 
         @Override
-        public String asString()
-        {
+        public final String asString() {
             final Map<String, List<String>> headers =
                 new Headers.Of(this.dict).asMap();
-            if (headers.containsKey("Cookie")) {
-
-                for (final String header : headers.get("Cookie"))
-                {
-                    for (final HttpCookie candidate : HttpCookie.parse(header))
-                    {
-                        if (candidate.getName().equals(this.key))
-                        {
-                            cookie = RestResponse.cookie(candidate);
-                            break;
+            final String key = "Set-Cookie";
+            if (headers.containsKey(key)) {
+                for (final String header : headers.get(key)) {
+                    //@checkstyle LineLength (1 line)
+                    for (final HttpCookie candidate : HttpCookie.parse(header)) {
+                        if (candidate.getName().equals(this.name)) {
+                            return candidate.getValue();
                         }
                     }
                 }
-                return this.dict.;
+                throw new IllegalStateException(
+                    String.format(
+                        "Cookie %s not found in Set-Cookie header.",
+                        this.name
+                    )
+                );
             }
-            throw new IllegalArgumentException("Cookie header not found.");
+            throw new IllegalStateException("Set-Cookie header not found.");
         }
     }
 }

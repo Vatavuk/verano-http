@@ -29,8 +29,8 @@ import com.jcabi.xml.XML;
  * Xml source.
  * @since 1.0
  */
-public interface XmlSource
-{
+public interface XmlSource {
+
     /**
      * Return xml representation of the source.
      * @return Xml Xml

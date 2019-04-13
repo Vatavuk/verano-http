@@ -44,7 +44,6 @@ public class HtmlBody extends DictInput.Envelope {
         super(() -> new Body(source.htmlElement().html()));
     }
 
-
     /**
      * Ctor.
      * @param html Html

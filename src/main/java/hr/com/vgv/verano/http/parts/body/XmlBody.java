@@ -44,7 +44,6 @@ public class XmlBody extends DictInput.Envelope {
         super(() -> new Body(source.xml().toString()));
     }
 
-
     /**
      * Ctor.
      * @param xml Xml
