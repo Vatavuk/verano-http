@@ -3,6 +3,14 @@
 [![EO principles respected here](http://www.elegantobjects.org/badge.svg)](http://www.elegantobjects.org)
 [![DevOps By Rultor.com](http://www.rultor.com/b/Vatavuk/verano-http)](http://www.rultor.com/p/Vatavuk/verano-http)
 
+[![Build Status](https://travis-ci.org/Vatavuk/verano-http.svg?branch=master)](https://travis-ci.org/Vatavuk/verano-http)
+[![Javadocs](http://javadoc.io/badge/hr.com.vgv/verano-http.svg)](http://javadoc.io/doc/hr.com.vgv/verano-http)
+[![Maven Central](https://img.shields.io/maven-central/v/hr.com.vgv/verano-http.svg)](https://maven-badges.herokuapp.com/maven-central/hr.com.vgv/verano-http)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/Vatavuk/verano-http/blob/master/LICENSE.txt)
+
+[![Test Coverage](https://codecov.io/gh/Vatavuk/verano-http/branch/master/graph/badge.svg)](https://codecov.io/gh/Vatavuk/verano-http)
+[![SonarQube](https://img.shields.io/badge/sonar-ok-green.svg)](https://sonarcloud.io/dashboard/index/hr.com.vgv:verano-http)
+
 HTTP client that provides object-oriented interface for building HTTP requests. 
 
 - Open for extension
