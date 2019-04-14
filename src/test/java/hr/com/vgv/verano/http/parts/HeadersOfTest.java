@@ -27,18 +27,21 @@ import hr.com.vgv.verano.http.HashDict;
 import hr.com.vgv.verano.http.Kvp;
 import hr.com.vgv.verano.http.KvpOf;
 import java.util.List;
+import java.util.Map;
 import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 /**
  * Test case for {@link Headers.Of}.
- * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
+ * @since 1.0
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class HeadersOfTest {
+
     @Test
     public void extractHeadersFromDict() {
         final List<Kvp> kvps = new ListOf<>(
@@ -61,6 +64,30 @@ public final class HeadersOfTest {
         MatcherAssert.assertThat(
             kvps.get(1).key(),
             new IsEqual<>("ksecond")
+        );
+    }
+
+    @Test
+    public void extractHeaderMapFromDict() {
+        final Map<String, List<String>> headers = new Headers.Of(
+            new HashDict(
+                new KvpOf("test", "test"),
+                new KvpOf("h.name", "john"),
+                new KvpOf("h.name", "mark"),
+                new KvpOf("h.surname", "doe")
+            )
+        ).asMap();
+        MatcherAssert.assertThat(
+            headers.size(),
+            new IsEqual<>(2)
+        );
+        MatcherAssert.assertThat(
+            headers.get("name"),
+            Matchers.contains("john", "mark")
+        );
+        MatcherAssert.assertThat(
+            headers.get("surname"),
+            Matchers.contains("doe")
         );
     }
 }

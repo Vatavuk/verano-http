@@ -29,18 +29,18 @@ import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 /**
- * Test case for {@link Body}.
+ * Test case for {@link Method}.
  * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
  */
-public final class BodyTest {
+public final class MethodTest {
 
     @Test
-    public void appliesBodyToRequest() {
-        final String body = "hello";
+    public void appliesMethodToRequest() {
+        final String method = "GET";
         MatcherAssert.assertThat(
-            new Body(body.getBytes()).apply(new HashDict()).get("body"),
-            new IsEqual<>(body)
+            new Method(method).apply(new HashDict()).get("method"),
+            new IsEqual<>(method)
         );
     }
 }

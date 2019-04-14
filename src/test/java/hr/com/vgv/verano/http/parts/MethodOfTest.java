@@ -24,23 +24,28 @@
 package hr.com.vgv.verano.http.parts;
 
 import hr.com.vgv.verano.http.HashDict;
+import hr.com.vgv.verano.http.KvpOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 /**
- * Test case for {@link Body}.
+ * Test case for {@link Method.Of}.
  * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
  */
-public final class BodyTest {
+public final class MethodOfTest {
 
     @Test
-    public void appliesBodyToRequest() {
-        final String body = "hello";
+    public void extractsMethodFromDict() {
+        final String method = "GET";
         MatcherAssert.assertThat(
-            new Body(body.getBytes()).apply(new HashDict()).get("body"),
-            new IsEqual<>(body)
+            new Method.Of(
+                new HashDict(
+                    new KvpOf("method", method), new KvpOf("unknown", "")
+                )
+            ).asString(),
+            new IsEqual<>(method)
         );
     }
 }
