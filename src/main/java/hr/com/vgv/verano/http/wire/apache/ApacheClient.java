@@ -21,21 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.wire;
+package hr.com.vgv.verano.http.wire.apache;
 
-import java.net.URI;
-import org.apache.http.impl.client.HttpClientBuilder;
+import hr.com.vgv.verano.http.Dict;
+import java.io.IOException;
+import org.apache.http.client.methods.CloseableHttpResponse;
 
 /**
- * Context to be attached to apache http client.
+ * Apache http client.
  * @since 1.0
  */
-public interface ApacheContext {
+public interface ApacheClient {
+
     /**
-     * Apply http builder to apache context.
-     * @param uri Uri
-     * @param builder Builder
-     * @return HttpClientBuilder Builder
+     * Executes HTTP request using the given dictionary request data.
+     * @param request Http Request
+     * @return HttpResponse Http Response
+     * @throws IOException If fails
      */
-    HttpClientBuilder apply(URI uri, HttpClientBuilder builder);
+    CloseableHttpResponse execute(Dict request) throws IOException;
 }

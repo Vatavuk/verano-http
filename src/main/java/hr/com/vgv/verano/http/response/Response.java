@@ -29,8 +29,8 @@ import hr.com.vgv.verano.http.DictOf;
 import hr.com.vgv.verano.http.HashDict;
 import hr.com.vgv.verano.http.Verification;
 import hr.com.vgv.verano.http.Wire;
-import hr.com.vgv.verano.http.wire.ApacheWire;
 import hr.com.vgv.verano.http.wire.VerificationWire;
+import hr.com.vgv.verano.http.wire.apache.ApacheWire;
 import org.cactoos.iterable.IterableOf;
 
 /**

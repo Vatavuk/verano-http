@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.wire;
+package hr.com.vgv.verano.http.wire.apache;
 
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.DictInput;
@@ -34,17 +34,13 @@ import hr.com.vgv.verano.http.parts.Method;
 import hr.com.vgv.verano.http.parts.RequestUri;
 import hr.com.vgv.verano.http.response.ReasonPhrase;
 import hr.com.vgv.verano.http.response.Status;
-import hr.com.vgv.verano.http.wire.apache.ApacheHeaders;
-import hr.com.vgv.verano.http.wire.apache.ApacheRequest;
 import java.io.IOException;
-import java.net.URI;
 import org.apache.http.HttpEntity;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.cactoos.iterable.IterableOf;
+import org.cactoos.iterable.Joined;
 import org.cactoos.scalar.Ternary;
 import org.cactoos.scalar.UncheckedScalar;
 
@@ -57,7 +53,7 @@ public class ApacheWire implements Wire {
     /**
      * Apache contexts.
      */
-    private final Iterable<ApacheContext> contexts;
+    private final ApacheClient client;
 
     /**
      * Additional parameters.
@@ -98,7 +94,7 @@ public class ApacheWire implements Wire {
     public ApacheWire(
         final String uri, final Iterable<ApacheContext> contexts
     ) {
-        this(contexts, new DictOf(new RequestUri(uri)));
+        this(new VrApacheClient(contexts), new DictOf(new RequestUri(uri)));
     }
 
     /**
@@ -113,37 +109,84 @@ public class ApacheWire implements Wire {
         final Dict parameters
     ) {
         this(
-            contexts,
+            new VrApacheClient(contexts),
             new HashDict(new JoinedDict(new RequestUri(uri), parameters))
         );
     }
 
     /**
      * Ctor.
-     * @param contexts Apache contexts
-     * @param parameters Additional parameters.
+     * @param uri Request uri
+     * @param client Http client
+     * @param parameters Parameters
      */
     public ApacheWire(
-        final Iterable<ApacheContext> contexts, final Dict parameters
+        final String uri,
+        final ApacheClient client,
+        final DictInput... parameters
     ) {
-        this.contexts = contexts;
+        this(uri, client, new IterableOf<>(parameters));
+    }
+
+    /**
+     * Ctor.
+     * @param uri Request uri
+     * @param client Http client
+     * @param parameters Parameters
+     */
+    public ApacheWire(
+        final String uri,
+        final ApacheClient client,
+        final Iterable<DictInput> parameters
+    ) {
+        this(
+            client,
+            new Joined<DictInput>(new RequestUri(uri), parameters)
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param client Http client
+     * @param parameters Parameters
+     */
+    public ApacheWire(
+        final ApacheClient client,
+        final DictInput... parameters
+    ) {
+        this(client, new IterableOf<>(parameters));
+    }
+
+    /**
+     * Ctor.
+     * @param client Http client
+     * @param parameters Parameters
+     */
+    public ApacheWire(
+        final ApacheClient client,
+        final Iterable<DictInput> parameters
+    ) {
+        this(client, new DictOf(parameters));
+    }
+
+    /**
+     * Ctor.
+     * @param client Http client
+     * @param parameters Parameters
+     */
+    public ApacheWire(final ApacheClient client, final Dict parameters) {
+        this.client = client;
         this.parameters = parameters;
     }
 
     @Override
-    public final Dict send(final Dict message) throws IOException {
-        final Dict request = new JoinedDict(message, this.parameters);
-        HttpClientBuilder builder = HttpClients.custom();
-        final URI uri = new RequestUri.Of(request).uri();
-        for (final ApacheContext context : this.contexts) {
-            builder = context.apply(uri, builder);
-        }
-        try (CloseableHttpResponse response = builder.build()
-            .execute(new ApacheRequest(request).value())) {
+    public final Dict send(final Dict request) throws IOException {
+        final Dict message = new JoinedDict(request, this.parameters);
+        try (CloseableHttpResponse response = this.client.execute(request)) {
             final StatusLine status = response.getStatusLine();
             return new DictOf(
                 new Method(new Method.Of(message).asString()),
-                new RequestUri(uri.getPath()),
+                new RequestUri(new RequestUri.Of(message).uri().getPath()),
                 new Status(status.getStatusCode()),
                 new ReasonPhrase(status.getReasonPhrase()),
                 new Body(ApacheWire.fetchBody(response)),

@@ -40,7 +40,7 @@ import hr.com.vgv.verano.http.request.Post;
 import hr.com.vgv.verano.http.response.ExpectedStatus;
 import hr.com.vgv.verano.http.response.FailWith;
 import hr.com.vgv.verano.http.response.Response;
-import hr.com.vgv.verano.http.wire.apache.BasicAuth;
+import hr.com.vgv.verano.http.wire.apache.ApacheWire;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.text.MatchesPattern;
 import org.junit.Ignore;
@@ -83,8 +83,7 @@ public final class ApacheWireIT {
     public void googlePage() {
         new Response(
             new ApacheWire(
-                "http://google.com",
-                new BasicAuth("username", "password")
+                "http://google.com"
             ),
             new ExpectedStatus(301, new FailWith("Cannot fetch from Google"))
         ).touch();
@@ -100,8 +99,7 @@ public final class ApacheWireIT {
             new Delete("/items")
         ).touch();
         WireMock.verify(
-            WireMock.deleteRequestedFor(WireMock.urlMatching("/item"))
-                .withQueryParam("Content-Type", WireMock.equalTo("sth"))
+            WireMock.deleteRequestedFor(WireMock.urlMatching("/items"))
         );
     }
 

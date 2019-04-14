@@ -23,8 +23,6 @@
  */
 package hr.com.vgv.verano.http.wire.apache;
 
-import hr.com.vgv.verano.http.wire.ApacheContext;
-import java.net.URI;
 import org.apache.http.HttpHost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.DefaultProxyRoutePlanner;
@@ -72,9 +70,7 @@ public class Proxy implements ApacheContext {
     }
 
     @Override
-    public final HttpClientBuilder apply(
-        final URI uri, final HttpClientBuilder builder
-    ) {
+    public final HttpClientBuilder apply(final HttpClientBuilder builder) {
         return builder.setRoutePlanner(
             new DefaultProxyRoutePlanner(
                 new HttpHost(this.host, this.port, this.scheme)

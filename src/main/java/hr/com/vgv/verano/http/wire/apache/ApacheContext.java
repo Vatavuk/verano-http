@@ -23,48 +23,17 @@
  */
 package hr.com.vgv.verano.http.wire.apache;
 
-import hr.com.vgv.verano.http.wire.ApacheContext;
-import java.net.URI;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 /**
- * Basic and Digest authentication.
+ * Context to be attached to apache http client.
  * @since 1.0
  */
-public class BasicAuth implements ApacheContext {
+public interface ApacheContext {
     /**
-     * Username.
+     * Apply additional context to http client builder.
+     * @param builder Builder
+     * @return HttpClientBuilder Builder
      */
-    private final String username;
-
-    /**
-     * Password.
-     */
-    private final String password;
-
-    /**
-     * Ctor.
-     * @param username Username
-     * @param password Password
-     */
-    public BasicAuth(final String username, final String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    @Override
-    public final HttpClientBuilder apply(
-        final URI uri, final HttpClientBuilder builder
-    ) {
-        final CredentialsProvider provider = new BasicCredentialsProvider();
-        provider.setCredentials(
-            new AuthScope(uri.getHost(), uri.getPort()),
-            new UsernamePasswordCredentials(this.username, this.password)
-        );
-        return builder.setDefaultCredentialsProvider(provider);
-    }
+    HttpClientBuilder apply(HttpClientBuilder builder);
 }

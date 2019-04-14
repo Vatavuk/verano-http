@@ -23,8 +23,6 @@
  */
 package hr.com.vgv.verano.http.wire.apache;
 
-import hr.com.vgv.verano.http.wire.ApacheContext;
-import java.net.URI;
 import javax.net.ssl.SSLContext;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -38,9 +36,7 @@ import org.apache.http.ssl.SSLContexts;
 @SuppressWarnings("PMD.AvoidCatchingGenericException")
 public class SslTrusted implements ApacheContext {
     @Override
-    public final HttpClientBuilder apply(
-        final URI uri, final HttpClientBuilder builder
-    ) {
+    public final HttpClientBuilder apply(final HttpClientBuilder builder) {
         final SSLContext context;
         try {
             final SSLContextBuilder ssl = SSLContexts.custom();
