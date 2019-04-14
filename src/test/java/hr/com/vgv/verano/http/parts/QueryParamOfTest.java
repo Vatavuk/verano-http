@@ -23,63 +23,30 @@
  */
 package hr.com.vgv.verano.http.parts;
 
-import hr.com.vgv.verano.http.Dict;
-import hr.com.vgv.verano.http.DictInput;
+import hr.com.vgv.verano.http.HashDict;
 import hr.com.vgv.verano.http.KvpOf;
-import org.cactoos.Text;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsEqual;
+import org.junit.Test;
 
 /**
- * Http query parameter.
+ * Test case for {@link QueryParam.Of}.
  * @since 1.0
+ * @checkstyle JavadocMethodCheck (500 lines)
  */
-public class QueryParam extends DictInput.Envelope {
+public final class QueryParamOfTest {
 
-    /**
-     * Ctor.
-     * @param key Key
-     * @param value Value
-     */
-    public QueryParam(final String key, final String value) {
-        super(new KvpOf(QueryParam.buildKey(key), value));
-    }
-
-    /**
-     * Build query param key in dictionary.
-     * @param key Key
-     * @return Key Key
-     */
-    private static String buildKey(final String key) {
-        return String.format("q.%s", key);
-    }
-
-    /**
-     * Query parameter from dictionary.
-     */
-    public static class Of implements Text {
-
-        /**
-         * Parameter key.
-         */
-        private final String key;
-
-        /**
-         * Dictionary.
-         */
-        private final Dict dict;
-
-        /**
-         * Ctor.
-         * @param key Key
-         * @param dict Dictionary
-         */
-        public Of(final String key, final Dict dict) {
-            this.key = key;
-            this.dict = dict;
-        }
-
-        @Override
-        public final String asString() {
-            return this.dict.get(QueryParam.buildKey(this.key));
-        }
+    @Test
+    public void extractsQueryParamFromDict() {
+        final String value = "value";
+        MatcherAssert.assertThat(
+            new QueryParam.Of(
+                "key",
+                new HashDict(
+                    new KvpOf("q.key", value), new KvpOf("unknown", "")
+                )
+            ).asString(),
+            new IsEqual<>(value)
+        );
     }
 }

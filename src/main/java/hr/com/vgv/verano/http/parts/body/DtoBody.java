@@ -28,6 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.DictInput;
 import hr.com.vgv.verano.http.parts.Body;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
  * Http body as dto object.
@@ -74,11 +75,12 @@ public class DtoBody extends DictInput.Envelope {
          * @param cls Class
          * @param <T> Output type
          * @return Dto Dto
-         * @throws Exception If fails
          * @checkstyle MethodNameCheck (2 lines)
          */
-        public final <T> T as(final Class<T> cls) throws Exception {
-            return DtoBody.MAPPER.readValue(this.asString(), cls);
+        public final <T> T as(final Class<T> cls) {
+            return new UncheckedScalar<>(
+                () -> DtoBody.MAPPER.readValue(this.asString(), cls)
+            ).value();
         }
     }
 }

@@ -182,7 +182,7 @@ public class ApacheWire implements Wire {
     @Override
     public final Dict send(final Dict request) throws IOException {
         final Dict message = new JoinedDict(request, this.parameters);
-        try (CloseableHttpResponse response = this.client.execute(request)) {
+        try (CloseableHttpResponse response = this.client.execute(message)) {
             final StatusLine status = response.getStatusLine();
             return new DictOf(
                 new Method(new Method.Of(message).asString()),
