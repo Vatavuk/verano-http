@@ -24,35 +24,56 @@
 package hr.com.vgv.verano.http.parts.body;
 
 import hr.com.vgv.verano.http.HashDict;
-import javax.json.Json;
+import hr.com.vgv.verano.http.KvpOf;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.IsNot;
+import org.hamcrest.core.IsNull;
 import org.junit.Test;
 
 /**
- * Test case for {@link JsonBody}.
+ * Test case for {@link JsonBody.Of}.
  * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class JsonBodyTest {
+public final class JsonBodyOfTest {
 
     @Test
-    public void appliesJsonBodyToRequest() {
+    public void extractsJsonObjectFromDict() {
         MatcherAssert.assertThat(
-            new JsonBody(Json.createObjectBuilder().add("key", "val").build())
-                .apply(new HashDict()).get("body"),
-            Matchers.containsString("key")
+            new JsonBody.Of(
+                new HashDict(
+                    new KvpOf("body", "{}"),
+                    new KvpOf("unknown", "")
+                )
+            ).json(),
+            new IsNot<>(new IsNull<>())
         );
     }
 
     @Test
-    public void appliesJsonSourceToRequest() {
+    public void extractsJsonArrayFromDict() {
         MatcherAssert.assertThat(
-            new JsonBody(
-                () -> Json.createObjectBuilder().add("key", "val").build()
-            ).apply(new HashDict()).get("body"),
-            Matchers.containsString("key")
+            new JsonBody.Of(
+                new HashDict(
+                    new KvpOf("body", "[]"),
+                    new KvpOf("unknown", "")
+                )
+            ).jsonArray(),
+            new IsNot<>(new IsNull<>())
+        );
+    }
+
+    @Test
+    public void extractsJsonReaderFromDict() {
+        MatcherAssert.assertThat(
+            new JsonBody.Of(
+                new HashDict(
+                    new KvpOf("body", "{}"),
+                    new KvpOf("unknown", "")
+                )
+            ).reader(),
+            new IsNot<>(new IsNull<>())
         );
     }
 }

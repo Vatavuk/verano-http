@@ -24,35 +24,30 @@
 package hr.com.vgv.verano.http.parts.body;
 
 import hr.com.vgv.verano.http.HashDict;
-import javax.json.Json;
+import hr.com.vgv.verano.http.KvpOf;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.IsNot;
+import org.hamcrest.core.IsNull;
 import org.junit.Test;
 
 /**
- * Test case for {@link JsonBody}.
+ * Test case for {@link XmlBody.Of}.
  * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class JsonBodyTest {
+public final class XmlBodyOfTest {
+
 
     @Test
-    public void appliesJsonBodyToRequest() {
+    public void extractsJsonObjectFromDict() {
         MatcherAssert.assertThat(
-            new JsonBody(Json.createObjectBuilder().add("key", "val").build())
-                .apply(new HashDict()).get("body"),
-            Matchers.containsString("key")
-        );
-    }
-
-    @Test
-    public void appliesJsonSourceToRequest() {
-        MatcherAssert.assertThat(
-            new JsonBody(
-                () -> Json.createObjectBuilder().add("key", "val").build()
-            ).apply(new HashDict()).get("body"),
-            Matchers.containsString("key")
+            new XmlBody.Of(
+                new HashDict(
+                    new KvpOf("body", "<test/>"),
+                    new KvpOf("unknown", "")
+                )
+            ).xml(),
+            new IsNot<>(new IsNull<>())
         );
     }
 }

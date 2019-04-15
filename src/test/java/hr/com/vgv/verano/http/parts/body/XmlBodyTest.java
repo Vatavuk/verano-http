@@ -23,36 +23,35 @@
  */
 package hr.com.vgv.verano.http.parts.body;
 
+import com.jcabi.xml.XMLDocument;
 import hr.com.vgv.verano.http.HashDict;
-import javax.json.Json;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link JsonBody}.
+ * Test case for {@link XmlBody}.
  * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class JsonBodyTest {
+public final class XmlBodyTest {
 
     @Test
-    public void appliesJsonBodyToRequest() {
+    public void appliesJXmlBodyToRequest() {
         MatcherAssert.assertThat(
-            new JsonBody(Json.createObjectBuilder().add("key", "val").build())
+            new XmlBody(new XMLDocument("<test></test>"))
                 .apply(new HashDict()).get("body"),
-            Matchers.containsString("key")
+            Matchers.containsString("test")
         );
     }
 
     @Test
-    public void appliesJsonSourceToRequest() {
+    public void appliesJXmlSourceToRequest() {
         MatcherAssert.assertThat(
-            new JsonBody(
-                () -> Json.createObjectBuilder().add("key", "val").build()
-            ).apply(new HashDict()).get("body"),
-            Matchers.containsString("key")
+            new XmlBody(() -> new XMLDocument("<test></test>"))
+                .apply(new HashDict()).get("body"),
+            Matchers.containsString("test")
         );
     }
 }
