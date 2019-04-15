@@ -37,7 +37,6 @@ import org.junit.Test;
  */
 public final class XmlBodyOfTest {
 
-
     @Test
     public void extractsJsonObjectFromDict() {
         MatcherAssert.assertThat(
