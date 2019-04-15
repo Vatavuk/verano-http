@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.parts;
+package hr.com.vgv.verano.http.parts.headers;
 
 import hr.com.vgv.verano.http.HashDict;
 import hr.com.vgv.verano.http.KvpOf;
@@ -30,35 +30,22 @@ import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 /**
- * Test case for {@link Body.Of}.
+ * Test case for {@link Cookie}.
  * @since 1.0
- * @checkstyle JavadocMethodCheck (500 lines)
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class BodyOfTest {
+public final class CookieOfTest {
 
     @Test
-    public void extractsBodyFromDict() {
+    public void extractsCookieFromDict() {
         MatcherAssert.assertThat(
-            new Body.Of(
+            new Cookie.Of(
+                "param1",
                 new HashDict(
-                    new KvpOf("body", "test"), new KvpOf("unknown", "")
+                    new KvpOf("h.Set-Cookie", "param1=val1; param2=val2"),
+                    new KvpOf("unknown", "")
                 )
             ).asString(),
-            new IsEqual<>("test")
-        );
-    }
-
-    @Test
-    public void extractsBodyFromDictWithFormParams() {
-        MatcherAssert.assertThat(
-            new Body.Of(
-                new HashDict(
-                    new KvpOf("f.param1", "test1"),
-                    new KvpOf("f.param2", "test2")
-                )
-            ).asString(),
-            new IsEqual<>("param1=test1&param2=test2")
+            new IsEqual<>("val1")
         );
     }
 }
