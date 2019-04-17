@@ -36,7 +36,7 @@ public class Delete extends Request {
      * @param inputs Inputs
      */
     public Delete(final DictInput... inputs) {
-        this("", new IterableOf<>(inputs));
+        this(new IterableOf<>(inputs));
     }
 
     /**

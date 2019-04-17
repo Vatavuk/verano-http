@@ -23,53 +23,40 @@
  */
 package hr.com.vgv.verano.http.request;
 
-import hr.com.vgv.verano.http.DictInput;
-import org.cactoos.iterable.IterableOf;
+import hr.com.vgv.verano.http.Dict;
+import hr.com.vgv.verano.http.parts.headers.ContentType;
+import org.cactoos.collection.CollectionOf;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsEqual;
+import org.junit.Test;
 
 /**
- * Http PUT request.
+ * Test case for {@link Request}.
  * @since 1.0
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
  */
-public class Put extends Request {
-    /**
-     * Ctor.
-     * @param inputs Inputs
-     */
-    public Put(final DictInput... inputs) {
-        this(new IterableOf<>(inputs));
-    }
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
+public final class RequestTest {
 
-    /**
-     * Ctor.
-     * @param inputs Inputs
-     */
-    public Put(final Iterable<DictInput> inputs) {
-        this("", inputs);
-    }
-
-    /**
-     * Ctor.
-     * @param uri Uri
-     */
-    public Put(final String uri) {
-        this(uri, new IterableOf<>());
-    }
-
-    /**
-     * Ctor.
-     * @param uri Uri
-     * @param inputs Inputs
-     */
-    public Put(final String uri, final DictInput... inputs) {
-        this(uri, new IterableOf<>(inputs));
-    }
-
-    /**
-     * Ctor.
-     * @param uri Uri
-     * @param inputs Inputs
-     */
-    public Put(final String uri, final Iterable<DictInput> inputs) {
-        super(uri, "PUT", inputs);
+    @Test
+    public void buildsRequest() {
+        final Dict dict = new Request("GET", new ContentType("text/html"));
+        MatcherAssert.assertThat(
+            new CollectionOf<>(dict).size(),
+            new IsEqual<>(3)
+        );
+        MatcherAssert.assertThat(
+            dict.get("method"),
+            new IsEqual<>("GET")
+        );
+        MatcherAssert.assertThat(
+            dict.get("path").isEmpty(),
+            new IsEqual<>(true)
+        );
+        MatcherAssert.assertThat(
+            dict.get("h.Content-Type"),
+            new IsEqual<>("text/html")
+        );
     }
 }

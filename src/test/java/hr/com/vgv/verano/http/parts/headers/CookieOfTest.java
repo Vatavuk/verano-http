@@ -33,6 +33,7 @@ import org.junit.Test;
  * Test case for {@link Cookie}.
  * @since 1.0
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class CookieOfTest {
 
     @Test
@@ -47,5 +48,19 @@ public final class CookieOfTest {
             ).asString(),
             new IsEqual<>("val1")
         );
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void cookieHeaderNotPresent() {
+        new Cookie.Of(
+            "param1", new HashDict(new KvpOf("unknown", ""))
+        ).asString();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void cookieNotFound() {
+        new Cookie.Of(
+            "param1", new HashDict(new KvpOf("h.Set-Cookie", "param2=val2"))
+        ).asString();
     }
 }

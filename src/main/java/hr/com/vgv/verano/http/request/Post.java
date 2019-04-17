@@ -36,7 +36,7 @@ public class Post extends Request {
      * @param inputs Inputs
      */
     public Post(final DictInput... inputs) {
-        this("", new IterableOf<>(inputs));
+        this(new IterableOf<>(inputs));
     }
 
     /**

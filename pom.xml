@@ -33,7 +33,7 @@ SOFTWARE.
         <version>0.49.4</version>
     </parent>
 
-    <groupId>hr.com.vgv.verano.http</groupId>
+    <groupId>hr.com.vgv.verano</groupId>
     <artifactId>verano-http</artifactId>
     <version>1.0-SNAPSHOT</version>
     <build>
