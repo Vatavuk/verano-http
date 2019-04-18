@@ -23,10 +23,32 @@
  */
 package hr.com.vgv.verano.http.wire.apache;
 
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsEqual;
+import org.hamcrest.core.IsNot;
+import org.hamcrest.core.IsNull;
+import org.junit.Test;
+
 /**
- * Test case for {@link ApacheHeaders}.
+ * Test case for {@link Proxy}.
  * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class ApacheHeadersTest {
+public final class ProxyTest {
+
+    @Test
+    public void appendsProxyToClient() {
+        final HttpClientBuilder builder = HttpClients.custom();
+        MatcherAssert.assertThat(
+            new Proxy("localhost", 8080).apply(builder),
+            new IsEqual<>(builder)
+        );
+        MatcherAssert.assertThat(
+            builder.build(),
+            new IsNot<>(new IsNull<>())
+        );
+    }
 }
