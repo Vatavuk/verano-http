@@ -42,7 +42,7 @@ import org.junit.Test;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class ApacheWireIT {
+public final class ApacheWireTest {
 
     /**
      * Wiremock rule.

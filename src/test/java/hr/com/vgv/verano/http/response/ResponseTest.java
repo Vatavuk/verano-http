@@ -41,7 +41,7 @@ import org.junit.Test;
  * @checkstyle MagicNumberCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class ResponseIT {
+public final class ResponseTest {
 
     /**
      * Wiremock rule.
