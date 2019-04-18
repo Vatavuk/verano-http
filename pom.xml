@@ -232,12 +232,12 @@ SOFTWARE.
                                                 <limit>
                                                     <counter>BRANCH</counter>
                                                     <value>COVEREDRATIO</value>
-                                                    <minimum>0.7</minimum>
+                                                    <minimum>0.6</minimum>
                                                 </limit>
                                                 <limit>
                                                     <counter>METHOD</counter>
                                                     <value>COVEREDRATIO</value>
-                                                    <minimum>0.7</minimum>
+                                                    <minimum>0.6</minimum>
                                                 </limit>
                                             </limits>
                                         </rule>
