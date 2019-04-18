@@ -38,6 +38,15 @@ import org.cactoos.iterable.IterableOf;
  * @since 1.0
  */
 public class Response extends Dict.Envelope {
+
+    /**
+     * Ctor.
+     * @param uri Uri
+     */
+    public Response(final String uri) {
+        this(new ApacheWire(uri));
+    }
+
     /**
      * Ctor.
      * @param uri Uri
