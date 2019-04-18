@@ -222,22 +222,22 @@ SOFTWARE.
                                                 <limit>
                                                     <counter>INSTRUCTION</counter>
                                                     <value>COVEREDRATIO</value>
-                                                    <minimum>0.9</minimum>
+                                                    <minimum>0.8</minimum>
                                                 </limit>
                                                 <limit>
                                                     <counter>LINE</counter>
                                                     <value>COVEREDRATIO</value>
-                                                    <minimum>0.9</minimum>
+                                                    <minimum>0.8</minimum>
                                                 </limit>
                                                 <limit>
                                                     <counter>BRANCH</counter>
                                                     <value>COVEREDRATIO</value>
-                                                    <minimum>0.9</minimum>
+                                                    <minimum>0.7</minimum>
                                                 </limit>
                                                 <limit>
                                                     <counter>METHOD</counter>
                                                     <value>COVEREDRATIO</value>
-                                                    <minimum>0.9</minimum>
+                                                    <minimum>0.7</minimum>
                                                 </limit>
                                             </limits>
                                         </rule>

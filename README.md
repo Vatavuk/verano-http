@@ -16,6 +16,9 @@ HTTP client that provides object-oriented interface for building HTTP requests.
 - Open for extension
 - Declarative
 - Immutable
+- [Testable](#testing) without mock servers
+
+Similar libraries: [cactoos-http](https://github.com/yegor256/cactoos-http), [jcabi-http](https://github.com/jcabi/jcabi-http)
 
 ## How to use
 Latest version [here](https://github.com/Vatavuk/verano-http/releases)
@@ -110,7 +113,7 @@ in each request:
 ```java
 Wire wire = new ApacheWire(
     "http://exmpl.com",
-    new ContentType("applicaiton/json"),
+    new ContentType("application/json"),
     new Header("foo", "bar"),
 );
 new Response(
@@ -118,16 +121,14 @@ new Response(
 ).touch();
 ```
 
-#### Configuration
-- BasicAuth - Basic and Digest authentication
-- Proxy - make requests through proxy
-- SslTrusted - trust all certificates
+#### Wire Configuration
+- [Proxy](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/wire/apache/Proxy.java#L34) - make requests through proxy
+- [SslTrusted](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/wire/apache/SslTrusted.java#L37) - trust all certificates
 
 ```java
 new Response(
     new ApacheWire(
         "http://exmpl.com", 
-        new BasicAuth("userame", "password"),
         new Proxy("127.0.0.1", 8000)
         new SslTrusted()
     ),
@@ -138,9 +139,7 @@ If you need additional functionality just implement `ApacheContext` and provide
 it as an argument to `ApacheWire`.
 
 #### Custom Wires
-
-
-You can also make custom `Wire` decorators to enrich http requests. Let's say
+You can make your own custom `Wire` decorators to enrich http requests. Let's say
 you need a custom authentication for requests towards remote api.
 You can implement it in this way:
 
@@ -156,18 +155,33 @@ public class CustomAuthWire implements Wire {
      @Override
      public Dict send(final Dict request) throws IOException {
          final String token = login();
-         return this.wire.send(
-             new JoinedDict(
-                 request,
-                 new DictOf(
-                     new Authorization(token),
-                     new Cookie("someCookie")
-                 )
-             )
-         );
+         return new ExpandedWire(
+             this.wire, 
+             new Authorization(token),
+             new Cookie("someCookie")
+         ).send(request);
      }
 }
 ```
+### Testing
+Http requests can be tested through `MockWire` without using a http server.
+`MockWire` works in conjunction with [hamcrest matchers](http://hamcrest.org/JavaHamcrest/) in a following way:
+```java
+MockWire wire = new MockWire(
+    new MockAnswer(
+        new PathMatch(MatchesPattern.matchesPattern("/*")),
+        new Response(new Status(201))
+    )
+);
+sendRequest(wire);
+wire.verify(
+    new PostMatch(
+        new PathMatch(new IsEqual<>("/items")),
+        new BodyMatch(new StringContains("text"))
+    )
+);
+```
+
 ### Contribution
 You can contribute by forking the repo and sending a pull request.
 Make sure your branch builds without any warnings/issues:
