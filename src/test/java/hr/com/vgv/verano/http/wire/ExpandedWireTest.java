@@ -21,26 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.response;
+package hr.com.vgv.verano.http.wire;
 
+import hr.com.vgv.verano.http.Dict;
 import hr.com.vgv.verano.http.HashDict;
+import hr.com.vgv.verano.http.KvpOf;
+import hr.com.vgv.verano.http.parts.headers.ContentType;
+import org.cactoos.collection.CollectionOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 /**
- * Test case for {@link Status}.
+ * Test case for {@link ExpandedWire}.
  * @since 1.0
- * @checkstyle MagicNumberCheck (500 lines)
  * @checkstyle JavadocMethodCheck (500 lines)
  */
-public final class StatusTest {
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
+public final class ExpandedWireTest {
 
     @Test
-    public void appliesStatusToResponse() {
+    public void expandWireWithAdditionalData() throws Exception {
+        final Dict response = new ExpandedWire(
+            req -> req, new ContentType("application/json")
+        ).send(new HashDict(new KvpOf("foo", "bar")));
         MatcherAssert.assertThat(
-            new Status(200).apply(new HashDict()).get("status"),
-            new IsEqual<>("200")
+            new CollectionOf<>(response).size(),
+            new IsEqual<>(2)
+        );
+        MatcherAssert.assertThat(
+            response.get("h.Content-Type"),
+            new IsEqual<>("application/json")
+        );
+        MatcherAssert.assertThat(
+            response.get("foo"),
+            new IsEqual<>("bar")
         );
     }
 }

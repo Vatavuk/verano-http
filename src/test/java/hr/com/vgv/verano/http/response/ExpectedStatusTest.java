@@ -33,8 +33,9 @@ import org.junit.rules.ExpectedException;
 
 /**
  * Test case for {@link ExpectedStatus}.
- * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
+ * @since 1.0
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class ExpectedStatusTest {
@@ -47,12 +48,13 @@ public final class ExpectedStatusTest {
 
     @Test
     public void statusMatches() {
-        new ExpectedStatus(200, new TextOf("msg"))
-            .verify(
-                new HashDict(
-                    new KvpOf("status", "200")
-                )
-            );
+        new ExpectedStatus(
+            200, new TextOf("msg")
+        ).verify(
+            new HashDict(
+                new KvpOf("status", "200")
+            )
+        );
     }
 
     @Test
@@ -60,6 +62,7 @@ public final class ExpectedStatusTest {
         this.error.expect(UncheckedIOException.class);
         this.error.expectMessage(
             String.format(
+                //@checkstyle LineLengthCheck (1 lines)
                 "%s\nReceived response with status %d, instead of %d.\nReason: %s\nUrl: %s\nBody: %s",
                 "msg",
                 404,
@@ -69,15 +72,15 @@ public final class ExpectedStatusTest {
                 "body"
             )
         );
-        new ExpectedStatus(200, new FailWith("msg"))
-            .verify(
-                new HashDict(
-                    new KvpOf("status", "404"),
-                    new KvpOf("reason", "some reason"),
-                    new KvpOf("uri", "localhost"),
-                    new KvpOf("body", "body")
-                )
-            );
+        new ExpectedStatus(
+            200, new FailWith("msg")
+        ).verify(
+            new HashDict(
+                new KvpOf("status", "404"),
+                new KvpOf("reason", "some reason"),
+                new KvpOf("uri", "localhost"),
+                new KvpOf("body", "body")
+            )
+        );
     }
-
 }

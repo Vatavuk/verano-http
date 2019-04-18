@@ -37,7 +37,10 @@ import org.junit.Test;
 /**
  * Integration test case for {@link Response}.
  * @since 1.0
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class ResponseIT {
 
     /**
@@ -87,6 +90,7 @@ public final class ResponseIT {
             WireMock.getRequestedFor(WireMock.urlPathEqualTo("/"))
         );
     }
+
     @Test(expected = UncheckedIOException.class)
     public void unsuccessfulResponseToRequestWithParameters() {
         this.mock.stubFor(WireMock.get(WireMock.urlMatching("/.*"))

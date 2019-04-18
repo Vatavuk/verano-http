@@ -21,26 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http.response;
-
-import hr.com.vgv.verano.http.HashDict;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+package hr.com.vgv.verano.http.wire.apache;
 
 /**
- * Test case for {@link Status}.
+ * Test case for {@link ApacheHeaders}.
  * @since 1.0
- * @checkstyle MagicNumberCheck (500 lines)
  * @checkstyle JavadocMethodCheck (500 lines)
  */
-public final class StatusTest {
-
-    @Test
-    public void appliesStatusToResponse() {
-        MatcherAssert.assertThat(
-            new Status(200).apply(new HashDict()).get("status"),
-            new IsEqual<>("200")
-        );
-    }
+public final class ApacheHeadersTest {
 }
