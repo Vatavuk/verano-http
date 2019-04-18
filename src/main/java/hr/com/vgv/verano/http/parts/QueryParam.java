@@ -79,7 +79,13 @@ public class QueryParam extends DictInput.Envelope {
 
         @Override
         public final String asString() {
-            return this.dict.get(QueryParam.buildKey(this.key));
+            final String dkey = QueryParam.buildKey(this.key);
+            if (this.dict.contains(dkey)) {
+                return this.dict.get(dkey);
+            }
+            throw new IllegalStateException(
+                String.format("Query parameter %s not found in url.", this.key)
+            );
         }
     }
 }

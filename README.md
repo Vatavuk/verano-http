@@ -65,10 +65,10 @@ new Response(
 
 ### Serialization and Deserialization
 The library provides following types of request serialization:
-- [JsonBody](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/parts/body/JsonBody.java) - javax.json
-- [XmlBody](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/parts/body/XmlBody.java)  - [jcabi-xml](https://github.com/jcabi/jcabi-xml)
-- [DtoBody](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/parts/body/DtoBody.java)  - jackson object mapper
-- [HtmlBody](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/parts/body/HtmlBody.java) - [jsoup](https://github.com/jhy/jsoup)
+- [JsonBody](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/parts/body/JsonBody.java#L42) - javax.json
+- [XmlBody](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/parts/body/XmlBody.java#37)  - [jcabi-xml](https://github.com/jcabi/jcabi-xml)
+- [DtoBody](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/parts/body/DtoBody.java#37)  - jackson object mapper
+- [HtmlBody](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/parts/body/HtmlBody.java#37) - [jsoup](https://github.com/jhy/jsoup)
 
 Response deserialization can be achieved using their accompanied `*.Of` classes.
 

@@ -21,68 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package hr.com.vgv.verano.http;
+package hr.com.vgv.verano.http.mock;
 
-import org.cactoos.collection.CollectionOf;
+import hr.com.vgv.verano.http.HashDict;
+import hr.com.vgv.verano.http.KvpOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 /**
- * Test case for {@link JoinedDict}.
+ * Test case for {@link RequestUriMatch}.
  * @since 1.0
  * @checkstyle JavadocMethodCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class JoinedDictTest {
+public final class RequestUriMatchTest {
 
     @Test
-    public void joinsDictionaries() {
-        final Dict dict = new JoinedDict(
-            new HashDict(
-                new KvpOf("first", "first")
-            ),
-            new HashDict(
-                new KvpOf("first", "second"),
-                new KvpOf("foo", "bar")
-            )
-        );
+    public void matchesBody() {
+        final String uri = "some uri";
         MatcherAssert.assertThat(
-            new CollectionOf<>(dict).size(),
-            //@checkstyle MagicNumberCheck (1 lines)
-            new IsEqual<>(3)
-        );
-        MatcherAssert.assertThat(
-            dict.get("first"),
-            new IsEqual<>("second")
-        );
-        MatcherAssert.assertThat(
-            dict.get("foo"),
-            new IsEqual<>("bar")
+            new RequestUriMatch(new IsEqual<>(uri))
+                .apply(new HashDict(new KvpOf("uri", uri))).isEmpty(),
+            new IsEqual<>(true)
         );
     }
 
     @Test
-    public void joinsKvpWithDict() {
-        final Dict dict = new JoinedDict(
-            new KvpOf("first", "first"),
-            new HashDict(
-                new KvpOf("first", "second"),
-                new KvpOf("foo", "bar")
-            )
-        );
+    public void bodyMismatch() {
         MatcherAssert.assertThat(
-            new CollectionOf<>(dict).size(),
-            //@checkstyle MagicNumberCheck (1 lines)
-            new IsEqual<>(3)
-        );
-        MatcherAssert.assertThat(
-            dict.get("first"),
-            new IsEqual<>("second")
-        );
-        MatcherAssert.assertThat(
-            dict.get("foo"),
-            new IsEqual<>("bar")
+            new RequestUriMatch(new IsEqual<>("text"))
+                .apply(new HashDict()).size(),
+            new IsEqual<>(1)
         );
     }
 }

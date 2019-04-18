@@ -114,7 +114,13 @@ public class Header extends DictInput.Envelope {
 
         @Override
         public final String asString() {
-            return this.dict.get(Header.buildKey(this.key));
+            final String dkey = Header.buildKey(this.key);
+            if (this.dict.contains(dkey)) {
+                return this.dict.get(dkey);
+            }
+            throw new IllegalStateException(
+                String.format("Header %s not found.", this.key)
+            );
         }
     }
 }

@@ -79,7 +79,13 @@ public class FormParam extends DictInput.Envelope {
 
         @Override
         public final String asString() {
-            return this.dict.get(FormParam.buildKey(this.key));
+            final String dkey = FormParam.buildKey(this.key);
+            if (this.dict.contains(dkey)) {
+                return this.dict.get(dkey);
+            }
+            throw new IllegalStateException(
+                String.format("Form parameter %s not found in body.", this.key)
+            );
         }
     }
 }
