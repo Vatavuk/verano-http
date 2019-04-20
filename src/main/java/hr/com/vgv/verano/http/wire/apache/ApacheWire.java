@@ -45,7 +45,19 @@ import org.cactoos.scalar.Ternary;
 import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Apache http wire.
+ * Wire that makes http request through apache client.
+ *
+ * Example of usage:
+ *
+ * <pre>
+ *    new Response(
+ *       new ApacheWire("https://example.com"),
+ *       new Post(
+ *           new Body("Hello World!")
+ *       )
+ *    ).touch();
+ * </pre>
+ *
  * @since 1.0
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */

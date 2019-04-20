@@ -24,9 +24,9 @@ Similar libraries: [cactoos-http](https://github.com/yegor256/cactoos-http), [jc
 Latest version [here](https://github.com/Vatavuk/verano-http/releases)
 ```xml
 <dependency>
-    <groupId>hr.com.vgv.verano.http</groupId>
+    <groupId>hr.com.vgv.verano</groupId>
     <artifactId>verano-http</artifactId>
-    <version>0.41</version>
+    <version>1.0</version>
 </dependency>
 ```
 ### Get a Url

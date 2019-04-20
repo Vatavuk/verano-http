@@ -34,7 +34,23 @@ import hr.com.vgv.verano.http.wire.apache.ApacheWire;
 import org.cactoos.iterable.IterableOf;
 
 /**
- * Http response.
+ * Http response from the wire.
+ *
+ * Example of usage:
+ *
+ * <pre>
+ *   JsonObject json = new JsonBody.Of(
+ *       new Response(
+ *          "http://example.com",
+ *          new Get(
+ *              "/items",
+ *              new QueryParam("name", "John"),
+ *              new Accept("application/json")
+ *          )
+ *      )
+ *   ).json();
+ * </pre>
+ *
  * @since 1.0
  */
 public class Response extends Dict.Envelope {

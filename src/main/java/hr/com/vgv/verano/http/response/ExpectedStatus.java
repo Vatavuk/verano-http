@@ -38,6 +38,19 @@ import org.cactoos.text.UncheckedText;
 
 /**
  * Assertion on http status.
+ *
+ * Example of usage:
+ *
+ * <pre>
+ *  new Response(
+ *      "http://example.com",
+ *      new Get(
+ *          "/items",
+ *          new ExpectedStatus(200, new FailWith("error fetching example.com"))
+ *      )
+ *  ).touch();
+ * </pre>
+ *
  * @since 1.0
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */

@@ -33,6 +33,17 @@ import org.cactoos.iterable.IterableOf;
 
 /**
  * Wire with additional request parameters.
+ *
+ * Example of usage:
+ *
+ * <pre>
+ *    new ExpandedWire(
+ *        wire,
+ *        new Authorization("some token"),
+ *        new Cookie("someCookie")
+ *    )
+ * </pre>
+ *
  * @since 1.0
  */
 public class ExpandedWire implements Wire {
