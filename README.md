@@ -30,7 +30,7 @@ Similar libraries: [cactoos-http](https://github.com/yegor256/cactoos-http), [jc
 </dependency>
 ```
 
-### Get a Url
+## Get a Url
 ```java
 JsonObject json = new JsonBody.Of(
     new Response(
@@ -44,7 +44,7 @@ JsonObject json = new JsonBody.Of(
 ).json();
 ```
 
-### Post to a Server
+## Post to a Server
 ```java
 new Response(
     "http://example.com",
@@ -67,7 +67,7 @@ new Response(
 ).touch();
 ```
 
-### Response handling
+## Response handling
 Response parameters can be extracted using `*.Of` classes:
 ```java
 Response response = new Response(
@@ -91,7 +91,7 @@ new Response(
 ).touch();
 ```
 
-### Serialization and Deserialization
+## Serialization and Deserialization
 The library provides following types of request body serialization:
 - [JsonBody](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/parts/body/JsonBody.java#L42) - javax.json
 - [XmlBody](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/parts/body/XmlBody.java#37)  - [jcabi-xml](https://github.com/jcabi/jcabi-xml)
@@ -100,7 +100,7 @@ The library provides following types of request body serialization:
 
 Response body deserialization can be achieved using their accompanied `*.Of` classes.
 
-### Wire
+## Wire
 Verano-http runs on `ApacheWire` which encapsulates [Apache http client](https://github.com/apache/httpcomponents-client).
 You can provide additional configuration to the wire:
 ```java
@@ -125,7 +125,7 @@ new Response(
 ).touch();
 ```
 
-### Testing
+## Testing
 Http requests can be tested through `MockWire` without using a http server.
 `MockWire` works in conjunction with [hamcrest matchers](http://hamcrest.org/JavaHamcrest/) in a following way:
 ```java
@@ -144,7 +144,7 @@ wire.verify(
 );
 ```
 
-### Contribution
+## Contribution
 You can contribute by forking the repo and sending a pull request.
 Make sure your branch builds without any warnings/issues:
 
