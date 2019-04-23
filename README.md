@@ -1,5 +1,5 @@
 # Verano-HTTP
-### Object-Oriented Java HTTP Client
+
 [![EO principles respected here](http://www.elegantobjects.org/badge.svg)](http://www.elegantobjects.org)
 [![DevOps By Rultor.com](http://www.rultor.com/b/Vatavuk/verano-http)](http://www.rultor.com/p/Vatavuk/verano-http)
 
@@ -20,7 +20,6 @@ HTTP client that provides object-oriented interface for building HTTP requests.
 
 Similar libraries: [cactoos-http](https://github.com/yegor256/cactoos-http), [jcabi-http](https://github.com/jcabi/jcabi-http)
 
-## How to use
 Latest version [here](https://github.com/Vatavuk/verano-http/releases)
 ```xml
 <dependency>
@@ -29,6 +28,7 @@ Latest version [here](https://github.com/Vatavuk/verano-http/releases)
     <version>1.0</version>
 </dependency>
 ```
+
 ### Get a Url
 ```java
 JsonObject json = new JsonBody.Of(
@@ -66,15 +66,6 @@ new Response(
 ).touch();
 ```
 
-### Serialization and Deserialization
-The library provides following types of request body serialization:
-- [JsonBody](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/parts/body/JsonBody.java#L42) - javax.json
-- [XmlBody](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/parts/body/XmlBody.java#37)  - [jcabi-xml](https://github.com/jcabi/jcabi-xml)
-- [DtoBody](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/parts/body/DtoBody.java#37)  - jackson object mapper
-- [HtmlBody](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/parts/body/HtmlBody.java#37) - [jsoup](https://github.com/jhy/jsoup)
-
-Response body deserialization can be achieved using their accompanied `*.Of` classes.
-
 ### Response handling
 Response parameters can be extracted using `*.Of` classes:
 ```java
@@ -87,82 +78,52 @@ String cookie = new Cookie.Of("cookieName", response).asString();
 String body = new Body.Of(response).asString();
 ```
 
-#### Assertions
-We can make assertions on received responses like this:
+You can make assertions on received responses like this:
 ```java
 new Response(
     "http://exmpl.com",
     new Get("/items"),
     new ExpectedStatus(
-        301, 
+        200, 
         new FailWith("Cannot fetch from exmpl")
     )
 ).touch();
 ```
-If the status code is not 301, exception will be raised with message specified
-by `FailWith`. Exception message will also contain response details. Custom
-exception message is optional.
 
-### Wires
-`Wire` is an interface through which requests are executed. Verano-http runs 
-on `ApacheWire` which encapsulates [Apache http client](https://github.com/apache/httpcomponents-client).
-If you need a different engine, you can make your custom `Wire` implementation.
+### Serialization and Deserialization
+The library provides following types of request body serialization:
+- [JsonBody](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/parts/body/JsonBody.java#L42) - javax.json
+- [XmlBody](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/parts/body/XmlBody.java#37)  - [jcabi-xml](https://github.com/jcabi/jcabi-xml)
+- [DtoBody](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/parts/body/DtoBody.java#37)  - jackson object mapper
+- [HtmlBody](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/parts/body/HtmlBody.java#37) - [jsoup](https://github.com/jhy/jsoup)
 
-Default http parameters can be specified directly on `ApacheWire` to be used
-in each request:
+Response body deserialization can be achieved using their accompanied `*.Of` classes.
+
+### Wire
+Verano-http runs on `ApacheWire` which encapsulates [Apache http client](https://github.com/apache/httpcomponents-client).
+You can provide additional configuration to the wire:
 ```java
 Wire wire = new ApacheWire(
     "http://exmpl.com",
-    new ContentType("application/json"),
-    new Header("foo", "bar"),
+    new Proxy("127.0.0.1", 8000),
+    new SslTrusted()
 );
 new Response(
     wire, new Get("/items")
 ).touch();
 ```
-
-#### Wire Configuration
-- [Proxy](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/wire/apache/Proxy.java#L34) - make requests through proxy
-- [SslTrusted](https://github.com/Vatavuk/verano-http/blob/master/src/main/java/hr/com/vgv/verano/http/wire/apache/SslTrusted.java#L37) - trust all certificates
-
+You can also provide http parameters to the wire:
 ```java
 new Response(
     new ApacheWire(
         "http://exmpl.com", 
-        new Proxy("127.0.0.1", 8000)
-        new SslTrusted()
+        new ContentType("application/json"),
+        new Header("foo", "bar"),
     ),
     new Get("/items")
 ).touch();
 ```
-If you need additional functionality just implement `ApacheContext` and provide
-it as an argument to `ApacheWire`.
 
-#### Custom Wires
-You can make your own custom `Wire` decorators to enrich http requests. Let's say
-you need a custom authentication for requests towards remote api.
-You can implement it in this way:
-
-```java
-public class CustomAuthWire implements Wire {
- 
-     private final Wire wire;
- 
-     public CustomAuth(final Wire wire) {
-         this.wire = wire;
-     }
- 
-     @Override
-     public Dict send(final Dict request) throws IOException {
-         final String token = login();
-         return new ExpandedWire(
-             this.wire, 
-             new Authorization(token),
-             new Cookie("someCookie")
-         ).send(request);
-     }
-}
-```
 ### Testing
 Http requests can be tested through `MockWire` without using a http server.
 `MockWire` works in conjunction with [hamcrest matchers](http://hamcrest.org/JavaHamcrest/) in a following way:
