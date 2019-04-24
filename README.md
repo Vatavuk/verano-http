@@ -1,4 +1,4 @@
-# Verano-HTTP
+<img src="logo.png" alt="drawing" height="100"/>
 
 [![EO principles respected here](http://www.elegantobjects.org/badge.svg)](http://www.elegantobjects.org)
 [![DevOps By Rultor.com](http://www.rultor.com/b/Vatavuk/verano-http)](http://www.rultor.com/p/Vatavuk/verano-http)
@@ -14,11 +14,8 @@
 
 
 HTTP client that provides object-oriented interface for building HTTP requests. 
-
-- Open for extension
-- Declarative
-- Immutable
-- [Testable](#testing) without mock servers
+The benefits of this library are that it is easily customizable, declarative and immutable.
+It can also be [tested](#testing) without mock servers which gives a performance edge.
 
 Similar libraries: [cactoos-http](https://github.com/yegor256/cactoos-http), [jcabi-http](https://github.com/jcabi/jcabi-http)
 
@@ -55,6 +52,8 @@ new Response(
     )
 ).touch();
 ```
+`Touch` method executes the `HTTP` request towards the server.
+
 Using form parameters:
 ```java
 new Response(
@@ -68,13 +67,13 @@ new Response(
 ```
 
 ## Response handling
-Response parameters can be extracted using `*.Of` classes:
+Extraction of response parameters can be done using `*.Of` classes:
 ```java
 Response response = new Response(
     "http://example.com",
     new Get("/items")
 );
-Map<String, List<String>> headers = new Headers.Of(response).asMap();
+Map<String, List<String>> headers = new Headers.Of(response).asMap(); // Extraction of headers from response
 String cookie = new Cookie.Of("cookieName", response).asString();
 String body = new Body.Of(response).asString();
 ```
