@@ -23,7 +23,7 @@ Similar libraries: [cactoos-http](https://github.com/yegor256/cactoos-http), [jc
 <dependency>
     <groupId>hr.com.vgv.verano</groupId>
     <artifactId>verano-http</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
 </dependency>
 ```
 
