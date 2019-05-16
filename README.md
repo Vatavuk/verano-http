@@ -130,7 +130,7 @@ Http requests can be tested through `MockWire` without using a http server.
 ```java
 MockWire wire = new MockWire(
     new MockAnswer(
-        new PathMatch(MatchesPattern.matchesPattern("/*")),
+        new PathMatch(MatchesPattern.matchesPattern("/.*")),
         new Response(new Status(201))
     )
 );
