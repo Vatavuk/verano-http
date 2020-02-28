@@ -19,6 +19,8 @@ It can also be [tested](#testing) without mock servers which gives a performance
 
 Similar libraries: [cactoos-http](https://github.com/yegor256/cactoos-http), [jcabi-http](https://github.com/jcabi/jcabi-http)
 
+C# port of the library: [Yaapii.Http](https://github.com/icarus-consulting/Yaapii.Http) ([icarus-consulting](https://github.com/icarus-consulting))
+
 ```xml
 <dependency>
     <groupId>hr.com.vgv.verano</groupId>
